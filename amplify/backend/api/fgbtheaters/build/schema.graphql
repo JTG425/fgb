@@ -1,0 +1,244 @@
+type AddAnnouncement @aws_iam @aws_api_key {
+  id: ID!
+  Date: AWSDate
+  Title: String
+  Description: String
+  Image: String
+  Active: Boolean
+  createdAt: AWSDateTime!
+  updatedAt: AWSDateTime!
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelSubscriptionStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  in: [String]
+  notIn: [String]
+}
+
+input ModelSubscriptionIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  in: [Int]
+  notIn: [Int]
+}
+
+input ModelSubscriptionFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  in: [Float]
+  notIn: [Float]
+}
+
+input ModelSubscriptionBooleanInput {
+  ne: Boolean
+  eq: Boolean
+}
+
+input ModelSubscriptionIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  in: [ID]
+  notIn: [ID]
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelAddAnnouncementConnection @aws_api_key @aws_iam {
+  items: [AddAnnouncement]!
+  nextToken: String
+}
+
+input ModelAddAnnouncementFilterInput {
+  id: ModelIDInput
+  Date: ModelStringInput
+  Title: ModelStringInput
+  Description: ModelStringInput
+  Image: ModelStringInput
+  Active: ModelBooleanInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelAddAnnouncementFilterInput]
+  or: [ModelAddAnnouncementFilterInput]
+  not: ModelAddAnnouncementFilterInput
+}
+
+type Query {
+  getAddAnnouncement(id: ID!): AddAnnouncement @aws_api_key @aws_iam
+  listAddAnnouncements(filter: ModelAddAnnouncementFilterInput, limit: Int, nextToken: String): ModelAddAnnouncementConnection @aws_api_key @aws_iam
+}
+
+input ModelAddAnnouncementConditionInput {
+  Date: ModelStringInput
+  Title: ModelStringInput
+  Description: ModelStringInput
+  Image: ModelStringInput
+  Active: ModelBooleanInput
+  and: [ModelAddAnnouncementConditionInput]
+  or: [ModelAddAnnouncementConditionInput]
+  not: ModelAddAnnouncementConditionInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+}
+
+input CreateAddAnnouncementInput {
+  id: ID
+  Date: AWSDate
+  Title: String
+  Description: String
+  Image: String
+  Active: Boolean
+}
+
+input UpdateAddAnnouncementInput {
+  id: ID!
+  Date: AWSDate
+  Title: String
+  Description: String
+  Image: String
+  Active: Boolean
+}
+
+input DeleteAddAnnouncementInput {
+  id: ID!
+}
+
+type Mutation {
+  createAddAnnouncement(input: CreateAddAnnouncementInput!, condition: ModelAddAnnouncementConditionInput): AddAnnouncement @aws_api_key @aws_iam
+  updateAddAnnouncement(input: UpdateAddAnnouncementInput!, condition: ModelAddAnnouncementConditionInput): AddAnnouncement @aws_api_key @aws_iam
+  deleteAddAnnouncement(input: DeleteAddAnnouncementInput!, condition: ModelAddAnnouncementConditionInput): AddAnnouncement @aws_api_key @aws_iam
+}
+
+input ModelSubscriptionAddAnnouncementFilterInput {
+  id: ModelSubscriptionIDInput
+  Date: ModelSubscriptionStringInput
+  Title: ModelSubscriptionStringInput
+  Description: ModelSubscriptionStringInput
+  Image: ModelSubscriptionStringInput
+  Active: ModelSubscriptionBooleanInput
+  createdAt: ModelSubscriptionStringInput
+  updatedAt: ModelSubscriptionStringInput
+  and: [ModelSubscriptionAddAnnouncementFilterInput]
+  or: [ModelSubscriptionAddAnnouncementFilterInput]
+}
+
+type Subscription {
+  onCreateAddAnnouncement(filter: ModelSubscriptionAddAnnouncementFilterInput): AddAnnouncement @aws_subscribe(mutations: ["createAddAnnouncement"]) @aws_api_key @aws_iam
+  onUpdateAddAnnouncement(filter: ModelSubscriptionAddAnnouncementFilterInput): AddAnnouncement @aws_subscribe(mutations: ["updateAddAnnouncement"]) @aws_api_key @aws_iam
+  onDeleteAddAnnouncement(filter: ModelSubscriptionAddAnnouncementFilterInput): AddAnnouncement @aws_subscribe(mutations: ["deleteAddAnnouncement"]) @aws_api_key @aws_iam
+}

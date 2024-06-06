@@ -1,0 +1,115 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-fgbtheaters-dev-f2bb9-authRole",
+      "UnauthRoleArn": "arn:aws:iam::767397816314:role/amplify-fgbtheaters-dev-f2bb9-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::767397816314:role/amplify-fgbtheaters-dev-f2bb9-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-fgbtheaters-dev-f2bb9-deployment",
+      "UnauthRoleName": "amplify-fgbtheaters-dev-f2bb9-unauthRole",
+      "StackName": "amplify-fgbtheaters-dev-f2bb9",
+      "StackId": "arn:aws:cloudformation:us-east-1:767397816314:stack/amplify-fgbtheaters-dev-f2bb9/04ddce20-17d6-11ef-be50-12a67e414383",
+      "AmplifyAppId": "d5vhylij0llj8"
+    }
+  },
+  "api": {
+    "fgbtheaters": {
+      "dependsOn": [],
+      "output": {
+        "authConfig": {
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            }
+          ],
+          "defaultAuthentication": {
+            "apiKeyConfig": {
+              "apiKeyExpirationDays": 30,
+              "description": "api key description"
+            },
+            "authenticationType": "API_KEY"
+          }
+        },
+        "GraphQLAPIIdOutput": "xxmkgnkaejdnllgd2bxkvbrdqu",
+        "GraphQLAPIEndpointOutput": "https://27mbbbtvqrcz3lee7hiubrgyri.appsync-api.us-east-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-ap7quaavw5ff5chabsm3woirfa"
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "AppSync",
+      "lastPushTimeStamp": "2024-06-01T22:14:07.669Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-dev-f2bb9-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "logicalId": "apifgbtheaters"
+      }
+    }
+  },
+  "auth": {
+    "fgbtheaters2ff27a91": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "output": {
+        "UserPoolId": "us-east-1_b8PSBz6LY",
+        "AppClientIDWeb": "67u31f1d30iac9c5cedcb1hsoj",
+        "AppClientID": "7h21c7g3f54303pikcv56b97ei",
+        "IdentityPoolId": "us-east-1:4e5ae03b-7e66-451a-98bd-5f54656d8b6b",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:767397816314:userpool/us-east-1_b8PSBz6LY",
+        "IdentityPoolName": "fgbtheaters2ff27a91_identitypool_2ff27a91__dev",
+        "UserPoolName": "fgbtheaters2ff27a91_userpool_2ff27a91"
+      },
+      "lastPushTimeStamp": "2024-06-01T22:14:07.670Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-dev-f2bb9-deployment/amplify-cfn-templates/auth/fgbtheaters2ff27a91-cloudformation-template.json",
+        "logicalId": "authfgbtheaters2ff27a91"
+      }
+    }
+  },
+  "hosting": {
+    "amplifyhosting": {
+      "providerPlugin": "awscloudformation",
+      "service": "amplifyhosting",
+      "type": "manual",
+      "output": {},
+      "lastPushTimeStamp": "2024-06-01T22:14:07.673Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-dev-f2bb9-deployment/amplify-cfn-templates/hosting/amplifyhosting-template.json",
+        "logicalId": "hostingamplifyhosting"
+      }
+    }
+  },
+  "storage": {
+    "fgbstorage": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3",
+      "output": {
+        "BucketName": "fgbtheatersstoragef2bb9-dev",
+        "Region": "us-east-1"
+      },
+      "lastPushTimeStamp": "2024-06-01T22:14:08.943Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-dev-f2bb9-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
+        "logicalId": "storagefgbstorage"
+      }
+    }
+  }
+}

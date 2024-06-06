@@ -1,0 +1,26 @@
+[
+    {
+        "id": 0,
+        "Date": "2024-05-24",
+        "Title": "Welcome To FGB Theaters",
+        "Description": "Some Catchy Tagline",
+        "Image": "https://placehold.co/1000x1500/png",
+        "Background": "https://i.imgur.com/CjufWqq.png"
+    },
+    {
+        "id": 1,
+        "Date": "2024-05-24",
+        "Title": "Movie Passes Available Online",
+        "Description": "A Perfect Gift For Your Loved Ones",
+        "Image": "https://placehold.co/1000x1500/png",
+        "Background": "https://i.imgur.com/CjufWqq.png"
+    },
+    {
+        "id": 2,
+        "Date": "2024-05-24",
+        "Title": "Now Serving Beer, Wine, and Cocktails",
+        "Description": "Enjoy A Drink With Your Movie",
+        "Image": "https://placehold.co/1000x1500/png",
+        "Background": "https://i.imgur.com/CjufWqq.png"
+    }
+]

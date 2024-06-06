@@ -1,0 +1,8 @@
+type AddAnnouncement @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Date: AWSDate
+  Title: String
+  Description: String
+  Image: String
+  Active: Boolean
+}

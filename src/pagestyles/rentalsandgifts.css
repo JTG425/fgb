@@ -1,0 +1,321 @@
+.rentals-and-gifts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.gift-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 0;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    background: var(--foreground);
+    max-width: 1500px;
+    width: 100%;
+}
+
+.gift-card img {
+    width: 200px;
+    height: auto;
+    align-self: center;
+}
+
+.gift-card-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    align-items: flex-start;
+    margin-left: 1rem;
+    text-align: justify;
+}
+
+.gift-card-text h4 {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    line-height: 1rem;
+    font-weight: bold;
+}
+
+.gift-card-text h5 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    line-height: 1rem;
+    font-weight: bold;
+
+}
+
+.gift-card-text p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.card-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.card-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.gift-rentals-button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.75rem;
+    width: 175px;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    font-weight: bold;
+    background: transparent;
+    border: none;
+    color: var(--copy);
+    outline: 2px solid var(--primary);
+    cursor: pointer;
+    border-radius: var(--border-radius);
+}
+
+.rental-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    border-radius: 0;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    background: var(--foreground);
+    max-width: 1500px;
+    width: 100%;
+}
+
+.card-content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    width: 100%;
+}
+
+.card-content img {
+    width: 200px;
+    height: auto;
+}
+
+
+.card-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: justify;
+    text-justify: inter-word;
+    width: 60%;
+}
+.card-text h3 {
+    margin-top: 0;
+    margin-bottom: 20px;
+    font-size: 1.5rem;
+    line-height: 1rem;
+    font-weight: bold;
+
+}
+
+.card-text p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    margin-bottom: 10px;
+}
+
+.card-text-2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    text-justify: inter-word;
+    width: 60%;
+}
+.card-text-2 h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    line-height: 1rem;
+    font-weight: bold;
+
+}
+
+.card-text-2 p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    margin-bottom: 5px;
+}
+
+.card-content-3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    width: 100%;
+}
+
+.card-text-3 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: justify;
+    text-justify: inter-word;
+    width: 100%;
+}
+.card-text-3 h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    line-height: 1rem;
+    font-weight: bold;
+
+}
+
+.card-text-3 p {
+    margin: 0;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    margin-top: 5px;
+}
+
+
+@media screen and (max-width: 600px) {
+    .gift-card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .gift-card img {
+        width: 100%;
+        height: auto;
+    }
+
+    .gift-card-text {
+        margin-left: 0;
+        margin-top: 1rem;
+    }
+
+    .rental-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+        border: 1px solid var(--border);
+        border-radius: 0;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        background: var(--foreground);
+        max-width: 1500px;
+        width: 100%;
+    }
+    
+    .card-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0.5rem 1rem;
+        gap: 25px;
+        width: 100%;
+    }
+    
+    .card-content img {
+        width: 200px;
+        height: auto;
+    }
+    
+    
+    .card-text {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: justify;
+        text-justify: inter-word;
+        width: 100%;
+        gap: 20px;
+    }
+
+    .card-text-2 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: justify;
+        text-justify: inter-word;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .card-text h3 {
+        margin-top: 0;
+        margin-bottom: -10px;
+        font-size: 1.5rem;
+        line-height: 1rem;
+        font-weight: bold;
+    
+    }
+    
+    .card-text p {
+        margin: 0;
+        font-size: 1rem;
+        line-height: 1.25rem;
+        margin-bottom: 10px;
+    }
+
+    .card-text-2 h3 {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 1.5rem;
+        line-height: 1rem;
+        font-weight: bold;
+    
+    }
+    .card-text-2 p {
+        font-size: 1rem;
+        line-height: 1rem;
+    }
+
+}
