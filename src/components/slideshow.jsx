@@ -80,10 +80,9 @@ const SlideShow = (props) => {
           key={`slideshow-button-left`}
           className="slideshow-button"
           onClick={() =>
-            setCurrentImageIndex((currentImageIndex + 1) % slideshow.length)
+            setCurrentImageIndex(currentImageIndex === 0 ? slideshow.length - 1 : (currentImageIndex - 1) % slideshow.length)
           }
         >
-          <FaChevronLeft />
         </button>
         <button
           key={`slideshow-button-right`}
@@ -92,7 +91,6 @@ const SlideShow = (props) => {
             setCurrentImageIndex((currentImageIndex + 1) % slideshow.length)
           }
         >
-          <FaChevronRight />
         </button>
       </div>
     </div>
