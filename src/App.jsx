@@ -1,7 +1,7 @@
 import "./App.css";
 import "react-day-picker/dist/style.css";
 import { useState, useEffect, useRef } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { SocialIcon } from 'react-social-icons';
 import loading from "./assets/loading.svg";
@@ -12,6 +12,7 @@ import Locations from "./pages/locations";
 import About from "./pages/about";
 import RentalsAndGifts from "./pages/rentalsandgiftcards";
 import Admin from "./pages/admin";
+import './pagestyles/admin.css';
 
 
 
@@ -140,14 +141,9 @@ function App(props) {
                   </PageWrapper>
                 }
               />
-
               <Route
-                path="/admin"
-                element={
-                  <PageWrapper>
-                    <Admin slideshow={slideshow} currentShows={currentShows} upcomingShows={upcomingShows} />
-                  </PageWrapper>
-                }
+                path="*"
+                element={<Navigate to="/" replace />}
               />
             </Routes>
           </motion.div>

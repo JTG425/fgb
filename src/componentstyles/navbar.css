@@ -31,8 +31,9 @@
     flex-direction: row;
     justify-content: flex-end;
     align-items: center;
-    margin-right: 0;
+    /* margin-right: 15px; */
     gap: 20px;
+
 }
 
 .nav-button {
@@ -114,6 +115,7 @@
     width: auto;
     height: 50px;
     z-index: 5;
+    /* margin-left: 15px; */
 }
 
 

@@ -20,6 +20,7 @@
     padding: 0.5rem 1rem;
     overflow: scroll;
     margin-bottom: 25px;
+    overscroll-behavior: auto;
     
 }
 
@@ -123,6 +124,7 @@
 .prices table tr td {
     padding: 0.5rem;
     border: 1px solid var(--border);
+    font-size: 14px;
 }
 
 
