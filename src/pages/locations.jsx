@@ -18,7 +18,7 @@ function CapitolMap() {
         latitude: 44.26092378286133,
         zoom: 14
       }}
-      style={{ width: '325px', height: '325px' }}
+      style={{ width: '275px', height: '275px' }}
       mapStyle="mapbox://styles/mapbox/streets-v9"
     >
       <Marker latitude={44.26092378286133} longitude={-72.57836915903455} />
@@ -38,7 +38,7 @@ function ParamountMap() {
         latitude: 44.19952086200256,
         zoom: 14
       }}
-      style={{ width: '325px', height: '325px' }}
+      style={{ width: '275px', height: '275px' }}
       mapStyle="mapbox://styles/mapbox/streets-v9"
     >
       <Marker latitude={44.19952086200256} longitude={-72.50370899940566} />

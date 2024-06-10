@@ -42,8 +42,8 @@
 }
 
 .Map {
-    width: 20vw;
-    height: 20vw;
+    width: 300px;
+    height: 300px;
 }
 
 .maps {
@@ -122,7 +122,7 @@
     text-decoration: none;
     color: var(--copy);
     font-size: 1rem;
-    width: 20vw;
+    width: 80%;
     height: 50px;
     text-align: center;
     margin-top: 20px;
@@ -147,7 +147,7 @@
     align-items: center;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 700px) {
     .maps {
         display: flex;
         flex-direction: column;
@@ -173,8 +173,5 @@
         width: fit-content;
     }
 
-    .call {
-        width: 50vw;
-    }
 
 }

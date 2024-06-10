@@ -3,6 +3,7 @@ import anime from "animejs";
 import { motion } from "framer-motion";
 import { FaChevronLeft } from "react-icons/fa";
 import { FaChevronRight } from "react-icons/fa";
+import firstSlide from "../assets/firstSlide.png";
 import "../componentstyles/slideshow.css"; // Import CSS for additional styles
 
 const SlideShow = (props) => {
@@ -37,7 +38,7 @@ const SlideShow = (props) => {
           animate={currentImageIndex === index ? "visible" : "hidden"}
           variants={imageVariants}
           style={{
-            backgroundImage: `url(${slide.Background})`,
+            backgroundImage: currentImageIndex === 0 ? `url(${firstSlide})` : `url(${slide.Background})`,
             backgroundSize: "cover",
             backgroundPosition: "center",
           }}
