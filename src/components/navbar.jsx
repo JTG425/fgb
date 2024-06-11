@@ -83,7 +83,7 @@ function NavBar(props) {
               </motion.p>
             </motion.button>
           </Link>
-          {["Tickets", "Locations", "Gifts", "About"].map((pageName) => (
+          {["Tickets", "Locations", "Rentals", "About"].map((pageName) => (
             <Link to={`/${pageName.toLowerCase()}`} key={pageName}>
               <motion.button
                 whileHover="hovered"

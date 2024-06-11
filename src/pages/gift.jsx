@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { motion } from "framer-motion";
-import '../pagestyles/rentalsandgifts.css'
+import '../pagestyles/tickets.css'
 
 function Gift(props) {
     const buttonVariants = {
@@ -17,7 +17,6 @@ function Gift(props) {
     }
     return (
         <div className='rentals-and-gifts-container'>
-            <h2>Gift Cards</h2>
             <div className='gift-card'>
                 <img
                     src="https://fgbtheatersstoragef2bb9-dev.s3.amazonaws.com/public/gifts/MovieCard.png"

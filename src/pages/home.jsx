@@ -78,7 +78,7 @@ function Home(props) {
     >
       <SlideShow slideshow={slideshow} />
       <div className="home-container">
-        <h2>Today's Showings</h2>
+        <h2>Showtimes</h2>
         <SelectTheater selected={selectedTheater} setSelected={handleTheaterChange} />
         <div className="datepicker-container">
           <motion.button
@@ -124,7 +124,7 @@ function Home(props) {
         </div>
       </div>
     <div className="upcoming-shows-container">
-      <h2>Upcoming Shows</h2>
+      <h2>Coming Soon</h2>
       <div className="upcoming-shows">
             {upcoming.map((show, index) => (
               <motion.div 

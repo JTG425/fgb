@@ -10,7 +10,7 @@ import Home from "./pages/home";
 import Tickets from "./pages/tickets";
 import Locations from "./pages/locations";
 import About from "./pages/about";
-import RentalsAndGifts from "./pages/rentalsandgiftcards";
+import Rentals from "./pages/rentals";
 import Admin from "./pages/admin";
 import './pagestyles/admin.css';
 
@@ -126,10 +126,10 @@ function App(props) {
                 }
               />
               <Route
-                path="/gifts"
+                path="/rentals"
                 element={
                   <PageWrapper>
-                    <RentalsAndGifts />
+                    <Rentals />
                   </PageWrapper>
                 }
               />
@@ -150,7 +150,7 @@ function App(props) {
         </AnimatePresence>
         <div className='footer'>
           <span className="footer-socials">
-            <SocialIcon key='facebook-icon' bgColor='#f1efef' fgColor='#292323' url="https://www.facebook.com/pages/Capitol%20Theatre/113448652021770/" target='_blank' />
+            <SocialIcon key='facebook-icon' bgColor='#f1efef' fgColor='#292323' url="https://www.facebook.com/profile.php?id=61556431721748" target='_blank' />
             <SocialIcon key='insta-icon' bgColor='#f1efef' fgColor='#292323' url="https://www.instagram.com/fgbtheaters/" target='_blank' />
           </span>
           <p><sup>©</sup>Copyright 2024 FGB Theaters</p>

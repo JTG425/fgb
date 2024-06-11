@@ -9,7 +9,8 @@ import { FiHome } from "react-icons/fi";
 import { FaTicketSimple } from "react-icons/fa6";
 import { FaMapLocation } from "react-icons/fa6";
 import { FaRegCircleQuestion } from "react-icons/fa6";
-import { FaGift } from "react-icons/fa";
+import { RiMovie2Line } from "react-icons/ri";
+
 
 function DropDown(props) {
   const [showDropdown, setShowDropdown] = useState(true);
@@ -106,10 +107,10 @@ function DropDown(props) {
           </button>
         </Link>
 
-        <Link to="/gifts">
+        <Link to="/rentals">
           <button className="dropdown-button" onClick={() => toggleDropdown()}>
-            <FaGift className="icon" />
-            <p>Gift Cards and Rentals</p>
+            <RiMovie2Line className="icon" />
+            <p>Rentals</p>
           </button>
         </Link>
 

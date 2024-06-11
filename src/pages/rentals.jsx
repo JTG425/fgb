@@ -1,19 +1,60 @@
-import { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import "../pagestyles/rentalsandgifts.css";
+import { useState, useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import "../pagestyles/rentals.css";
 import { FaPhoneAlt } from "react-icons/fa";
 
 function Rentals(props) {
+
+  const cardVariants = {
+    hidden: {
+      opacity: 0,
+      y: 100,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+      },
+    },
+  };
+
+  const rentalCardRef1 = useRef(null);
+  const rentalCardRef2 = useRef(null);
+  const rentalCardRef3 = useRef(null);
+  const inView1 = useInView(rentalCardRef1, { once: true });
+  const inView2 = useInView(rentalCardRef2, { once: true });
+  const inView3 = useInView(rentalCardRef3, { once: true });
+
+
   return (
     <div className="rentals-and-gifts-container">
       <h2>Rentals</h2>
+      <div className="rental-card">
+        <div className="card-text">
+          <p>
+            <i>
+              <b>For more information contact the Capitol Theater</b>
+            </i>
+          </p>
+        </div>
+        <motion.a href="tel:18025223576" className="call">
+          <span className="call-content">
+            <FaPhoneAlt />
+            <p>(802)-522-3576</p>
+          </span>
+        </motion.a>
+      </div>
       <div className="rentals-container">
-        <div className="rental-card">
+        <motion.div 
+          className="rental-card"
+          ref={rentalCardRef1}
+          initial="hidden"
+          animate={inView1 ? "visible" : "hidden"}
+          variants={cardVariants}
+
+          >
           <div className="card-content">
-            <img
-              src="https://fgbtheatersstoragef2bb9-dev.s3.amazonaws.com/public/gifts/rentals1.png"
-              alt="rental"
-            />
             <span className="card-text">
               <h3>Special Events</h3>
               <p>
@@ -31,26 +72,17 @@ function Rentals(props) {
                 whole School! Our digital projection offers more flexiblility
                 than ever before!
               </p>
-              <p>
-                <i>
-                  <b>For more information contact the Capitol Theater</b>
-                </i>
-              </p>
             </span>
           </div>
-          <motion.a href="tel:18022290343" className="call">
-                <span className="call-content">
-                  <FaPhoneAlt />
-                  <p>(802)-229-0343</p>
-                </span>
-              </motion.a>
-        </div>
-        <div className="rental-card">
+        </motion.div>
+        <motion.div 
+          className="rental-card"
+          ref={rentalCardRef2}
+          initial="hidden"
+          animate={inView2 ? "visible" : "hidden"}
+          variants={cardVariants}
+          >
           <div className="card-content">
-            <img
-              src="https://fgbtheatersstoragef2bb9-dev.s3.amazonaws.com/public/gifts/rentals2.png"
-              alt="rental"
-            />
             <span className="card-text-2">
               <h3>Birthday Parties</h3>
               <p>Celebrate Your Childs Birthday at the Movies!</p>
@@ -60,24 +92,18 @@ function Rentals(props) {
                 </i>
               </p>
               <p>
-                <b>$10.50</b> For Matinee Shows <i>per person</i>
-              </p>
-              <p>
-                <b>$12.50</b> For Evening Shows <i>per person</i>
+                <b>$16.75</b> <i>per person</i>
               </p>
               <ul>
                 <li>
                   <b>Reserved Seating</b> to the movie showing of your choice.
                 </li>
                 <li>
-                  <b>FREE movie ticket for the birthday child!</b>
+                  <b>FREE movie ticket and kids pack for the birthday child!</b>
                 </li>
                 <li>
                   <b>FREE kids pack</b> including soda, popcorn, and small
                   candy!
-                </li>
-                <li>
-                  <b>Exclusive private tour</b> of the projection booth!
                 </li>
               </ul>
               <p>
@@ -87,14 +113,15 @@ function Rentals(props) {
               </p>
             </span>
           </div>
-          <motion.a href="tel:18022290343" className="call">
-                <span className="call-content">
-                  <FaPhoneAlt />
-                  <p>(802)-229-0343</p>
-                </span>
-              </motion.a>
-        </div>
-        <div className="rental-card">
+        </motion.div>
+        <motion.div 
+          className="rental-card"
+          ref={rentalCardRef3}
+          initial="hidden"
+          animate={inView3 ? "visible" : "hidden"}
+          variants={cardVariants}
+          
+          >
           <div className="card-content-3">
             <span className="card-text-3">
               <h3>Advertisements</h3>
@@ -106,20 +133,9 @@ function Rentals(props) {
                 Showcase your business with the power of Hollywood and let
                 advertising on our big screens deliver blockbuster results.
               </p>
-              <p>
-                <i>
-                  <b>For more information contact the Capitol Theater</b>
-                </i>
-              </p>
             </span>
           </div>
-          <motion.a href="tel:18022290343" className="call">
-                <span className="call-content">
-                  <FaPhoneAlt />
-                  <p>(802)-229-0343</p>
-                </span>
-              </motion.a>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
