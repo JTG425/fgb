@@ -1,9 +1,11 @@
 .select-theater-container {
+    position: relative;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
     margin-top: 25px;
+    z-index: 1;
 
 }
 

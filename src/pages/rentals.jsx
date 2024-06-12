@@ -101,16 +101,7 @@ function Rentals(props) {
                 <li>
                   <b>FREE movie ticket and kids pack for the birthday child!</b>
                 </li>
-                <li>
-                  <b>FREE kids pack</b> including soda, popcorn, and small
-                  candy!
-                </li>
               </ul>
-              <p>
-                <i>
-                  <b>For more information contact the Capitol Theater</b>
-                </i>
-              </p>
             </span>
           </div>
         </motion.div>

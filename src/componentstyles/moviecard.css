@@ -104,9 +104,9 @@
     padding: 1.5rem;
     border: 1px solid var(--border);
     border-radius: 0;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow);
     background: var(--foreground);
-    max-width: 1500px;
+    max-width: 1000px;
     width: 100%;
 }
 

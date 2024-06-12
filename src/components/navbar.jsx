@@ -3,7 +3,7 @@ import { BrowserRouter, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "../componentstyles/navbar.css";
 import DropDown from "./dropdown";
-import NavLogo from '../assets/navLogo.svg';
+import NavLogo from "../assets/navLogo.svg";
 
 function NavBar(props) {
   const pages = props.pages;
@@ -61,7 +61,7 @@ function NavBar(props) {
         </Link>
         <DropDown />
         <div className="nav-buttons-container">
-          <Link to = "/" >
+          <Link to="/">
             <motion.button
               whileHover="hovered"
               whileTap={{ scale: 0.9 }}

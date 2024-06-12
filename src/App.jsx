@@ -13,6 +13,9 @@ import About from "./pages/about";
 import Rentals from "./pages/rentals";
 import Admin from "./pages/admin";
 import './pagestyles/admin.css';
+import icon10 from "./assets/10.png";
+
+
 
 
 

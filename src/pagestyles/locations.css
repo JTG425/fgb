@@ -4,7 +4,7 @@
     justify-content: flex-start;
     overflow: hidden;
     height: fit-content;
-    margin-top: 25px;
+    margin-top: -90px;
     width: 100%;
 }
 
@@ -184,6 +184,14 @@
         justify-content: flex-start;
         align-items: center;
         width: 100%;
+    }
+
+
+}
+
+@media screen and (max-width: 600px) {
+    .locations {
+        margin-top: 75px;
     }
 
 

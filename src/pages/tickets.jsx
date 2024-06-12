@@ -3,6 +3,9 @@ import "../pagestyles/home.css";
 import React, { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Gift from "./gift";
+import popcornbucket from "../assets/6.png";
+import soda from "../assets/5.png";
+import icon9 from "../assets/9.png";
 
 function Tickets() {
   const [confirmed, setConfirmed] = useState(true);
@@ -48,6 +51,7 @@ function Tickets() {
       <motion.div className="tickets">
         <h2>Buy Tickets</h2>
         <h3>Skip The Line, Buy Online!</h3>
+        <img className="film-reel" src={icon9} />
         <div className="buy-ticket-container">
         <div className="prices">
           <table>

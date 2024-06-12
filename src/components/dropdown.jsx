@@ -16,7 +16,7 @@ function DropDown(props) {
   const [showDropdown, setShowDropdown] = useState(true);
 
   const toggleDropdown = () => {
-    switch (showDropdown) {
+switch (showDropdown) {
       case true:
         anime({
           targets: ".dropdown",
@@ -78,49 +78,49 @@ function DropDown(props) {
 
   return (
     <>
-      <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        className="show-dropdown-button"
-        onClick={() => toggleDropdown()}
-      >
-        <RxHamburgerMenu />
-      </motion.button>
-      <div className="dropdown">
-        <Link to="/">
-          <button className="dropdown-button" onClick={() => toggleDropdown()}>
-            <FiHome className="icon" />
-            <p>Home</p>
-          </button>
-        </Link>
-        <Link to="/tickets">
-          <button className="dropdown-button" onClick={() => toggleDropdown()}>
-            <FaTicketSimple className="icon" />
-            <p>Buy Tickets</p>
-          </button>
-        </Link>
+        <motion.button
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          className="show-dropdown-button"
+          onClick={() => toggleDropdown()}
+        >
+          <RxHamburgerMenu />
+        </motion.button>
+        <div className="dropdown">
+          <Link to="/">
+            <button className="dropdown-button" onClick={() => toggleDropdown()}>
+              <FiHome className="icon" />
+              <p>Home</p>
+            </button>
+          </Link>
+          <Link to="/tickets">
+            <button className="dropdown-button" onClick={() => toggleDropdown()}>
+              <FaTicketSimple className="icon" />
+              <p>Buy Tickets</p>
+            </button>
+          </Link>
 
-        <Link to="/locations">
-          <button className="dropdown-button" onClick={() => toggleDropdown()}>
-            <FaMapLocation className="icon" />
-            <p>Our Locations</p>
-          </button>
-        </Link>
+          <Link to="/locations">
+            <button className="dropdown-button" onClick={() => toggleDropdown()}>
+              <FaMapLocation className="icon" />
+              <p>Our Locations</p>
+            </button>
+          </Link>
 
-        <Link to="/rentals">
-          <button className="dropdown-button" onClick={() => toggleDropdown()}>
-            <RiMovie2Line className="icon" />
-            <p>Rentals</p>
-          </button>
-        </Link>
+          <Link to="/rentals">
+            <button className="dropdown-button" onClick={() => toggleDropdown()}>
+              <RiMovie2Line className="icon" />
+              <p>Rentals</p>
+            </button>
+          </Link>
 
-        <Link to="/about">
-          <button className="dropdown-button" onClick={() => toggleDropdown()}>
-            <FaRegCircleQuestion className="icon" />
-            <p>About Us</p>
-          </button>
-        </Link>
-      </div>
+          <Link to="/about">
+            <button className="dropdown-button" onClick={() => toggleDropdown()}>
+              <FaRegCircleQuestion className="icon" />
+              <p>About Us</p>
+            </button>
+          </Link>
+              </div>
     </>
   );
 }

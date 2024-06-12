@@ -10,7 +10,8 @@
   --secondary-light: #c61404;
 
   --background: #f1efef;
-  --foreground: #fbfbfb;
+  --foreground: rgba(251, 251, 251, 0.90);
+  /* --foreground: #fbfbfb; */
   --border: #e2dddd;
 
   --copy: #292323;
@@ -58,6 +59,7 @@ a {
 
 
 .App {
+  /* position: relative; */
   margin: 0;
   padding: 2rem;
   display: flex;
@@ -71,7 +73,10 @@ a {
   scrollbar-width: none;
   /* Firefox */
   overscroll-behavior: none;
+  padding-top: 2rem;
 }
+
+
 
 .App::-webkit-scrollbar {
   display: none;
@@ -93,8 +98,8 @@ a {
 }
 
 
-
 .page-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -103,7 +108,7 @@ a {
   max-width: 1000px;
   height: fit-content;
   background: var(--background);
-  margin-top: 35px;
+  margin-top: 140px;
   -ms-overflow-style: none;
   /* Internet Explorer 10+ */
   scrollbar-width: none;
@@ -112,19 +117,21 @@ a {
 
 
 .home-container {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   width: 100vw;
-  max-width: 1000px;
   height: fit-content;
   background: var(--background);
-  margin-top: 400px;
+  margin-top: 275px;
   -ms-overflow-style: none;
   /* Internet Explorer 10+ */
   scrollbar-width: none;
   /* Firefox */
+  overflow-y: hidden;
+  overflow-x: hidden;
 }
 
 .home-container h2 {
@@ -177,9 +184,11 @@ a {
   }
 }
 
-
 @media screen and (max-width: 600px) {
+  .page-container {
+    margin-top: -30px;
+  }
   .home-container {
-    margin-top: 450px;
+    margin-top: 550px;
   }
 }
