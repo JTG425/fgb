@@ -4,6 +4,8 @@ import React, { Suspense } from "react";
 import { motion } from "framer-motion";
 import { FaPhoneAlt } from "react-icons/fa";
 import Map, { Marker } from 'react-map-gl';
+import masks from "../assets/16.png";
+import stars from "../assets/12.png";
 
 
 
@@ -50,6 +52,8 @@ function Locations(props) {
   return (
     <div className="page-container">
       <div className="locations">
+        <img className="masks-icon" src={masks} />
+        <img className="stars-icon" src={stars} />
         <h2>Locations</h2>
         <span className="info">
           <p>

@@ -3,9 +3,11 @@ import "../pagestyles/home.css";
 import React, { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Gift from "./gift";
+import Concessions from "../components/concessions";
 import popcornbucket from "../assets/6.png";
 import soda from "../assets/5.png";
 import icon9 from "../assets/9.png";
+import icon1 from "../assets/1.png";
 
 function Tickets() {
   const [confirmed, setConfirmed] = useState(true);
@@ -43,15 +45,18 @@ function Tickets() {
 
   const tickRef1 = useRef(null);
   const tickRef2 = useRef(null);
+  const tickRef3 = useRef(null);
   const inView1 = useInView(tickRef1, { once: true });
   const inView2 = useInView(tickRef2, { once: true });
+  const inView3 = useInView(tickRef3, { once: true });
 
   return (
     <div className="page-container">
       <motion.div className="tickets">
         <h2>Buy Tickets</h2>
         <h3>Skip The Line, Buy Online!</h3>
-        <img className="film-reel" src={icon9} />
+        <img className="film-reel1" src={icon9} />
+        <img className="tickets-icon" src={icon1} />
         <div className="buy-ticket-container">
         <div className="prices">
           <table>
@@ -104,6 +109,7 @@ function Tickets() {
           </a>
         </motion.div>
         </div>
+        <img className="film-reel2" src={icon9} />
         <motion.div
           ref={tickRef1}
           initial="hidden"
@@ -112,11 +118,20 @@ function Tickets() {
           >
         <Gift />
         </motion.div>
-        <motion.div 
-          className="tickets-terms"
+        {/* <motion.div
+          className="concessions-container"
           ref={tickRef2}
           initial="hidden"
           animate={inView2 ? "visible" : "hidden"}
+          variants={cardVariants}
+          >
+          <Concessions />
+          </motion.div> */}
+        <motion.div 
+          className="tickets-terms"
+          ref={tickRef3}
+          initial="hidden"
+          animate={inView3 ? "visible" : "hidden"}
           variants={cardVariants}
         >
           <h3>Print At Home</h3>

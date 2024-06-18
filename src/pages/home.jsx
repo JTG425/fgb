@@ -124,6 +124,7 @@ function Home(props) {
             </div>
           )}
         </div>
+
         <img className="home-icon1" src={icon7} />
         <img className="home-icon2" src={icon7} />
         <div className="movies-container">
@@ -157,10 +158,12 @@ function Home(props) {
                 setDate(handleUpcomingDateFormatting(show.StartDate))
               }
             >
+              <span className="title">
               <a href={show.website} target="_blank">
                 <h4>{show.name}</h4>
               </a>
               <p>{show.rating}</p>
+              </span>
               <img src={show.poster} />
               <p>{handleUpcomingDate(show.StartDate)}</p>
             </motion.div>

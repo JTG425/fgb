@@ -5,6 +5,7 @@
     overflow: hidden;
     height: fit-content;
     margin-top: -90px;
+    margin-bottom: 50px;
     width: 100%;
 }
 
@@ -37,6 +38,7 @@
     background: var(--foreground);
     box-shadow: var(--box-shadow);
     padding: 1rem;
+    z-index: 1;
 }
 
 .info p {
@@ -87,6 +89,7 @@
     padding-right: 1rem;
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);
     background: var(--foreground);
+    z-index: 1;
 }
 
 .cap-map h3 {
@@ -123,6 +126,7 @@
     padding-right: 1rem;
     box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);
     background: var(--foreground);
+    z-index: 1;
 }
 
 .call {
@@ -158,6 +162,25 @@
     align-items: center;
 }
 
+.masks-icon {
+    position: absolute;
+    width: auto;
+    height: 250px;
+    top: -100px;
+    transform: rotateZ(-25deg);
+    z-index: 0;
+}
+
+.stars-icon {
+    position: absolute;
+    width: auto;
+    height: 20%;
+    left: 42%;
+    right: 42%;
+    bottom: -35px;
+    z-index: 0;
+}
+
 @media screen and (max-width: 700px) {
     .maps {
         display: flex;
@@ -184,6 +207,12 @@
         justify-content: flex-start;
         align-items: center;
         width: 100%;
+    }
+    .stars-icon {
+        display: none;
+    }
+    .masks-icon {
+        top: 100px;
     }
 
 

@@ -21,6 +21,7 @@
     overflow: scroll;
     margin-bottom: 25px;
     overscroll-behavior: auto;
+    z-index: 1;
     
 }
 
@@ -164,6 +165,7 @@
     max-width: 1500px;
     width: 100%;
     margin-top: -1.5rem;
+    z-index: 1;
 }
 
 .gift-card img {
@@ -208,13 +210,114 @@
 }
 
 
-.film-reel {
+.film-reel1 {
     position: absolute;
-    top: -240px;
+    top: -230px;
     left: -100px;
     width: auto;
     height: 500px;
     z-index: 0;
+}
+
+.film-reel2 {
+    position: absolute;
+    top: 125px;
+    right: -100px;
+    width: auto;
+    height: 500px;
+    z-index: 0;
+    transform: rotateY(180deg);
+}
+
+.tickets-icon {
+    width: 300px;
+    height: 300px;
+    position: absolute;
+    left: -50px;
+    bottom: 300px;
+
+}
+
+.concessions-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: var(--foreground);
+    border: var(--border);
+    border-radius: none;
+    box-shadow: var(--box-shadow);
+    padding: 1rem;
+    overflow: scroll;
+    margin-bottom: 50px;
+    overscroll-behavior: auto;
+    margin-top: 10px;
+    z-index: 1;
+    text-align: center;
+}
+
+.concessions h4 {
+    margin: 0;
+    margin-bottom: 25px;
+    font-size: 1.5rem;
+    line-height: 1rem;
+    font-weight: bold;
+}
+
+.concessions h5 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    line-height: 1rem;
+    font-weight: bold;
+
+}
+
+.concessions-header-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 1rem;
+    gap: 25px;
+}
+
+.concessions-header-buttons button {
+    background: var(--foreground);
+    color: var(--copy);
+    padding: 0.5rem;
+    border: var(--border);
+    box-shadow: var(--box-shadow);
+    cursor: pointer;
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--border-radius);
+
+
+}
+
+.popcorn {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.soda {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+
+}
+
+.concession-icon {
+    margin: 0;
+    width: 100%;
+    height: 100%;
 }
 
 
@@ -230,6 +333,16 @@
 
     .tickets {
         margin-top: 75px;
+    }
+
+    .film-reel1 {
+        top: -90px;
+        left: -150px;
+    }
+    
+    .film-reel2 {
+        top: 225px;
+        right: -150px;
     }
     
 }
