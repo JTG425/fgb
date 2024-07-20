@@ -7,22 +7,7 @@ import SelectTheater from "../components/selecttheater";
 import { CiCalendarDate } from "react-icons/ci";
 import { Day, DayPicker } from "react-day-picker";
 import { motion } from "framer-motion";
-import icon1 from "../assets/1.png";
-import icon2 from "../assets/2.png";
-import icon3 from "../assets/3.png";
-import icon4 from "../assets/4.png";
-import icon5 from "../assets/5.png";
 import icon7 from "../assets/7.png";
-import icon8 from "../assets/8.png";
-import icon9 from "../assets/9.png";
-import icon11 from "../assets/11.png";
-import icon12 from "../assets/12.png";
-import icon13 from "../assets/13.png";
-import icon14 from "../assets/14.png";
-import icon15 from "../assets/15.png";
-import icon16 from "../assets/16.png";
-import icon17 from "../assets/17.png";
-import icon18 from "../assets/18.png";
 
 const handleDateFormating = (date) => {
   const day = date.getDate();
@@ -51,7 +36,8 @@ const handleUpcomingDateFormatting = (date) => {
   const year = date.slice(0, 4);
   const month = date.slice(4, 6);
   const day = date.slice(6, 8);
-  return `${month}${day}${year}`;
+  const newDate = new Date(year, month - 1, day);
+  return newDate;
 };
 
 function Home(props) {
@@ -83,12 +69,7 @@ function Home(props) {
   };
 
   return (
-    <motion.div
-      className="page-container"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 1 }}
-    >
+    <motion.div className="page-container">
       <SlideShow slideshow={slideshow} />
       <div className="home-container">
         <h2>Showtimes</h2>
@@ -120,6 +101,14 @@ function Home(props) {
                   selected={selectedDate}
                   onSelect={(date) => handleDateChange(date)}
                 />
+                <motion.button
+                  className="date-picker-today-button"
+                  onClick={() => handleDateChange(new Date())}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  Today
+                </motion.button>
               </div>
             </div>
           )}
@@ -155,14 +144,14 @@ function Home(props) {
               whileTap={{ scale: 0.98 }}
               whileHover={{ scale: 1.02 }}
               onClick={() =>
-                setDate(handleUpcomingDateFormatting(show.StartDate))
+                handleDateChange(handleUpcomingDateFormatting(show.StartDate))
               }
             >
               <span className="title">
-              <a href={show.website} target="_blank">
-                <h4>{show.name}</h4>
-              </a>
-              <p>{show.rating}</p>
+                <a href={show.website} target="_blank">
+                  <h4>{show.name}</h4>
+                </a>
+                <p>{show.rating}</p>
               </span>
               <img src={show.poster} />
               <p>{handleUpcomingDate(show.StartDate)}</p>

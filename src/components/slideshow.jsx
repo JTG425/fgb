@@ -1,8 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
-import anime from "animejs";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { FaChevronLeft } from "react-icons/fa";
-import { FaChevronRight } from "react-icons/fa";
 import firstSlide from "../assets/firstSlide.png";
 import "../componentstyles/slideshow.css"; // Import CSS for additional styles
 

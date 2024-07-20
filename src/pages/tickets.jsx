@@ -3,9 +3,6 @@ import "../pagestyles/home.css";
 import React, { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Gift from "./gift";
-import Concessions from "../components/concessions";
-import popcornbucket from "../assets/6.png";
-import soda from "../assets/5.png";
 import icon9 from "../assets/9.png";
 import icon1 from "../assets/1.png";
 
@@ -52,7 +49,7 @@ function Tickets() {
 
   return (
     <div className="page-container">
-      <motion.div className="tickets">
+      <div className="tickets">
         <h2>Buy Tickets</h2>
         <h3>Skip The Line, Buy Online!</h3>
         <img className="film-reel1" src={icon9} />
@@ -182,7 +179,7 @@ function Tickets() {
             </span>
           </p>
         </motion.div>
-      </motion.div>
+      </div>
     </div>
   );
 }

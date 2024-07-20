@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import "../pagestyles/rentals.css";
 import { FaPhoneAlt } from "react-icons/fa";
@@ -52,7 +52,6 @@ function Rentals(props) {
           initial="hidden"
           animate={inView1 ? "visible" : "hidden"}
           variants={cardVariants}
-
           >
           <div className="card-content">
             <span className="card-text">

@@ -3,7 +3,7 @@ import "react-day-picker/dist/style.css";
 import { useState, useEffect, useRef } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
-import { SocialIcon } from 'react-social-icons';
+import { SocialIcon } from "react-social-icons";
 import loading from "./assets/loading.svg";
 import NavBar from "./components/navbar";
 import Home from "./pages/home";
@@ -12,12 +12,7 @@ import Locations from "./pages/locations";
 import About from "./pages/about";
 import Rentals from "./pages/rentals";
 import Admin from "./pages/admin";
-import './pagestyles/admin.css';
-import icon10 from "./assets/10.png";
-
-
-
-
+import "./pagestyles/admin.css";
 
 function App(props) {
   const [currentPage, setCurrentPage] = useState("Home");
@@ -27,7 +22,6 @@ function App(props) {
   const slideshow = props.slideshow;
   const dataReceived = props.dataReceived;
   const currentShows = props.currentShows;
-
 
   const pages = [
     {
@@ -62,10 +56,8 @@ function App(props) {
     enable: {
       opacity: 1,
       overflowY: "scroll",
-    }
-  }
-
-
+    },
+  };
 
   return (
     <div className="App">
@@ -75,88 +67,98 @@ function App(props) {
           handlePageChange={handlePageChange}
           currentPage={currentPage.name}
         />
-        <AnimatePresence mode="wait">
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <Routes location={location} key={location.pathname}>
-              <Route
-                key="home"
-                path="/"
-                element={
-                  <PageWrapper>
-                    <Home
-                      capShows={capitolShows}
-                      parShows={paramountShows}
-                      upcomingShows={upcomingShows}
-                      slideshow={slideshow}
-                      dataReceived={dataReceived}
-                    />
-                  </PageWrapper>
-                }
-              />
-              <Route
-                key="home"
-                path="/home"
-                element={
-                  <PageWrapper>
-                    <Home
-                      capShows={capitolShows}
-                      parShows={paramountShows}
-                      upcomingShows={upcomingShows}
-                      slideshow={slideshow}
-                      dataReceived={dataReceived}
-                    />
-                  </PageWrapper>
-                }
-              />
-              <Route
-                path="/tickets"
-                element={
-                  <PageWrapper>
-                    <Tickets />
-                  </PageWrapper>
-                }
-              />
-              <Route
-                path="/locations"
-                element={
-                  <PageWrapper>
-                    <Locations key={import.meta.env.GOOGLE_MAPS_API_KEY} />
-                  </PageWrapper>
-                }
-              />
-              <Route
-                path="/rentals"
-                element={
-                  <PageWrapper>
-                    <Rentals />
-                  </PageWrapper>
-                }
-              />
-              <Route
-                path="/about"
-                element={
-                  <PageWrapper>
-                    <About />
-                  </PageWrapper>
-                }
-              />
-              <Route
-                path="*"
-                element={<Navigate to="/" replace />}
-              />
-            </Routes>
-          </motion.div>
-        </AnimatePresence>
-        <div className='footer'>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <Routes location={location} key={location.pathname}>
+            <Route
+              key="home"
+              path="/"
+              element={
+                <PageWrapper>
+                  <Home
+                    capShows={capitolShows}
+                    parShows={paramountShows}
+                    upcomingShows={upcomingShows}
+                    slideshow={slideshow}
+                    dataReceived={dataReceived}
+                  />
+                </PageWrapper>
+              }
+            />
+            <Route
+              key="home"
+              path="/home"
+              element={
+                <PageWrapper>
+                  <Home
+                    capShows={capitolShows}
+                    parShows={paramountShows}
+                    upcomingShows={upcomingShows}
+                    slideshow={slideshow}
+                    dataReceived={dataReceived}
+                  />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/tickets"
+              element={
+                <PageWrapper>
+                  <Tickets />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/locations"
+              element={
+                <PageWrapper>
+                  <Locations key={import.meta.env.GOOGLE_MAPS_API_KEY} />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/rentals"
+              element={
+                <PageWrapper>
+                  <Rentals />
+                </PageWrapper>
+              }
+            />
+            <Route
+              path="/about"
+              element={
+                <PageWrapper>
+                  <About />
+                </PageWrapper>
+              }
+            />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </motion.div>
+        <div className="footer">
           <span className="footer-socials">
-            <SocialIcon key='facebook-icon' bgColor='#f1efef' fgColor='#292323' url="https://www.facebook.com/profile.php?id=61556431721748" target='_blank' />
-            <SocialIcon key='insta-icon' bgColor='#f1efef' fgColor='#292323' url="https://www.instagram.com/fgbtheaters/" target='_blank' />
+            <SocialIcon
+              key="facebook-icon"
+              bgColor="#f1efef"
+              fgColor="#292323"
+              url="https://www.facebook.com/profile.php?id=61556431721748"
+              target="_blank"
+            />
+            <SocialIcon
+              key="insta-icon"
+              bgColor="#f1efef"
+              fgColor="#292323"
+              url="https://www.instagram.com/fgbtheaters/"
+              target="_blank"
+            />
           </span>
-          <p><sup>©</sup>Copyright 2024 FGB Theaters</p>
+          <p>
+            <sup>©</sup>Copyright 2024 FGB Theaters
+          </p>
         </div>
       </BrowserRouter>
     </div>
@@ -165,13 +167,16 @@ function App(props) {
 
 function PageWrapper({ children }) {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      {children}
-    </motion.div>
+    <AnimatePresence mode="wait">
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: 10}}
+        transition={{ duration: 0.5 }}
+      >
+        {children}
+      </motion.div>
+    </AnimatePresence>
   );
 }
 

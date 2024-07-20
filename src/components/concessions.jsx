@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { motion } from "framer-motion";
 import '../pagestyles/tickets.css'
 import soda from "../assets/5.png";

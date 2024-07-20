@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { BrowserRouter, Link } from "react-router-dom";
+import { useState } from "react";
+import {Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "../componentstyles/navbar.css";
 import DropDown from "./dropdown";
@@ -14,25 +14,16 @@ function NavBar(props) {
   const buttonVariants = {
     Selected: {
       background: "#940303",
-    },
-    NotSelected: {
-      background: "#fbfbfb",
-    },
-    hovered: {
-      boxShadow: "0px 0px 10px 0px rgba(148, 3, 3, 0.75)",
-    },
-  };
-
-  const textVariants = {
-    selected: {
       color: "#fbfbfb",
       fontWeight: "700",
     },
-    notselected: {
-      color: "#292323",
+    NotSelected: {
+      background: "#fbfbfb",
       fontWeight: "400",
+      color: "#292323",
     },
     hovered: {
+      boxShadow: "0px 0px 10px 0px rgba(148, 3, 3, 0.75)",
       fontWeight: "700",
     },
   };
@@ -72,15 +63,7 @@ function NavBar(props) {
               transition={{ duration: 0.25 }}
               onClick={() => handleButtonClick("Home")}
             >
-              <motion.p
-                initial={page === "Home" ? "selected" : "notselected"}
-                whileHover="hovered"
-                animate={page === "Home" ? "selected" : "notselected"}
-                variants={textVariants}
-                transition={{ duration: 0.3 }}
-              >
-                Home
-              </motion.p>
+              Home
             </motion.button>
           </Link>
           {["Tickets", "Locations", "Rentals", "About"].map((pageName) => (
@@ -95,15 +78,7 @@ function NavBar(props) {
                 transition={{ duration: 0.25 }}
                 onClick={() => handleButtonClick(pageName)}
               >
-                <motion.p
-                  initial={page === pageName ? "selected" : "notselected"}
-                  whileHover="hovered"
-                  animate={page === pageName ? "selected" : "notselected"}
-                  variants={textVariants}
-                  transition={{ duration: 0.3 }}
-                >
-                  {pageName}
-                </motion.p>
+                {pageName}
               </motion.button>
             </Link>
           ))}

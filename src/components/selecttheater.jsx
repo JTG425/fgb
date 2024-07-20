@@ -1,7 +1,6 @@
 // Source: https://www.hover.dev/components/toggles
 
 import { motion } from "framer-motion";
-import { useState } from "react";
 import '../componentstyles/selecttheater.css';
 
 const SelectTheater = (props) => {

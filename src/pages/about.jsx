@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import { motion, useAnimation, useInView } from "framer-motion";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 import "../pagestyles/about.css";
 import oldCap from "../assets/oldCap.png";
 import jiddo from "../assets/jiddo.png";

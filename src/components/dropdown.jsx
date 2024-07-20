@@ -1,6 +1,6 @@
 import "../componentstyles/navbar.css";
 
-import { useEffect, useState } from "react";
+import {useState } from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import anime from "animejs/lib/anime.es.js";
