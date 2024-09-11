@@ -27,7 +27,8 @@
   --iconography: #f0e3d1;
 
   --border-radius: 0.375rem;
-  --box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+  /* --box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1); */
+  --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 
 
 }
@@ -132,6 +133,7 @@ a {
   /* Firefox */
   overflow-y: hidden;
   overflow-x: hidden;
+  padding-bottom: 25px;
 }
 
 .home-container h2 {

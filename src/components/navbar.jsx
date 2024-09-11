@@ -21,10 +21,12 @@ function NavBar(props) {
       background: "#fbfbfb",
       fontWeight: "400",
       color: "#292323",
+      filter: 'none'
     },
     hovered: {
+      background: "#940303",
+      color: "#fbfbfb",
       boxShadow: "0px 0px 10px 0px rgba(148, 3, 3, 0.75)",
-      fontWeight: "700",
     },
   };
 
@@ -42,6 +44,7 @@ function NavBar(props) {
       <div className="nav-content-container">
         <Link to="/">
           <motion.img
+            key="nav-home-logo"
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.98 }}
             src={NavLogo}
@@ -54,6 +57,7 @@ function NavBar(props) {
         <div className="nav-buttons-container">
           <Link to="/">
             <motion.button
+              key="nav-home-button"
               whileHover="hovered"
               whileTap={{ scale: 0.9 }}
               className="nav-button"
@@ -69,6 +73,7 @@ function NavBar(props) {
           {["Tickets", "Locations", "Rentals", "About"].map((pageName) => (
             <Link to={`/${pageName.toLowerCase()}`} key={pageName}>
               <motion.button
+                key={`nav-${pageName}-button`}
                 whileHover="hovered"
                 whileTap={{ scale: 0.9 }}
                 className="nav-button"

@@ -4,6 +4,7 @@ import "../componentstyles/datepicker.css";
 import SlideShow from "../components/slideshow";
 import MovieCard from "../components/movieCard";
 import SelectTheater from "../components/selecttheater";
+import Upcoming from "../components/upcoming";
 import { CiCalendarDate } from "react-icons/ci";
 import { Day, DayPicker } from "react-day-picker";
 import { motion } from "framer-motion";
@@ -25,20 +26,8 @@ const handleDisplayDate = (date) => {
   return `${month} / ${day} / ${year}`;
 };
 
-const handleUpcomingDate = (date) => {
-  const year = date.slice(0, 4);
-  const month = date.slice(4, 6);
-  const day = date.slice(6, 8);
-  return `${month} / ${day} / ${year}`;
-};
 
-const handleUpcomingDateFormatting = (date) => {
-  const year = date.slice(0, 4);
-  const month = date.slice(4, 6);
-  const day = date.slice(6, 8);
-  const newDate = new Date(year, month - 1, day);
-  return newDate;
-};
+
 
 function Home(props) {
   const capShows = props.capShows;
@@ -69,6 +58,7 @@ function Home(props) {
   };
 
   return (
+    <>
     <motion.div className="page-container">
       <SlideShow slideshow={slideshow} />
       <div className="home-container">
@@ -134,32 +124,9 @@ function Home(props) {
           )}
         </div>
       </div>
-      <div className="upcoming-shows-container">
-        <h2>Coming Soon</h2>
-        <div className="upcoming-shows">
-          {upcoming.map((show, index) => (
-            <motion.div
-              key={`upcoming-cap-show-${index}`}
-              className="upcoming-show"
-              whileTap={{ scale: 0.98 }}
-              whileHover={{ scale: 1.02 }}
-              onClick={() =>
-                handleDateChange(handleUpcomingDateFormatting(show.StartDate))
-              }
-            >
-              <span className="title">
-                <a href={show.website} target="_blank">
-                  <h4>{show.name}</h4>
-                </a>
-                <p>{show.rating}</p>
-              </span>
-              <img src={show.poster} />
-              <p>{handleUpcomingDate(show.StartDate)}</p>
-            </motion.div>
-          ))}
-        </div>
-      </div>
+        <Upcoming upcoming={upcoming} handleDateChange={handleDateChange} />
     </motion.div>
+    </>
   );
 }
 
