@@ -1,7 +1,7 @@
 import "../componentstyles/moviecard.css";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { FaPlay } from "react-icons/fa";
+import { FaInfoCircle } from "react-icons/fa";
 import { IoCloseOutline } from "react-icons/io5";
 import noImage from "../assets/noimage.png";
 
@@ -21,6 +21,13 @@ const createDisplayDate = (date) => {
   const year = date.slice(4, 8);
   return `${month} / ${day} / ${year}`;
 };
+
+// Takes in length in mins (String) and returns a string in hours and minutes
+const createDisplayTime = (time) => {
+  const hours = Math.floor(time / 60);
+  const minutes = time % 60;
+  return `${hours}HR ${minutes}MIN`;
+}
 
 function MovieCard(props) {
   const date = props.date;
@@ -106,13 +113,18 @@ function MovieCard(props) {
                 key={`movie-${filmIndex}-${film.name}`}
                 initial={{ opacity: 0, y: 100 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 100}}
+                exit={{ opacity: 0, y: 100 }}
                 transition={{ duration: 0.5, type: "spring" }}
               >
                 <motion.img
                   key={`movie-${filmIndex}-${film.name}-poster`}
                   className="poster"
-                  src={film.poster === "https://fgbtheatersstoragef2bb9-dev.s3.amazonaws.com/public/images/noimage.png" ? noImage : film.poster}
+                  src={
+                    film.poster ===
+                    "https://fgbtheatersstoragef2bb9-dev.s3.amazonaws.com/public/images/noimage.png"
+                      ? noImage
+                      : film.poster
+                  }
                   alt={film.name}
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
@@ -124,7 +136,7 @@ function MovieCard(props) {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  >
+                >
                   <a
                     href={film.website}
                     target="_blank"
@@ -134,11 +146,12 @@ function MovieCard(props) {
                   </a>
                   <span className="film-info">
                     <p>{film.rating}</p>
-                    <p>{film.length} minutes</p>
+                    <p>|</p>
+                    <p>{createDisplayTime(film.length)}</p>
                   </span>
                   <span className="film-trailer-desc">
                     <motion.button
-                      key={film.trailer}
+                      key={`${film.trailer}-${film.name}-${filmIndex}`}
                       className="film-trailer"
                       initial="nothovered"
                       whileHover="hovered"
@@ -156,9 +169,9 @@ function MovieCard(props) {
                       }}
                       variants={trailerButtonVariants}
                     >
-                      <FaPlay />
+                      <FaInfoCircle />
                       {trailerButtonHovered && trailerIndex === filmIndex ? (
-                        <p>Trailer</p>
+                        <p>Info</p>
                       ) : null}
                     </motion.button>
                     {showTrailer && trailerIndex === filmIndex ? (
@@ -179,16 +192,30 @@ function MovieCard(props) {
                         </motion.button>
 
                         <motion.div
+                          key={`movie-${filmIndex}-${film.name}-trailer-container`}
                           className="trailer-container"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
+                          initial={{ opacity: 0, y: "10vh" }}
+                          animate={{ opacity: 1, y: "-5vh" }}
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.5 }}
                         >
+                          <p>{film.name}</p>
                           <iframe
-                            className="trailer-frame"
-                            src={`${film.trailer}?autoplay=1`}
-                          />
+                              className="trailer-frame"
+                              src={`${film.trailer}?autoplay=1`}
+                            />
+                          <div className="movie-info-container">
+                            <div className="movie-info">
+                              <span className="movie-stats">
+                              <p>{film.rating}</p>
+                              <p>|</p>
+                              <p>{createDisplayTime(film.length)}</p>
+                              </span>
+                              <span className="movie-description">
+                              <p>{film.description}</p>
+                              </span>
+                            </div>
+                          </div>
                         </motion.div>
                       </motion.div>
                     ) : null}

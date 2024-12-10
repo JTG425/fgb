@@ -22,6 +22,7 @@ function App(props) {
   const slideshow = props.slideshow;
   const dataReceived = props.dataReceived;
   const currentShows = props.currentShows;
+  console.log("Capitol Schedule: ", capitolShows);
 
   const pages = [
     {
