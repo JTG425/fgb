@@ -9,6 +9,7 @@ import { CiCalendarDate } from "react-icons/ci";
 import { Day, DayPicker } from "react-day-picker";
 import { motion } from "framer-motion";
 import icon7 from "../assets/7.png";
+import CustomDatepicker from "../components/customDatePicker";
 
 const handleDateFormating = (date) => {
   const day = date.getDate();
@@ -35,27 +36,17 @@ function Home(props) {
   const upcoming = props.upcomingShows;
   const dataReceived = props.dataReceived;
   const slideshow = props.slideshow;
-  const [startDate, setStartDate] = useState(new Date());
-  const [selectedDate, setSelectedDate] = useState(new Date());
   const [date, setDate] = useState(handleDateFormating(new Date()));
-  const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedTheater, setSelectedTheater] = useState("capitol");
-  const [testingDate, setTestingDate] = useState(new Date());
 
   const handleTheaterChange = (theater) => {
     setSelectedTheater(theater);
   };
 
-  const handleDateChange = (newDate) => {
-    if (newDate === undefined) {
-      setShowDatePicker(false);
-      return;
-    } else {
-      setSelectedDate(newDate);
-      setDate(handleDateFormating(newDate));
-      setShowDatePicker(false);
-    }
-  };
+  const handleDateChange = (date) => {
+    setDate(handleDateFormating(date));
+  }
+
 
   return (
     <>
@@ -67,43 +58,7 @@ function Home(props) {
           selected={selectedTheater}
           setSelected={handleTheaterChange}
         />
-        <div className="datepicker-container">
-          <motion.button
-            className="date-button"
-            onClick={() => setShowDatePicker(!showDatePicker)}
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            {date ? handleDisplayDate(date) : "Select Date"}
-            <CiCalendarDate className="date-icon" />
-          </motion.button>
-          {showDatePicker && (
-            <div className="date-picker-container">
-              <div
-                className="blur-date-background"
-                onClick={() => setShowDatePicker(false)}
-              />
-              <div className="date-picker">
-                <DayPicker
-                  showOutsideDays={true}
-                  fixedWeeks={true}
-                  mode="single"
-                  selected={selectedDate}
-                  onSelect={(date) => handleDateChange(date)}
-                />
-                <motion.button
-                  className="date-picker-today-button"
-                  onClick={() => handleDateChange(new Date())}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  Today
-                </motion.button>
-              </div>
-            </div>
-          )}
-        </div>
-
+        <CustomDatepicker setDate={handleDateChange} />
         <img className="home-icon1" src={icon7} />
         <img className="home-icon2" src={icon7} />
         <div className="movies-container">

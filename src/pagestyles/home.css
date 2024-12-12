@@ -1,177 +1,176 @@
 .home-icon1 {
-    position: absolute;
-    width: auto;
-    height: auto;
-    /* right: 0px; */
-    left: calc(50%  -1000px);
-    right: calc(50% - 1200px);
-    top: -350px;
-    z-index: 0;
-    scale: 0.5;
-    /* transform: rotateZ(0deg); */
+  position: absolute;
+  width: auto;
+  height: auto;
+  /* right: 0px; */
+  left: calc(50% - 1000px);
+  right: calc(50% - 1200px);
+  top: -350px;
+  z-index: 0;
+  transform: scale(0.5);
+  /* transform: rotateZ(0deg) scale(0.5); */
+  /* If needed, you can add: -webkit-transform: scale(0.5); -moz-transform: scale(0.5); */
 }
 
 .home-icon2 {
-    position: absolute;
-    width: auto;
-    height: auto;
-    /* right: 0px; */
-    right: calc(50%  -1000px);
-    left: calc(50% - 1200px);
-    top: 400px;
-    z-index: 0;
-    scale: 0.5;
-    transform: rotateY(180deg);
+  position: absolute;
+  width: auto;
+  height: auto;
+  /* right: 0px; */
+  right: calc(50% - 1000px);
+  left: calc(50% - 1200px);
+  top: 400px;
+  z-index: 0;
+  transform: scale(0.5) rotateY(180deg);
+  /* Add vendor prefixes if needed:
+     -webkit-transform: scale(0.5) rotateY(180deg);
+     -moz-transform: scale(0.5) rotateY(180deg);
+  */
 }
 
-
-
 .movies-container {
-    position: relative;
+  position: relative;
 }
 
 .date-button {
-    position: relative;
-    margin-top: 25px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-    width: 200px;
-    height: fit-content;
-    padding: 0.5rem 0.5rem;
-    border: var(--border);
-    border-radius: var(--border-radius);
-    background-color: var(--foreground);
-    box-shadow: var(--box-shadow);
-    cursor: pointer;
-    color: var(--copy);
-    font-weight: 700;
-    z-index: 1;
+  position: relative;
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  width: 200px;
+  height: auto;
+  padding: 0.5rem 0.5rem;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  background-color: var(--foreground);
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+  color: var(--copy);
+  font-weight: 700;
+  z-index: 1;
 }
 
 .date-icon {
-    width: 35px;
-    height: 35px;
-    fill: var(--icon);
+  width: 35px;
+  height: 35px;
+  fill: var(--icon);
 }
 
 .date-picker-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 10;
-    width: 100vw;
-    height: 100vh;
-    padding: 1rem 0;
-    scroll-behavior: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  width: 100%;
+  height: 100%;
+  padding: 1rem 0;
+  scroll-behavior: none;
 }
 
 .blur-date-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 9;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  /* Use backdrop-filter with vendor prefixes */
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  /* Firefox doesn't fully support backdrop-filter, but this will degrade gracefully */
 }
 
 .date-picker {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: fit-content;
-    height: fit-content;
-    padding: 1rem 0;
-    border: var(--border);
-    border-radius: var(--border-radius);
-    background-color: rgba(251, 251, 251, 1);
-    box-shadow: var(--box-shadow);
-    z-index: 9;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: auto;
+  padding: 0;
+  border: var(--border);
+  border-radius: var(--border-radius);
+  background-color: rgba(251, 251, 251, 1);
+  box-shadow: var(--box-shadow);
+  z-index: 9;
 }
-
 
 .date-picker-today-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: var(--foreground);
-    border: none;
-    border-radius: var(--border-radius);
-    color: var(--copy);
-    border: 1px solid var(--border);
-    cursor: pointer;
-    box-shadow: var(--box-shadow);
-    padding: 0.5rem 1rem;
-
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--foreground);
+  border: none;
+  border-radius: var(--border-radius);
+  color: var(--copy);
+  border: 1px solid var(--border);
+  cursor: pointer;
+  box-shadow: var(--box-shadow);
+  padding: 0.5rem 1rem;
 }
+
 .rdp {
-    --rdp-cell-size: 50px; /* Size of the day cells. */
-    --rdp-caption-font-size: 24px; /* Font size for the caption labels. */
-    --rdp-accent-color: var(--primary); /* Accent color for the background of selected days. */
-    --rdp-background-color: var(--foreground); /* Background color for the hovered/focused elements. */
-    --rdp-accent-color-dark: var(--background); /* Accent color for the background of selected days (to use in dark-mode). */
-    --rdp-outline: none; /* Outline border for focused elements */
-    --rdp-outline-selected: 3px solid var(--rdp-accent-color); /* Outline border for focused _and_ selected elements */
-    --rdp-selected-color: #fff; /* Color of selected day text */
-    margin: 1em;
-    z-index: 10;
-    height: fit-content;
-    width: fit-content;
-  }
+  --rdp-cell-size: 50px;
+  --rdp-caption-font-size: 24px;
+  --rdp-accent-color: var(--primary);
+  --rdp-background-color: var(--foreground);
+  --rdp-accent-color-dark: var(--background);
+  --rdp-outline: none;
+  --rdp-outline-selected: 3px solid var(--rdp-accent-color);
+  --rdp-selected-color: #fff;
+  margin: 10px;
+  z-index: 10;
+  max-width: 500px;
+  height: auto;
+}
 
-  .rdp .rdp-day {
-    font-size: 16px;
-    font-weight: 700;
-    border-radius: var(--border-radius);
-  }
+.rdp .rdp-day {
+  font-size: 16px;
+  font-weight: 700;
+  border-radius: var(--border-radius);
+}
 
-  .rdp .rdp-head_cell {
-    font-size: 18px;
-    font-weight: 700;
-    padding: 0.5rem;
-    border: none;
-  }
+.rdp .rdp-head_cell {
+  font-size: 18px;
+  font-weight: 700;
+  padding: 0.5rem;
+  border: none;
+}
 
-  .rdp .rdp-cell {
-    padding: 0.25rem;
-    border: none;
-  }
-
-
-
-
+.rdp .rdp-cell {
+  padding: 0.25rem;
+  border: none;
+}
 
 @media screen and (max-width: 500px) {
-    .rdp {
-        --rdp-cell-size: 55px; /* Size of the day cells. */
-      }
+  .rdp {
+      --rdp-cell-size: 55px;
+  }
 
-      .date-picker {
-        width: 100vw;
-        height: fit-content;
-        border-radius: 0;
-      }  
+  .date-picker {
+      width: 100vw;
+      height: auto;
+      border-radius: 0;
+  }
 }
 
 @media screen and (max-width: 450px) {
-    .rdp {
-        --rdp-cell-size: 45px; /* Size of the day cells. */
-      }
+  .rdp {
+      --rdp-cell-size: 45px;
+  }
 
-      .date-picker {
-        width: 100vw;
-        height: fit-content;
-        border-radius: 0;
-      }
+  .date-picker {
+      width: 100vw;
+      height: auto;
+      border-radius: 0;
+  }
 }
