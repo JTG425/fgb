@@ -121,7 +121,7 @@ function MovieCard(props) {
                   className="poster"
                   src={
                     film.poster ===
-                    "https://fgbtheatersstoragef2bb9-dev.s3.amazonaws.com/public/images/noimage.png"
+                      "https://fgbtheatersstoragef2bb9-dev.s3.amazonaws.com/public/images/noimage.png"
                       ? noImage
                       : film.poster
                   }
@@ -194,25 +194,29 @@ function MovieCard(props) {
                         <motion.div
                           key={`movie-${filmIndex}-${film.name}-trailer-container`}
                           className="trailer-container"
-                          initial={{ opacity: 0, y: "10vh" }}
-                          animate={{ opacity: 1, y: "-5vh" }}
+                          initial={{ opacity: 0, y: "0" }}
+                          animate={{ opacity: 1, y: "0" }}
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.5 }}
                         >
-                          <p>{film.name}</p>
+                          <h2>{film.name}</h2>
                           <iframe
-                              className="trailer-frame"
-                              src={`${film.trailer}?autoplay=1`}
-                            />
+                            title="trailer"
+                            class="youtube-trailer"
+                            type="text/html"
+                            src={`${film.trailer}?autoplay=1`}
+                            width="480"
+                            height="390"
+                          />
                           <div className="movie-info-container">
                             <div className="movie-info">
                               <span className="movie-stats">
-                              <p>{film.rating}</p>
-                              <p>|</p>
-                              <p>{createDisplayTime(film.length)}</p>
+                                <p>{film.rating}</p>
+                                <p>|</p>
+                                <p>{createDisplayTime(film.length)}</p>
                               </span>
                               <span className="movie-description">
-                              <p>{film.description}</p>
+                                <p>{film.description}</p>
                               </span>
                             </div>
                           </div>

@@ -225,7 +225,7 @@
 }
 .movie-info-container {
     width: 100%;
-    height: 100%;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -238,9 +238,9 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    width: 100%;
-    height: 100%;
     gap: 1rem;
+    width: 100%;
+    height: fit-content;
 }
 
 .movie-stats {
@@ -258,41 +258,53 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 1rem;
     width: 100%;
+    height: fit-content;
 }
 .movie-description p {
     font-size: 1rem;
     color: var(--text);
     text-align: justify;
+    margin: 0;
+    
 }
 
-.trailer-frame {
-    z-index: 100;
+.youtube-trailer {
+    width: 100%;
+    height: 100%;
     border: none;
-    width: 75%;
-    height: 150%;
-    max-width: 700px;
-    max-height: 400px;
-    box-shadow: 0 0px 5px 5px rgba(0, 0, 0, 0.1);
-    border-radius: var(--border-radius);
+    display: block;
 }
 
 .trailer-container {
+    /* Keep the existing structure you need: position fixed, etc. */
     position: fixed;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    width: 98vw;
-    height: 80vw;
-    max-width: 800px;
-    max-height: 500px;
+    aspect-ratio: 16 / 9; 
+    /* Let the container size itself relative to the viewport or your chosen max dimensions */
+    width: 100%;        /* a responsive width */
+    max-width: 800px;   /* or whatever max you want */
     background: var(--foreground);
-    padding: 1rem;
     border-radius: 0.375rem;
     box-shadow: var(--box-shadow);
     z-index: 99;
     gap: 1rem;
+    overflow: hidden; /* hide any overflow to prevent black bars/gaps */
+    padding: 0;
+    height: fit-content;
+    border: none;
+}
+
+.trailer-container h2 {
+    margin: 0;
+    padding: 1rem;
+    font-size: 1.5rem;
+    color: var(--text);
+    align-self: center;
 }
 
 
@@ -332,21 +344,7 @@
         font-size: 1rem;
     }
 
-    .movie-info-container {
-        width: 100%;
-        height: fit-content;
-    }
-    .movie-description {
-        width: 100%;
-        height: fit-content;
-    }
-    
     .trailer-container {
-        height: fit-content;
-    }
-
-    .trailer-frame {
-        height: 200px;
-        width: 90vw;
+        border-radius: 0;
     }
 }

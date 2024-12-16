@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { CiCalendar } from "react-icons/ci";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import '../componentstyles/customDatePicker.css';
 
 const CustomDatepicker = ({ setDate }) => {
@@ -9,6 +9,7 @@ const CustomDatepicker = ({ setDate }) => {
     const [currentYear, setCurrentYear] = useState(today.getFullYear());
     const [selectedDate, setSelectedDate] = useState(today);
     const [showDatePicker, setShowDatePicker] = useState(false);
+
     const monthNames = [
         'January', 'February', 'March', 'April', 'May', 'June',
         'July', 'August', 'September', 'October', 'November', 'December'
@@ -42,7 +43,7 @@ const CustomDatepicker = ({ setDate }) => {
 
     useEffect(() => {
         // On mount, set today's date as default and inform parent
-        setDate && setDate(today);
+        if (setDate) setDate(today);
         setButtonText(formatDisplayDate(today));
     }, []);
 
@@ -55,11 +56,9 @@ const CustomDatepicker = ({ setDate }) => {
         for (let x = 0; x < firstDayIndex; x++) {
             days.push(null);
         }
-
         for (let d = 1; d <= lastDay; d++) {
             days.push(d);
         }
-
         return days;
     };
 
@@ -98,7 +97,7 @@ const CustomDatepicker = ({ setDate }) => {
         if (chosenDateMidnight.getTime() < todayMidnight.getTime()) return;
 
         setSelectedDate(chosenDate);
-        setDate && setDate(chosenDate);
+        if (setDate) setDate(chosenDate);
         setButtonText(formatDisplayDate(chosenDate));
         setShowDatePicker(false);
     };
@@ -107,17 +106,31 @@ const CustomDatepicker = ({ setDate }) => {
         setShowDatePicker((prev) => !prev);
     };
 
+    // Framer Motion variants for the toggle button
     const buttonVariants = {
         hovered: {
-          background: "#940303",
-          color: "#fbfbfb",
-          boxShadow: "0px 0px 10px 0px rgba(148, 3, 3, 0.75)",
+          backgroundColor: "var(--primary)",
+          color: "var(--foreground)",
+          boxShadow: "0px 0px 10px rgba(148, 3, 3, 0.5)",
+          transition: { duration: 0.2 }
         },
         nothovered: {
-          background: "#fbfbfb",
-          color: "#292323",
-          boxShadow: "0px 0px 0px 0px rgba(148, 3, 3, 0)",
+          backgroundColor: "var(--foreground)",
+          color: "var(--copy)",
+          boxShadow: "var(--box-shadow)",
+          transition: { duration: 0.2 }
         },
+    };
+
+    // Framer Motion container variants
+    const containerVariants = {
+        hidden: { opacity: 0, scale: 0.95 },
+        visible: {
+            opacity: 1,
+            scale: 1,
+            transition: { duration: 0.3 }
+        },
+        exit: { opacity: 0, scale: 0.95, transition: { duration: 0.2 } }
     };
 
     return (
@@ -134,6 +147,8 @@ const CustomDatepicker = ({ setDate }) => {
                 <CiCalendar size='25px' />
                 {buttonText}
             </motion.button>
+
+            <AnimatePresence>
             {showDatePicker && (
                 <motion.div
                     className='datepicker-background'
@@ -145,11 +160,11 @@ const CustomDatepicker = ({ setDate }) => {
                 >
                     <motion.div
                         className="datepicker-container"
-                        onClick={(e) => e.stopPropagation()} // Prevent clicks inside from closing datepicker
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.3 }}
+                        onClick={(e) => e.stopPropagation()} // Prevent clicks inside container from closing datepicker
+                        variants={containerVariants}
+                        initial="hidden"
+                        animate="visible"
+                        exit="exit"
                     >
                         <div className="datepicker-header">
                             <button className="month-nav prev" onClick={handlePrevMonth}>&lt;</button>
@@ -179,7 +194,7 @@ const CustomDatepicker = ({ setDate }) => {
                                 const isDisabled = cellDateCompare && cellDateCompare.getTime() < todayCompare.getTime();
 
                                 return (
-                                    <div
+                                    <motion.div
                                         key={idx}
                                         className={[
                                             'datepicker-cell',
@@ -188,15 +203,18 @@ const CustomDatepicker = ({ setDate }) => {
                                             isDisabled ? 'disabled' : ''
                                         ].join(' ')}
                                         onClick={() => !isDisabled && handleSelectDate(day)}
+                                        whileHover={{ scale: !isDisabled ? 1.08 : 1, transition: { duration: 0.1 } }}
+                                        whileTap={{ scale: !isDisabled ? 0.95 : 1 }}
                                     >
                                         {day || ''}
-                                    </div>
+                                    </motion.div>
                                 );
                             })}
                         </div>
                     </motion.div>
                 </motion.div>
             )}
+            </AnimatePresence>
         </div>
     );
 };

@@ -18,7 +18,8 @@ function Gift(props) {
         <div className='rentals-and-gifts-container'>
             <div className='gift-card'>
                 <img
-                    src="https://fgbtheatersstoragef2bb9-dev.s3.amazonaws.com/public/gifts/MovieCard.png"
+                    className='gift-card-image'
+                    src="https://fgbtheatersstoragef2bb9-dev.s3.us-east-1.amazonaws.com/public/images/MovieCard.png"
                     alt="gift card"
                 />
                 <span className='gift-card-text'>

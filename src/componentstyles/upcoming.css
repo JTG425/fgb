@@ -30,9 +30,7 @@
 }
 
 .upcoming-show {
-    width: 50vw;
-    max-width: 275px;
-    height: fit-content;
+    width: fit-content;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -47,7 +45,7 @@
 }
 
 .upcoming-show img {
-    width: 100%;
+    width: 70%;
     max-width: 175px;
     height: auto;
     object-fit: cover;

@@ -35,6 +35,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .datepicker-container {
@@ -122,43 +124,83 @@
     pointer-events: none;
 }
 
+
 @media (max-width: 600px) {
     .datepicker-container {
-        width: 90vw;
-        height: 450px;
-        max-width: 90vw;
-        max-height: 80vh;
-        padding: 10px;
+        width:  fit-content;
+        height: 65vh;
+        max-width: 100vw;
+        max-height: 100vh;
+        padding: 1rem;
+        border: none;
+        border-radius: 0;
         display: flex;
         flex-direction: column;
-        justify-content: flex-start;
         align-items: center;
+        justify-content: center;
+        background: var(--foreground);
+        backdrop-filter: blur(5px);
+        -webkit-backdrop-filter: blur(5px);
     }
 
     .datepicker-header {
-        width: 90%;
+        /* Give the header some breathing room */
+        display: flex;
+        width: 100%;
+        height: auto;
+        margin: 0;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        font-weight: 700;
     }
 
     .current-month {
         font-size: 24px;
     }
 
+    /* The grid should fill the remaining space for the calendar */
     .datepicker-grid {
-        column-gap: 5%;
-        row-gap: 20%;
+        flex: 1;
+        width: 100vw;
+        gap: 0;
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-auto-rows: 1fr;
+        align-self: center;
+        justify-self: center;
+        align-content: center;
+        justify-content: center;
+        align-items: center;
+        justify-items: center;
     }
 
     .datepicker-day-label {
-        font-size: 18px;
+        font-size: 20px;
+        margin: 0;
+        line-height: normal;
+        text-align: center;
+        font-weight: bold;
     }
 
     .datepicker-cell {
+        border-radius: 0;
+        margin: 0;
+        padding: 0;
+        min-height: 48px;
+        font-size: 16px;
+        line-height: 0; 
+        cursor: pointer;
+        width: 100%;
+        height: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 18px;
-        height: 25px;
-        line-height: 25px;
-        padding: 1rem 0.5rem;
+        text-align: center;
+        border-radius: var(--border-radius);
     }
+
+    /* Hover, selected, or other states are inherited from your existing desktop CSS */
 }
+
+
