@@ -7,7 +7,7 @@ import SelectTheater from "../components/selecttheater";
 import Upcoming from "../components/upcoming";
 import { CiCalendarDate } from "react-icons/ci";
 import { Day, DayPicker } from "react-day-picker";
-import { motion } from "framer-motion";
+import { motion } from "motion/react"
 import icon7 from "../assets/7.png";
 import CustomDatepicker from "../components/customDatePicker";
 

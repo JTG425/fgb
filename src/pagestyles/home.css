@@ -5,7 +5,7 @@
   /* right: 0px; */
   left: calc(50% - 1000px);
   right: calc(50% - 1200px);
-  top: -350px;
+  top: 500px;
   z-index: 0;
   transform: scale(0.5);
   /* transform: rotateZ(0deg) scale(0.5); */
@@ -19,13 +19,9 @@
   /* right: 0px; */
   right: calc(50% - 1000px);
   left: calc(50% - 1200px);
-  top: 400px;
+  top: 1400px;
   z-index: 0;
   transform: scale(0.5) rotateY(180deg);
-  /* Add vendor prefixes if needed:
-     -webkit-transform: scale(0.5) rotateY(180deg);
-     -moz-transform: scale(0.5) rotateY(180deg);
-  */
 }
 
 .movies-container {
