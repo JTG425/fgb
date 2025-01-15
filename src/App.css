@@ -106,7 +106,7 @@ a {
   align-items: center;
   justify-content: flex-start;
   width: 100vw;
-  max-width: 1000px;
+  /* max-width: 1000px; */
   height: fit-content;
   background: var(--background);
   margin-top: 140px;

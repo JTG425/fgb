@@ -1,36 +1,42 @@
 .upcoming {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 25px;
-    overflow: hidden;
-    padding: 0;
-    padding-bottom: 3rem;
-    padding-top: 1rem;
-    flex-wrap: wrap;
+    overflow-y: scroll;
+    padding: 1rem 0 3rem;
     width: 100%;
-}
-
-.upcoming h2 {
+  }
+  
+  .upcoming h2 {
     margin: 0;
-}
-
-.upcoming-shows {
+  }
+  
+  .upcoming-shows {
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
-    gap: 25px;
-    overflow: hidden;
-    flex-wrap: wrap;
+    overflow-y: scroll;
     width: 100%;
-    padding-top: 1rem;
-    padding-bottom: 3rem;
-}
+    position: relative;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 
-.upcoming-show {
-    width: fit-content;
+  }
+
+  .upcoming-shows::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .carousel-track {
+    display: flex;
+    margin-bottom: 25px;
+    margin-top: 25px;
+  }
+  
+  .upcoming-show {
+    flex: 0 0 20%;
+    max-width: 200px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -42,46 +48,29 @@
     cursor: pointer;
     overflow: hidden;
     text-align: center;
-}
-
-.upcoming-show img {
-    width: 70%;
-    max-width: 175px;
-    height: auto;
-    object-fit: cover;
-    border-radius: 0;
-    box-shadow: var(--box-shadow);
-    margin-bottom: 25px;
-    margin-top: 19px;
-}
-
-
-.title {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 0rem;
+    margin: 0 12.5px; /* Half of the gap to maintain spacing */
+  }
+  
+  .upcoming-show img {
     width: 100%;
-}
-
-.title h4 {
-    font-size: 0.8rem;
+    height: 150px;
+    object-fit: contain;
+    /* box-shadow: var(--box-shadow); */
+    margin: 10px 0 15px;
+  }
+  
+  .title h4 {
+    font-size: 0.75rem;
     font-weight: 700;
     color: var(--copy);
     margin: 0;
-}
-
-.title p {
-    font-size: 0.6rem;
+  }
+  
+  .title p,
+  .upcoming-show p {
+    font-size: 0.8rem;
     font-weight: 400;
     color: var(--copy-light);
     margin: 0;
-}
-
-.upcoming-show p {
-    font-size: 0.6rem;
-    font-weight: 400;
-    color: var(--copy-light);
-    margin: 0;
-}
+  }
+  
