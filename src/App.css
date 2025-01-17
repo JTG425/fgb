@@ -10,6 +10,7 @@
   --secondary-light: #c61404;
 
   --background: #f1efef;
+  --foreground-solid: rgba(251, 251, 251, 1);
   --foreground: rgba(251, 251, 251, 0.90);
   /* --foreground: #fbfbfb; */
   --border: #e2dddd;
@@ -176,6 +177,20 @@ a {
   gap: 10px;
 }
 
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 11;
+
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -186,7 +201,7 @@ a {
   }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 675px) {
   .page-container {
     margin-top: -30px;
   }

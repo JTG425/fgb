@@ -4,12 +4,10 @@
   height: auto;
   /* right: 0px; */
   left: calc(50% - 1000px);
-  right: calc(50% - 1200px);
-  top: 500px;
+  right: calc(50% - 1000px);
+  top: -315px;
   z-index: 0;
   transform: scale(0.5);
-  /* transform: rotateZ(0deg) scale(0.5); */
-  /* If needed, you can add: -webkit-transform: scale(0.5); -moz-transform: scale(0.5); */
 }
 
 .home-icon2 {
@@ -18,11 +16,12 @@
   height: auto;
   /* right: 0px; */
   right: calc(50% - 1000px);
-  left: calc(50% - 1200px);
-  top: 1400px;
+  left: calc(50% - 1300px);
+  top: 550px;
   z-index: 0;
   transform: scale(0.5) rotateY(180deg);
 }
+
 
 .movies-container {
   position: relative;
@@ -147,6 +146,8 @@
   border: none;
 }
 
+
+
 @media screen and (max-width: 500px) {
   .rdp {
       --rdp-cell-size: 55px;
@@ -156,6 +157,12 @@
       width: 100vw;
       height: auto;
       border-radius: 0;
+  }
+
+  .home-icon2 {
+    top: 900px;
+    right: calc(50% - 1000px);
+    left: calc(50% - 950px);
   }
 }
 

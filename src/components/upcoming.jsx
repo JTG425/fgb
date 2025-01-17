@@ -1,6 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useAnimation } from 'motion/react';
 import '../componentstyles/upcoming.css';
+import { use } from 'react';
 
 const handleUpcomingDate = (date) => {
   const year = date.slice(0, 4);
@@ -18,38 +19,37 @@ const handleUpcomingDateFormatting = (date) => {
 
 function Upcoming({ upcoming, handleDateChange }) {
   const controls = useAnimation();
-  const carouselRef = useRef(null);
   const totalShows = upcoming.length;
+  const carouselRef = useRef();
 
   useEffect(() => {
-    const scrollSpeed = 20;
-    let animationFrameId;
+    const scrollSpeed = 10;
+    const distance = -totalShows * 250;
 
-    const animate = () => {
-      if (carouselRef.current) {
-        carouselRef.current.scrollLeft += 1;
-        if (carouselRef.current.scrollLeft >= carouselRef.current.scrollWidth / 2) {
-          carouselRef.current.scrollLeft = 0;
-        }
-      }
-      animationFrameId = requestAnimationFrame(animate);
-    };
-
-    animationFrameId = requestAnimationFrame(animate);
-
-    return () => cancelAnimationFrame(animationFrameId);
-  }, []);
+    controls.start({
+      x: [-distance/2.5, distance / 2.5],
+      transition: {
+        x: {
+          repeat: Infinity,
+          repeatType: 'reverse',
+          duration: totalShows * scrollSpeed,
+          ease: 'linear',
+        },
+      },
+    });
+  }, [controls, totalShows]);
 
   return (
     <div className='upcoming'>
       <h2>Coming Soon</h2>
-      <div className='upcoming-shows' ref={carouselRef}>
+      <div className='upcoming-shows'>
         <motion.div
+          ref={carouselRef}
           className='carousel-track'
           animate={controls}
-          style={{ display: 'flex', width: `${totalShows * 2 * 20}%` }}
+          style={{ display: 'flex', width: `${totalShows * 200}px` }} // Adjust width based on item width
         >
-          {upcoming.concat(upcoming).map((show, index) => (
+          {upcoming.map((show, index) => (
             <div
               key={index}
               className='upcoming-show'

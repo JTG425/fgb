@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import firstSlide from "../assets/firstSlide.png";
-import "../componentstyles/slideshow.css"; // Import CSS for additional styles
+import "../componentstyles/slideshow.css";
+import icon8 from "../assets/8.png";
 
 const SlideShow = (props) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);

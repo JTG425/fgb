@@ -4,43 +4,40 @@ import { motion } from "framer-motion";
 import "../componentstyles/navbar.css";
 import DropDown from "./dropdown";
 import NavLogo from "../assets/navLogo.svg";
+import { Context } from "../App";
+import { useContext } from "react";
 
-function NavBar(props) {
-  const pages = props.pages;
-  const handlePageChange = props.handlePageChange;
-  const [page, setPage] = useState("Home");
+function NavBar() {
+  const props = useContext(Context);
+  const {pages, currentPage, setCurrentPage} = props;
   const [showDropdown, setShowDropdown] = useState(false);
 
   const buttonVariants = {
     Selected: {
       background: "#940303",
       color: "#fbfbfb",
-      fontWeight: "700",
     },
     NotSelected: {
       background: "#fbfbfb",
-      fontWeight: "400",
       color: "#292323",
-      filter: 'none'
-    },
-    hovered: {
-      background: "#940303",
-      color: "#fbfbfb",
-      boxShadow: "0px 0px 10px 0px rgba(148, 3, 3, 0.75)",
     },
   };
 
-  const handleShowDropdown = () => {
-    setShowDropdown(!showDropdown);
-  };
 
   const handleButtonClick = (pageName) => {
-    handlePageChange(pageName);
-    setPage(pageName);
+    setCurrentPage(pageName);
   };
 
   return (
-    <div className="nav-container">
+    <>
+    <DropDown />
+    <motion.div 
+      key="nav-container-key"
+      className="nav-container"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      >
       <div className="nav-content-container">
         <Link to="/">
           <motion.img
@@ -53,16 +50,14 @@ function NavBar(props) {
             onClick={() => handleButtonClick("Home")}
           />
         </Link>
-        <DropDown />
         <div className="nav-buttons-container">
           <Link to="/">
             <motion.button
               key="nav-home-button"
-              whileHover="hovered"
-              whileTap={{ scale: 0.9 }}
+              whileTap={{ scale: 0.98 }}
               className="nav-button"
-              initial={page === "Home" ? "Selected" : "NotSelected"}
-              animate={page === "Home" ? "Selected" : "NotSelected"}
+              initial={currentPage === "Home" ? "Selected" : "NotSelected"}
+              animate={currentPage === "Home" ? "Selected" : "NotSelected"}
               variants={buttonVariants}
               transition={{ duration: 0.25 }}
               onClick={() => handleButtonClick("Home")}
@@ -74,11 +69,10 @@ function NavBar(props) {
             <Link to={`/${pageName.toLowerCase()}`} key={pageName}>
               <motion.button
                 key={`nav-${pageName}-button`}
-                whileHover="hovered"
-                whileTap={{ scale: 0.9 }}
+                whileTap={{ scale: 0.98 }}
                 className="nav-button"
-                initial={page === pageName ? "Selected" : "NotSelected"}
-                animate={page === pageName ? "Selected" : "NotSelected"}
+                initial={currentPage === pageName ? "Selected" : "NotSelected"}
+                animate={currentPage === pageName ? "Selected" : "NotSelected"}
                 variants={buttonVariants}
                 transition={{ duration: 0.25 }}
                 onClick={() => handleButtonClick(pageName)}
@@ -89,7 +83,8 @@ function NavBar(props) {
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
+    </>
   );
 }
 
