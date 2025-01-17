@@ -1,7 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useAnimation } from 'motion/react';
 import '../componentstyles/upcoming.css';
-import { use } from 'react';
+import leftCurtain from "../assets/leftcurtain.png";
+import rightCurtain from "../assets/rightcurtain.png";
 
 const handleUpcomingDate = (date) => {
   const year = date.slice(0, 4);
@@ -40,6 +41,11 @@ function Upcoming({ upcoming, handleDateChange }) {
   }, [controls, totalShows]);
 
   return (
+    <div className='upcoming-container'>
+      <div className='curtains'>
+      <img className='leftcurtain' src={leftCurtain} alt='left curtain' />
+      <img className='rightcurtain' src={rightCurtain} alt='right curtain' />
+      </div>
     <div className='upcoming'>
       <h2>Coming Soon</h2>
       <div className='upcoming-shows'>
@@ -67,6 +73,7 @@ function Upcoming({ upcoming, handleDateChange }) {
           ))}
         </motion.div>
       </div>
+    </div>
     </div>
   );
 }

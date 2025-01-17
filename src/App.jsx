@@ -21,6 +21,7 @@ import { PulseLoader } from "react-spinners";
 
 
 
+
 Amplify.configure(amplifyconfig);
 
 export const Context = React.createContext(null);
@@ -235,12 +236,14 @@ function App() {
           </motion.div>
           <AnimatePresence mode="sync">
           {!loading && (
+            <>
             <motion.div 
               className="footer"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               >
+                
               <span className="footer-socials">
                 <SocialIcon
                   key="facebook-icon"
@@ -261,6 +264,7 @@ function App() {
                 <sup>©</sup>Copyright 2024 FGB Theaters
               </p>
             </motion.div>
+            </>
           )}
           </AnimatePresence>
         </BrowserRouter>

@@ -1,3 +1,12 @@
+.upcoming-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  position: relative;
+}
+
 .upcoming {
     display: flex;
     flex-direction: column;
@@ -76,5 +85,25 @@
     font-weight: 400;
     color: var(--copy-light);
     margin: 0;
+  }
+
+  .curtains {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    width: 125%;
+    max-width: 1200px;
+    top: 75px;
+  }
+
+  .leftcurtain {
+    width: 250px;
+    height: auto;
+  }
+  
+  .rightcurtain {
+    width: 250px;
+    height: auto;
   }
   
