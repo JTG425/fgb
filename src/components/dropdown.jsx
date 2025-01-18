@@ -34,16 +34,16 @@ function DropDown() {
   const dropdownVariants = {
     hidden: {
       opacity: 1,
-      y: -550,
+      y: -700,
+      transition: {
+        duration: 0.5,
+      },
     },
     visible: {
       opacity: 1,
-      y: 25,
+      y: 0,
       transition: {
-        duration: 1,
-        type: "spring",
-        stiffness: 260,
-        damping: 20,
+        duration: 0.5,
       },
     },
   };
@@ -51,7 +51,12 @@ function DropDown() {
 
   return (
     <>
-      <div className="dropdown-top-bar">
+      <motion.div 
+        key="dropdown-top-bar-key"
+        className="dropdown-top-bar"
+        initial={{y: -125}}
+
+      >
         <Link to="/">
           <motion.img
             key="nav-home-logo"
@@ -72,7 +77,7 @@ function DropDown() {
         >
           <RxHamburgerMenu />
         </motion.button>
-      </div>
+      </motion.div>
       <motion.div
         key="dropdown-key"
         className="dropdown"

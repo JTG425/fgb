@@ -28,6 +28,8 @@ const SlideShow = (props) => {
 
   return (
     <div className="slideshow-container">
+      <img src={icon8} className="slideshow-icon-1" />
+      <img src={icon8} className="slideshow-icon-2" />
       {slideshow.map((slide, index) => (
         <motion.div
           className="slideshow-div"

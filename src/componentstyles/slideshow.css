@@ -9,6 +9,26 @@
     top: -100px;
 }
 
+.slideshow-icon-1 {
+    position: absolute;
+    top: -200px;
+    left: -100px;
+    z-index: 0;
+    width: 500px;
+    height: auto;
+
+}
+
+.slideshow-icon-2 {
+    position: absolute;
+    top: -200px;
+    right: -100px;
+    z-index: 0;
+    width: 500px;
+    height: auto;
+    transform: rotateY(180deg);
+}
+
 .slideshow-div {
     display: flex;
     justify-content: center;
@@ -147,6 +167,16 @@
     .slide-image {
         margin-top: 25px;
         height: 70%;
+    }
+
+}
+
+@media screen and (max-width: 1000px) {
+    .slideshow-icon-1 {
+        display: none;
+    }
+    .slideshow-icon-2 {
+        display: none;
     }
 
 }

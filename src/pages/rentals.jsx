@@ -2,6 +2,8 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import "../pagestyles/rentals.css";
 import { FaPhoneAlt } from "react-icons/fa";
+import icon3 from "../assets/3.png";
+import icon11 from "../assets/11.png";
 
 function Rentals(props) {
 
