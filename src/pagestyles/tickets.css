@@ -23,7 +23,13 @@
     margin-bottom: 25px;
     overscroll-behavior: auto;
     z-index: 1;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
     
+}
+
+.tickets-terms::-webkit-scrollbar {
+    display: none;
 }
 
 .buy-ticket-container {
@@ -42,6 +48,8 @@
     overscroll-behavior: auto;
     margin-top: 10px;
     z-index: 1;
+    -ms-overflow-style: none;  /* Internet Explorer 10+ */
+    scrollbar-width: none;  /* Firefox */
 }
 
 .tickets h2 {
@@ -122,6 +130,11 @@
     justify-content: center;
     align-items: center;
     z-index: 1;
+
+}
+
+.buy-ticket-container::-webkit-scrollbar {
+    display: none;
 }
 
 .prices table {

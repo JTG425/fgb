@@ -33,35 +33,36 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    max-width: 665px;
+    width: 90%;
     align-self: center;
     background: var(--foreground);
     box-shadow: var(--box-shadow);
     padding: 1rem;
     z-index: 1;
+    margin-bottom: 25px;
 }
 
 .info p {
-    font-size: 0.60rem;
+    font-size: 1rem;
     text-align: justify;
     text-justify: inter-word;
 }
 
 .Map {
-    width: 300px;
-    height: 300px;
+    width: 500px;
+    height: 500px;
 }
 
 .maps {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: center;   
     align-items: center;
-    /* max-width: 1500px; */
-    gap: 25px;
+    gap: 10px;
     margin-top: 10px;
     margin-bottom: 10px;
+    padding-left: 50px;
+    padding-right: 50px;
 }
 
 .map-container {
@@ -176,13 +177,14 @@
     position: absolute;
     width: auto;
     height: 20%;
-    left: 42%;
-    right: 42%;
-    bottom: -35px;
+    left: 50%;
+    right: 50%;
+    transform: translate(-50%, -50%);
+    bottom: -125px;
     z-index: 0;
 }
 
-@media screen and (max-width: 675px) {
+@media screen and (max-width: 1000px) {
     .maps {
         display: flex;
         flex-direction: column;

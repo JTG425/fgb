@@ -3,11 +3,9 @@ import "../pagestyles/home.css";
 import React, { Suspense } from "react";
 import { motion } from "framer-motion";
 import { FaPhoneAlt } from "react-icons/fa";
-import Map, { Marker } from 'react-map-gl';
+import Map, { Marker } from "react-map-gl";
 import masks from "../assets/16.png";
 import stars from "../assets/12.png";
-
-
 
 function CapitolMap() {
   const key = import.meta.env.VITE_MAPBOX_API_KEY;
@@ -18,16 +16,15 @@ function CapitolMap() {
       initialViewState={{
         longitude: -72.57836915903455,
         latitude: 44.26092378286133,
-        zoom: 14
+        zoom: 14,
       }}
-      style={{ width: '275px', height: '275px' }}
+      style={{ width: "400px", height: "400px" }}
       mapStyle="mapbox://styles/mapbox/streets-v9"
     >
       <Marker latitude={44.26092378286133} longitude={-72.57836915903455} />
     </Map>
   );
 }
-
 
 function ParamountMap() {
   const key = import.meta.env.VITE_MAPBOX_API_KEY;
@@ -38,9 +35,9 @@ function ParamountMap() {
       initialViewState={{
         longitude: -72.50370899940566,
         latitude: 44.19952086200256,
-        zoom: 14
+        zoom: 14,
       }}
-      style={{ width: '275px', height: '275px' }}
+      style={{ width: "400px", height: "400px" }}
       mapStyle="mapbox://styles/mapbox/streets-v9"
     >
       <Marker latitude={44.19952086200256} longitude={-72.50370899940566} />
