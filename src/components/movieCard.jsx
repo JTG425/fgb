@@ -199,7 +199,9 @@ function MovieCard(props) {
                           exit={{ opacity: 0 }}
                           transition={{ duration: 0.5 }}
                         >
+                          <span className="trailer-header">
                           <h2>{film.name}</h2>
+                          </span>
                           <iframe
                             title="trailer"
                             class="youtube-trailer"

@@ -1,101 +1,175 @@
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import firstSlide from "../assets/firstSlide.png";
+"use client";
 import "../componentstyles/slideshow.css";
-import icon8 from "../assets/8.png";
+import { useEffect, useState } from "react";
+import { motion, AnimatePresence } from "motion/react";
+import { wrap } from "@popmotion/popcorn";
 
-const SlideShow = (props) => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const slideshow = props.slideshow;
-
-  const imageVariants = {
-    hidden: {
-      opacity: 0,
-      zIndex: 0,
+const slideVariants = {
+    enter: (direction) => ({
+        x: direction > 0 ? "100%" : "-100%",
+        scale: 0.75,
+        opacity: 1,
+    }),
+    center: {
+        x: "0%",
+        scale: 1,
+        opacity: 1,
     },
-    visible: {
-      opacity: 1,
-      zIndex: 2,
-    },
-  };
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((currentImageIndex + 1) % slideshow.length);
-    }, 7000);
-    return () => clearInterval(interval);
-  }, [currentImageIndex]);
-
-  return (
-    <div className="slideshow-container">
-      <img src={icon8} className="slideshow-icon-1" />
-      <img src={icon8} className="slideshow-icon-2" />
-      {slideshow.map((slide, index) => (
-        <motion.div
-          className="slideshow-div"
-          key={`slideshow-div-${index}`}
-          initial="hidden"
-          animate={currentImageIndex === index ? "visible" : "hidden"}
-          variants={imageVariants}
-          style={{
-            backgroundImage: currentImageIndex === 0 ? `url(${firstSlide})` : `url(${slide.Background})`,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-          }}
-        >
-          <div
-            key={`slideshow-content-${index}`}
-            className="slideshow-content-container"
-          >
-            <div
-              key={`slideshow-content-${index}`}
-              className="slideshow-content"
-            >
-              {slide.Image === "" ? null : (
-                <img
-                  key={`slide-image-${index}`}
-                  className="slide-image"
-                  src={slide.Image}
-                />
-              )}
-              {/* <img
-                key={`slide-image-${index}`}
-                className='slide-image'
-                src={slide.Image}
-
-              /> */}
-              <div key={`slide-text-div-${index}`} className="slide-text-div">
-                <h2 key={`slide-title-${index}`} className="slide-title">
-                  {slide.Title}
-                </h2>
-                <p key={`slide-text-${index}`} className="slide-text">
-                  {slide.Description}
-                </p>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      ))}
-      <div className="slideshow-buttons">
-        <button
-          key={`slideshow-button-left`}
-          className="slideshow-button"
-          onClick={() =>
-            setCurrentImageIndex(currentImageIndex === 0 ? slideshow.length - 1 : (currentImageIndex - 1) % slideshow.length)
-          }
-        >
-        </button>
-        <button
-          key={`slideshow-button-right`}
-          className="slideshow-button"
-          onClick={() =>
-            setCurrentImageIndex((currentImageIndex + 1) % slideshow.length)
-          }
-        >
-        </button>
-      </div>
-    </div>
-  );
+    exit: (direction) => ({
+        x: direction > 0 ? "-100%" : "100%",
+        scale: 0.75,
+        opacity: 0,
+    }),
 };
 
-export default SlideShow;
+export default function Slideshow(props) {
+    const slideshowData = props.slideshowData
+    const [currentSlide, setCurrentSlide] = useState(0);
+    const [direction, setDirection] = useState(0);
+    const [imagesLoaded, setImagesLoaded] = useState(false);
+
+    useEffect(() => {
+        const preloadImage = (url) =>
+            new Promise((resolve, reject) => {
+                const img = new Image();
+                img.src = url;
+                img.onload = resolve;
+                img.onerror = reject;
+            });
+
+        const preloadAll = async () => {
+            try {
+                await Promise.all(
+                    slideshowData.flatMap((slide) => {
+                        const urls = [];
+                        if (slide.Background) urls.push(slide.Background);
+                        if (slide.Image && slide.Image.trim() !== "") urls.push(slide.Image);
+                        return urls.map(preloadImage);
+                    })
+                );
+            } catch (error) {
+                console.error("Error preloading images", error);
+            } finally {
+                setImagesLoaded(true);
+            }
+        };
+
+        preloadAll();
+
+    }, [slideshowData]);
+
+    const handleMove = (dir) => {
+        setDirection(dir === "right" ? 1 : -1);
+        const newIndex = wrap(0, slideshowData.length, currentSlide + (dir === "right" ? 1 : -1));
+        setCurrentSlide(newIndex);
+    };
+
+    // Auto-slide every 5 seconds
+    useEffect(() => {
+        const interval = setInterval(() => {
+            handleMove("right");
+        }, 5000);
+        return () => clearInterval(interval);
+    }, [currentSlide]);
+
+    if (!imagesLoaded) {
+        return (
+            <motion.div
+                className="slideshow"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                style={{
+                    width: "100%",
+                    height: "50vh",
+                    background: "var(--background)",
+                }}
+            >
+              Loading
+            </motion.div>
+        );
+    }
+
+
+
+    return (
+        <>
+            <motion.div 
+              className="slideshow" 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              style={{ position: "relative", overflow: "hidden" }}
+              >
+                <AnimatePresence initial={false} custom={direction}>
+                    <motion.div
+                        key={`slide-${currentSlide}`}
+                        className="slide-current"
+                        custom={direction}
+                        variants={slideVariants}
+                        initial="enter"
+                        animate="center"
+                        exit="exit"
+                        transition={{ duration: 0.5 }}
+                        style={{
+                            backgroundImage: `url(${slideshowData[currentSlide].Background})`,
+                            backgroundSize: "cover",
+                            position: "absolute",
+                            width: "100%",
+                            height: "100%",
+                        }}
+                    >
+                        <div className="slideshow-controls">
+                            <button onClick={() => handleMove("left")} />
+                            <button onClick={() => handleMove("right")} />
+                        </div>
+                        <div className="blur" />
+                        <div className="slide-content">
+
+                            {slideshowData[currentSlide].Image !== "" ? (
+                                <span className="slide-left">
+                                    <img className="slide-image" src={slideshowData[currentSlide].Image} alt={slideshowData[currentSlide].Title} />
+                                </span>
+                            ) : null}
+
+                            <span className="slide-right">
+                                <h2>{slideshowData[currentSlide].Title}</h2>
+
+                                <p>{slideshowData[currentSlide].Description}</p>
+                            </span>
+                        </div>
+                    </motion.div>
+                </AnimatePresence>
+                {/* Pre-render incoming slides off-screen */}
+                <motion.div
+                    className="slide-incoming-left"
+                    style={{
+                        backgroundImage: `url(${slideshowData[wrap(0, slideshowData.length, currentSlide - 1)].Background})`,
+                        backgroundSize: "cover",
+                        objectFit: "cover",
+                        position: "absolute",
+                        top: 0,
+                        left: "-100%",
+                        width: "100%",
+                        height: "100%",
+                        opacity: 1,
+                    }}
+                ></motion.div>
+                <motion.div
+                    className="slide-incoming-right"
+                    style={{
+                        backgroundImage: `url(${slideshowData[wrap(0, slideshowData.length, currentSlide + 1)].Background})`,
+                        backgroundSize: "contain",
+                        objectFit: "cover",
+                        position: "absolute",
+                        top: 0,
+                        right: "-100%",
+                        width: "100%",
+                        height: "100%",
+                        opacity: 1,
+                    }}
+                ></motion.div>
+            </motion.div>
+        </>
+    );
+}

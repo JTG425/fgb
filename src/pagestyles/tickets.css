@@ -6,7 +6,7 @@
     align-items: center;
     width: 100%;
     height: fit-content;
-    margin-top: -75px;
+    margin-top: 25px;
     margin-bottom: 25px;
     max-width: 1000px;
 }
@@ -348,7 +348,7 @@
     }
 
     .tickets {
-        margin-top: 100px;
+        margin-top: 25px;
     }
 
     .film-reel1 {

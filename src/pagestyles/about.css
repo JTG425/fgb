@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: -100px;
+    margin-top: 0px;
     padding: 0 1rem;
     width: 100%;
     max-width: 1000px;
@@ -137,10 +137,4 @@
 }
 
 
-@media screen and (max-width: 675px) {
-    .about-container {
-        margin-top: 80px;
-    }
-    
-}
 

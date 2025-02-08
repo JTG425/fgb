@@ -4,7 +4,7 @@
     justify-content: flex-start;
     overflow: hidden;
     height: fit-content;
-    margin-top: -75px;
+    margin-top: 25px;
     margin-bottom: 50px;
     width: 100%;
     max-width: 1000px;
@@ -219,10 +219,4 @@
     }
 
 
-}
-
-@media screen and (max-width: 675px) {
-    .locations {
-        margin-top: 100px;
-    }
 }

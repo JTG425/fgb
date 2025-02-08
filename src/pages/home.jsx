@@ -58,7 +58,7 @@ function Home() {
       exit={{ opacity: 0 }}
       
       >
-      <SlideShow slideshow={slideshow} />
+      <SlideShow slideshowData={slideshow} />
       <div className="home-container">
         <h2>Showtimes</h2>
         <SelectTheater
