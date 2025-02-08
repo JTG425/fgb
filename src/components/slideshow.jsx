@@ -72,25 +72,6 @@ export default function Slideshow(props) {
         return () => clearInterval(interval);
     }, [currentSlide]);
 
-    if (!imagesLoaded) {
-        return (
-            <motion.div
-                className="slideshow"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                style={{
-                    width: "100%",
-                    height: "50vh",
-                    background: "var(--background)",
-                }}
-            >
-              Loading
-            </motion.div>
-        );
-    }
-
-
 
     return (
         <>

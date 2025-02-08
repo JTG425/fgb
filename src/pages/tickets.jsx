@@ -50,61 +50,63 @@ function Tickets() {
   return (
     <div className="page-container">
       <div className="tickets">
-        <h2>Buy Tickets</h2>
-        <h3>Skip The Line, Buy Online!</h3>
+        <div className="tickets-header">
+          <h2>Buy Tickets</h2>
+          <h3>Skip The Line, Buy Online!</h3>
+        </div>
         <img className="film-reel1" src={icon9} />
         <img className="tickets-icon" src={icon1} />
         <div className="buy-ticket-container">
-        <div className="prices">
-          <table>
-            <thead>
-              <tr className="prices-row">
-                <th className="prices-cell" colSpan="5">Prices</th>
-              </tr>
-              <tr>
-                <th>Show</th>
-                <th>Adult</th>
-                <th>Child</th>
-                <th>Senior</th>
-                <th>Military</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Standard</td>
-                <td>$12.84</td>
-                <td>$9.63</td>
-                <td>$9.37</td>
-                <td>$9.37</td>
-              </tr>
-              <tr>
-                <td>Matinee</td>
-                <td>$9.37</td>
-                <td>$9.37</td>
-                <td>$9.37</td>
-                <td>$9.37</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <motion.div className="tickets-button">
-          <a
-            href="https://app.formovietickets.com/?id=fgbtheatres"
-            target="_blank"
-            rel="noreferrer"
-          >
-            <motion.button
-              className="buy-button"
-              initial="nothovered"
-              whileHover="hovered"
-              whileTap={{ scale: 0.98 }}
-              variants={buttonVariants}
-              disabled={confirmed === false}
+          <div className="prices">
+            <table>
+              <thead>
+                <tr className="prices-row">
+                  <th className="prices-cell" colSpan="5">Prices</th>
+                </tr>
+                <tr>
+                  <th>Show</th>
+                  <th>Adult</th>
+                  <th>Child</th>
+                  <th>Senior</th>
+                  <th>Military</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Standard</td>
+                  <td>$12.84</td>
+                  <td>$9.63</td>
+                  <td>$9.37</td>
+                  <td>$9.37</td>
+                </tr>
+                <tr>
+                  <td>Matinee</td>
+                  <td>$9.37</td>
+                  <td>$9.37</td>
+                  <td>$9.37</td>
+                  <td>$9.37</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <motion.div className="tickets-button">
+            <a
+              href="https://app.formovietickets.com/?id=fgbtheatres"
+              target="_blank"
+              rel="noreferrer"
             >
-              Buy Tickets Now
-            </motion.button>
-          </a>
-        </motion.div>
+              <motion.button
+                className="buy-button"
+                initial="nothovered"
+                whileHover="hovered"
+                whileTap={{ scale: 0.98 }}
+                variants={buttonVariants}
+                disabled={confirmed === false}
+              >
+                Buy Tickets Now
+              </motion.button>
+            </a>
+          </motion.div>
         </div>
         <img className="film-reel2" src={icon9} />
         <motion.div
@@ -112,19 +114,10 @@ function Tickets() {
           initial="hidden"
           animate={inView1 ? "visible" : "hidden"}
           variants={cardVariants}
-          >
-        <Gift />
+        >
+          <Gift />
         </motion.div>
-        {/* <motion.div
-          className="concessions-container"
-          ref={tickRef2}
-          initial="hidden"
-          animate={inView2 ? "visible" : "hidden"}
-          variants={cardVariants}
-          >
-          <Concessions />
-          </motion.div> */}
-        <motion.div 
+        <motion.div
           className="tickets-terms"
           ref={tickRef3}
           initial="hidden"

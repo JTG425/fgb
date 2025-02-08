@@ -57,7 +57,16 @@
     margin-bottom: 0;
 }
 
-.tickets h3 {
+.tickets-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+
+.tickets-header h3 {
     margin-top: 0;
     margin-bottom: 10px;
 }
@@ -175,7 +184,7 @@
     padding: 1.5rem;
     border: 1px solid var(--border);
     border-radius: 0;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow);
     background: var(--foreground);
     max-width: 1500px;
     width: 100%;
@@ -272,6 +281,7 @@
     z-index: 1;
     text-align: center;
 }
+
 
 .concessions h4 {
     margin: 0;
