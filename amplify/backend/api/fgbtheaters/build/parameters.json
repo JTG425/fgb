@@ -2,6 +2,12 @@
     "AppSyncApiName": "fgbtheaters",
     "DynamoDBBillingMode": "PAY_PER_REQUEST",
     "DynamoDBEnableServerSideEncryption": false,
-    "S3DeploymentBucket": "amplify-fgbtheaters-dev-f2bb9-deployment",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "S3DeploymentBucket": "amplify-fgbtheaters-main-c850c-deployment",
     "S3DeploymentRootKey": "amplify-appsync-files/c76de35a03029b50257ede3535d05eac846e0c4e"
 }

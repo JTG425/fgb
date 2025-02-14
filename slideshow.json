@@ -1,0 +1,21 @@
+[
+    {
+        "Order": "1",
+        "Date": "2024-05-30",
+        "Title": "Welcome To FGB Theaters",
+        "Description": "",
+        "Image": "",
+        "Background": "https://fgbtheatersstoragec850c-main.s3-accelerate.amazonaws.com/public/slideshow/firstSlide.png",
+        "Movie": false
+    },
+    {
+        "Order": 1,
+        "Title": "COMPLETE UNKNOWN",
+        "Description": "Now Playing!",
+        "Date": "12-25-2024",
+        "Image": "https://fgbtheatersstoragec850c-main.s3-accelerate.amazonaws.com/public/images/CO29732/poster.png",
+        "Background": "https://fgbtheatersstoragec850c-main.s3-accelerate.amazonaws.com/public/images/CO29732/poster.png",
+        "Trailer": "https://www.youtube.com/embed/NO9hXSD5K4A",
+        "Movie": true
+    }
+]

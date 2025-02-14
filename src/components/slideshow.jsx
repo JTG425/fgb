@@ -56,6 +56,7 @@ export default function Slideshow(props) {
 
         preloadAll();
 
+        console.log(slideshowData);
     }, [slideshowData]);
 
     const handleMove = (dir) => {

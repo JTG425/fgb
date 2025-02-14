@@ -1,5 +1,5 @@
 {
-  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.12.0\",\"stackType\":\"storage-S3\",\"metadata\":{}}",
+  "Description": "{\"createdOn\":\"Mac\",\"createdBy\":\"Amplify\",\"createdWith\":\"12.14.3\",\"stackType\":\"storage-S3\",\"metadata\":{\"whyContinueWithGen1\":\"\"}}",
   "AWSTemplateFormatVersion": "2010-09-09",
   "Parameters": {
     "env": {

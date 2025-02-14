@@ -110,6 +110,53 @@
       "UpdateReplacePolicy": "Retain",
       "DeletionPolicy": "Retain"
     },
+    "DeploymentBucketBlockHTTP": {
+      "Type": "AWS::S3::BucketPolicy",
+      "Properties": {
+        "Bucket": {
+          "Ref": "DeploymentBucketName"
+        },
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": "s3:*",
+              "Effect": "Deny",
+              "Principal": "*",
+              "Resource": [
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "DeploymentBucketName"
+                      },
+                      "/*"
+                    ]
+                  ]
+                },
+                {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:aws:s3:::",
+                      {
+                        "Ref": "DeploymentBucketName"
+                      }
+                    ]
+                  ]
+                }
+              ],
+              "Condition": {
+                "Bool": {
+                  "aws:SecureTransport": false
+                }
+              }
+            }
+          ]
+        }
+      }
+    },
     "AuthRole": {
       "Type": "AWS::IAM::Role",
       "Properties": {
@@ -152,10 +199,30 @@
         }
       }
     },
+    "apifgbtheaters": {
+      "Type": "AWS::CloudFormation::Stack",
+      "Properties": {
+        "TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-main-c850c-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "Parameters": {
+          "AppSyncApiName": "fgbtheaters",
+          "DynamoDBBillingMode": "PAY_PER_REQUEST",
+          "DynamoDBEnableServerSideEncryption": false,
+          "authRoleName": {
+            "Ref": "AuthRoleName"
+          },
+          "unauthRoleName": {
+            "Ref": "UnauthRoleName"
+          },
+          "S3DeploymentBucket": "amplify-fgbtheaters-main-c850c-deployment",
+          "S3DeploymentRootKey": "amplify-appsync-files/c76de35a03029b50257ede3535d05eac846e0c4e",
+          "env": "main"
+        }
+      }
+    },
     "authfgbtheaters2ff27a91": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-dev-f2bb9-deployment/amplify-cfn-templates/auth/fgbtheaters2ff27a91-cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-main-c850c-deployment/amplify-cfn-templates/auth/fgbtheaters2ff27a91-cloudformation-template.json",
         "Parameters": {
           "identityPoolName": "fgbtheaters2ff27a91_identitypool_2ff27a91",
           "allowUnauthenticatedIdentities": true,
@@ -201,25 +268,25 @@
           },
           "breakCircularDependency": true,
           "dependsOn": "",
-          "env": "dev"
+          "env": "main"
         }
       }
     },
     "hostingamplifyhosting": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-dev-f2bb9-deployment/amplify-cfn-templates/hosting/amplifyhosting-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-main-c850c-deployment/amplify-cfn-templates/hosting/amplifyhosting-template.json",
         "Parameters": {
           "appId": "d5vhylij0llj8",
           "type": "manual",
-          "env": "dev"
+          "env": "main"
         }
       }
     },
     "storagefgbstorage": {
       "Type": "AWS::CloudFormation::Stack",
       "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-dev-f2bb9-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
+        "TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-main-c850c-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
         "Parameters": {
           "bucketName": "fgbtheatersstorage",
           "selectedGuestPermissions": "s3:GetObject,s3:ListBucket",
@@ -245,27 +312,7 @@
           "s3PermissionsAuthenticatedUploads": "s3:PutObject",
           "s3PermissionsGuestPublic": "s3:GetObject",
           "s3PermissionsGuestUploads": "DISALLOW",
-          "env": "dev"
-        }
-      }
-    },
-    "apifgbtheaters": {
-      "Type": "AWS::CloudFormation::Stack",
-      "Properties": {
-        "TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-dev-f2bb9-deployment/amplify-cfn-templates/api/cloudformation-template.json",
-        "Parameters": {
-          "AppSyncApiName": "fgbtheaters",
-          "DynamoDBBillingMode": "PAY_PER_REQUEST",
-          "DynamoDBEnableServerSideEncryption": false,
-          "authRoleName": {
-            "Ref": "AuthRoleName"
-          },
-          "unauthRoleName": {
-            "Ref": "UnauthRoleName"
-          },
-          "S3DeploymentBucket": "amplify-fgbtheaters-dev-f2bb9-deployment",
-          "S3DeploymentRootKey": "amplify-appsync-files/c76de35a03029b50257ede3535d05eac846e0c4e",
-          "env": "dev"
+          "env": "main"
         }
       }
     },

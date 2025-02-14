@@ -101,12 +101,6 @@
     "AddAnnouncementTable": {
       "Type": "AWS::DynamoDB::Table",
       "Properties": {
-        "KeySchema": [
-          {
-            "AttributeName": "id",
-            "KeyType": "HASH"
-          }
-        ],
         "AttributeDefinitions": [
           {
             "AttributeName": "id",
@@ -122,6 +116,12 @@
             }
           ]
         },
+        "KeySchema": [
+          {
+            "AttributeName": "id",
+            "KeyType": "HASH"
+          }
+        ],
         "PointInTimeRecoverySpecification": {
           "Fn::If": [
             "ShouldUsePointInTimeRecovery",
@@ -285,14 +285,56 @@
         }
       }
     },
+    "AddAnnouncementIAMRoleDefaultPolicyA356A98C": {
+      "Type": "AWS::IAM::Policy",
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
+                "dynamodb:BatchGetItem",
+                "dynamodb:GetRecords",
+                "dynamodb:GetShardIterator",
+                "dynamodb:Query",
+                "dynamodb:GetItem",
+                "dynamodb:Scan",
+                "dynamodb:ConditionCheckItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:PutItem",
+                "dynamodb:UpdateItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:DescribeTable"
+              ],
+              "Effect": "Allow",
+              "Resource": [
+                {
+                  "Fn::GetAtt": [
+                    "AddAnnouncementTable",
+                    "Arn"
+                  ]
+                },
+                {
+                  "Ref": "AWS::NoValue"
+                }
+              ]
+            }
+          ],
+          "Version": "2012-10-17"
+        },
+        "PolicyName": "AddAnnouncementIAMRoleDefaultPolicyA356A98C",
+        "Roles": [
+          {
+            "Ref": "AddAnnouncementIAMRole4A3E6368"
+          }
+        ]
+      }
+    },
     "AddAnnouncementDataSource": {
       "Type": "AWS::AppSync::DataSource",
       "Properties": {
         "ApiId": {
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
-        "Name": "AddAnnouncementTable",
-        "Type": "AMAZON_DYNAMODB",
         "DynamoDBConfig": {
           "AwsRegion": {
             "Ref": "AWS::Region"
@@ -301,12 +343,14 @@
             "Ref": "AddAnnouncementTable"
           }
         },
+        "Name": "AddAnnouncementTable",
         "ServiceRoleArn": {
           "Fn::GetAtt": [
             "AddAnnouncementIAMRole4A3E6368",
             "Arn"
           ]
-        }
+        },
+        "Type": "AMAZON_DYNAMODB"
       },
       "DependsOn": [
         "AddAnnouncementIAMRole4A3E6368"
@@ -321,8 +365,8 @@
         "DataSourceName": {
           "Ref": "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name"
         },
-        "Name": "QuerygetAddAnnouncementauth0Function",
         "FunctionVersion": "2018-05-29",
+        "Name": "QuerygetAddAnnouncementauth0Function",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
             "",
@@ -351,8 +395,8 @@
         "DataSourceName": {
           "Ref": "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name"
         },
-        "Name": "QuerygetAddAnnouncementpostAuth0Function",
         "FunctionVersion": "2018-05-29",
+        "Name": "QuerygetAddAnnouncementpostAuth0Function",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
             "",
@@ -384,8 +428,8 @@
             "Name"
           ]
         },
-        "Name": "QueryGetAddAnnouncementDataResolverFn",
         "FunctionVersion": "2018-05-29",
+        "Name": "QueryGetAddAnnouncementDataResolverFn",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
             "",
@@ -430,7 +474,6 @@
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
         "FieldName": "getAddAnnouncement",
-        "TypeName": "Query",
         "Kind": "PIPELINE",
         "PipelineConfig": {
           "Functions": [
@@ -482,11 +525,12 @@
               {
                 "Ref": "referencetotransformerrootstackunauthRoleName49F3C1FERef"
               },
-              "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"us-east-1:4e5ae03b-7e66-451a-98bd-5f54656d8b6b\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"us-east-1_DpEs4b21N_Full-access/CognitoIdentityCredentials\",\"us-east-1_DpEs4b21N_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
+              "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"us-east-1_DpEs4b21N_Full-access/CognitoIdentityCredentials\",\"us-east-1_DpEs4b21N_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
-        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
+        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+        "TypeName": "Query"
       }
     },
     "QueryListAddAnnouncementsDataResolverFnQueryListAddAnnouncementsDataResolverFnAppSyncFunction6F4B8013": {
@@ -501,8 +545,8 @@
             "Name"
           ]
         },
-        "Name": "QueryListAddAnnouncementsDataResolverFn",
         "FunctionVersion": "2018-05-29",
+        "Name": "QueryListAddAnnouncementsDataResolverFn",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
             "",
@@ -547,7 +591,6 @@
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
         "FieldName": "listAddAnnouncements",
-        "TypeName": "Query",
         "Kind": "PIPELINE",
         "PipelineConfig": {
           "Functions": [
@@ -599,11 +642,12 @@
               {
                 "Ref": "referencetotransformerrootstackunauthRoleName49F3C1FERef"
               },
-              "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"us-east-1:4e5ae03b-7e66-451a-98bd-5f54656d8b6b\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"us-east-1_DpEs4b21N_Full-access/CognitoIdentityCredentials\",\"us-east-1_DpEs4b21N_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
+              "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"us-east-1_DpEs4b21N_Full-access/CognitoIdentityCredentials\",\"us-east-1_DpEs4b21N_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
-        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
+        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+        "TypeName": "Query"
       }
     },
     "MutationcreateAddAnnouncementinit0FunctionMutationcreateAddAnnouncementinit0FunctionAppSyncFunction5B15E714": {
@@ -615,8 +659,8 @@
         "DataSourceName": {
           "Ref": "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name"
         },
-        "Name": "MutationcreateAddAnnouncementinit0Function",
         "FunctionVersion": "2018-05-29",
+        "Name": "MutationcreateAddAnnouncementinit0Function",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
             "",
@@ -645,8 +689,8 @@
         "DataSourceName": {
           "Ref": "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name"
         },
-        "Name": "MutationcreateAddAnnouncementauth0Function",
         "FunctionVersion": "2018-05-29",
+        "Name": "MutationcreateAddAnnouncementauth0Function",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
             "",
@@ -678,8 +722,8 @@
             "Name"
           ]
         },
-        "Name": "MutationCreateAddAnnouncementDataResolverFn",
         "FunctionVersion": "2018-05-29",
+        "Name": "MutationCreateAddAnnouncementDataResolverFn",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
             "",
@@ -724,7 +768,6 @@
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
         "FieldName": "createAddAnnouncement",
-        "TypeName": "Mutation",
         "Kind": "PIPELINE",
         "PipelineConfig": {
           "Functions": [
@@ -782,11 +825,12 @@
               {
                 "Ref": "referencetotransformerrootstackunauthRoleName49F3C1FERef"
               },
-              "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"us-east-1:4e5ae03b-7e66-451a-98bd-5f54656d8b6b\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"us-east-1_DpEs4b21N_Full-access/CognitoIdentityCredentials\",\"us-east-1_DpEs4b21N_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
+              "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"us-east-1_DpEs4b21N_Full-access/CognitoIdentityCredentials\",\"us-east-1_DpEs4b21N_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
-        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
+        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+        "TypeName": "Mutation"
       }
     },
     "MutationupdateAddAnnouncementinit0FunctionMutationupdateAddAnnouncementinit0FunctionAppSyncFunction381F63EE": {
@@ -798,8 +842,8 @@
         "DataSourceName": {
           "Ref": "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name"
         },
-        "Name": "MutationupdateAddAnnouncementinit0Function",
         "FunctionVersion": "2018-05-29",
+        "Name": "MutationupdateAddAnnouncementinit0Function",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
             "",
@@ -831,8 +875,8 @@
             "Name"
           ]
         },
-        "Name": "MutationupdateAddAnnouncementauth0Function",
         "FunctionVersion": "2018-05-29",
+        "Name": "MutationupdateAddAnnouncementauth0Function",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
             "",
@@ -882,8 +926,8 @@
             "Name"
           ]
         },
-        "Name": "MutationUpdateAddAnnouncementDataResolverFn",
         "FunctionVersion": "2018-05-29",
+        "Name": "MutationUpdateAddAnnouncementDataResolverFn",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
             "",
@@ -928,7 +972,6 @@
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
         "FieldName": "updateAddAnnouncement",
-        "TypeName": "Mutation",
         "Kind": "PIPELINE",
         "PipelineConfig": {
           "Functions": [
@@ -986,11 +1029,12 @@
               {
                 "Ref": "referencetotransformerrootstackunauthRoleName49F3C1FERef"
               },
-              "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"us-east-1:4e5ae03b-7e66-451a-98bd-5f54656d8b6b\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"us-east-1_DpEs4b21N_Full-access/CognitoIdentityCredentials\",\"us-east-1_DpEs4b21N_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
+              "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"us-east-1_DpEs4b21N_Full-access/CognitoIdentityCredentials\",\"us-east-1_DpEs4b21N_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
-        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
+        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+        "TypeName": "Mutation"
       }
     },
     "MutationdeleteAddAnnouncementauth0FunctionMutationdeleteAddAnnouncementauth0FunctionAppSyncFunction38F55F45": {
@@ -1005,8 +1049,8 @@
             "Name"
           ]
         },
-        "Name": "MutationdeleteAddAnnouncementauth0Function",
         "FunctionVersion": "2018-05-29",
+        "Name": "MutationdeleteAddAnnouncementauth0Function",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
             "",
@@ -1056,8 +1100,8 @@
             "Name"
           ]
         },
-        "Name": "MutationDeleteAddAnnouncementDataResolverFn",
         "FunctionVersion": "2018-05-29",
+        "Name": "MutationDeleteAddAnnouncementDataResolverFn",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
             "",
@@ -1102,7 +1146,6 @@
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
         "FieldName": "deleteAddAnnouncement",
-        "TypeName": "Mutation",
         "Kind": "PIPELINE",
         "PipelineConfig": {
           "Functions": [
@@ -1154,11 +1197,12 @@
               {
                 "Ref": "referencetotransformerrootstackunauthRoleName49F3C1FERef"
               },
-              "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"us-east-1:4e5ae03b-7e66-451a-98bd-5f54656d8b6b\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"us-east-1_DpEs4b21N_Full-access/CognitoIdentityCredentials\",\"us-east-1_DpEs4b21N_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
+              "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"us-east-1_DpEs4b21N_Full-access/CognitoIdentityCredentials\",\"us-east-1_DpEs4b21N_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
-        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
+        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+        "TypeName": "Mutation"
       }
     },
     "SubscriptiononCreateAddAnnouncementauth0FunctionSubscriptiononCreateAddAnnouncementauth0FunctionAppSyncFunction32006AD0": {
@@ -1170,8 +1214,8 @@
         "DataSourceName": {
           "Ref": "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name"
         },
-        "Name": "SubscriptiononCreateAddAnnouncementauth0Function",
         "FunctionVersion": "2018-05-29",
+        "Name": "SubscriptiononCreateAddAnnouncementauth0Function",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
             "",
@@ -1200,8 +1244,8 @@
         "DataSourceName": {
           "Ref": "referencetotransformerrootstackGraphQLAPINONEDS2BA9D1C8Name"
         },
-        "Name": "SubscriptionOnCreateAddAnnouncementDataResolverFn",
         "FunctionVersion": "2018-05-29",
+        "Name": "SubscriptionOnCreateAddAnnouncementDataResolverFn",
         "RequestMappingTemplateS3Location": {
           "Fn::Join": [
             "",
@@ -1243,7 +1287,6 @@
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
         "FieldName": "onCreateAddAnnouncement",
-        "TypeName": "Subscription",
         "Kind": "PIPELINE",
         "PipelineConfig": {
           "Functions": [
@@ -1291,11 +1334,12 @@
               {
                 "Ref": "referencetotransformerrootstackunauthRoleName49F3C1FERef"
               },
-              "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"us-east-1:4e5ae03b-7e66-451a-98bd-5f54656d8b6b\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"us-east-1_DpEs4b21N_Full-access/CognitoIdentityCredentials\",\"us-east-1_DpEs4b21N_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
+              "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"us-east-1_DpEs4b21N_Full-access/CognitoIdentityCredentials\",\"us-east-1_DpEs4b21N_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
-        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
+        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+        "TypeName": "Subscription"
       }
     },
     "SubscriptiononUpdateAddAnnouncementResolver": {
@@ -1305,7 +1349,6 @@
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
         "FieldName": "onUpdateAddAnnouncement",
-        "TypeName": "Subscription",
         "Kind": "PIPELINE",
         "PipelineConfig": {
           "Functions": [
@@ -1353,11 +1396,12 @@
               {
                 "Ref": "referencetotransformerrootstackunauthRoleName49F3C1FERef"
               },
-              "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"us-east-1:4e5ae03b-7e66-451a-98bd-5f54656d8b6b\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"us-east-1_DpEs4b21N_Full-access/CognitoIdentityCredentials\",\"us-east-1_DpEs4b21N_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
+              "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"us-east-1_DpEs4b21N_Full-access/CognitoIdentityCredentials\",\"us-east-1_DpEs4b21N_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
-        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
+        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+        "TypeName": "Subscription"
       }
     },
     "SubscriptiononDeleteAddAnnouncementResolver": {
@@ -1367,7 +1411,6 @@
           "Ref": "referencetotransformerrootstackGraphQLAPI20497F53ApiId"
         },
         "FieldName": "onDeleteAddAnnouncement",
-        "TypeName": "Subscription",
         "Kind": "PIPELINE",
         "PipelineConfig": {
           "Functions": [
@@ -1415,11 +1458,12 @@
               {
                 "Ref": "referencetotransformerrootstackunauthRoleName49F3C1FERef"
               },
-              "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"identityPoolId\", \"us-east-1:4e5ae03b-7e66-451a-98bd-5f54656d8b6b\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"us-east-1_DpEs4b21N_Full-access/CognitoIdentityCredentials\",\"us-east-1_DpEs4b21N_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
+              "/CognitoIdentityCredentials\"))\n$util.qr($ctx.stash.put(\"adminRoles\", [\"us-east-1_DpEs4b21N_Full-access/CognitoIdentityCredentials\",\"us-east-1_DpEs4b21N_Manage-only/CognitoIdentityCredentials\"]))\n$util.toJson({})"
             ]
           ]
         },
-        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)"
+        "ResponseMappingTemplate": "$util.toJson($ctx.prev.result)",
+        "TypeName": "Subscription"
       }
     }
   },

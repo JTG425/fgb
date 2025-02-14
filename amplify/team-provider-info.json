@@ -25,5 +25,35 @@
         }
       }
     }
+  },
+  "main": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-fgbtheaters-main-c850c-authRole",
+      "UnauthRoleArn": "arn:aws:iam::767397816314:role/amplify-fgbtheaters-main-c850c-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::767397816314:role/amplify-fgbtheaters-main-c850c-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-fgbtheaters-main-c850c-deployment",
+      "UnauthRoleName": "amplify-fgbtheaters-main-c850c-unauthRole",
+      "StackName": "amplify-fgbtheaters-main-c850c",
+      "StackId": "arn:aws:cloudformation:us-east-1:767397816314:stack/amplify-fgbtheaters-main-c850c/c9b8d1e0-eaf3-11ef-9f1d-0ea151c2cfe3",
+      "AmplifyAppId": "d5vhylij0llj8"
+    },
+    "categories": {
+      "auth": {
+        "fgbtheaters2ff27a91": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d5vhylij0llj8",
+          "type": "manual"
+        }
+      },
+      "api": {
+        "fgbtheaters": {}
+      },
+      "storage": {
+        "fgbstorage": {}
+      }
+    }
   }
 }

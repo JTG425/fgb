@@ -1,14 +1,14 @@
 {
   "providers": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-fgbtheaters-dev-f2bb9-authRole",
-      "UnauthRoleArn": "arn:aws:iam::767397816314:role/amplify-fgbtheaters-dev-f2bb9-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::767397816314:role/amplify-fgbtheaters-dev-f2bb9-authRole",
+      "AuthRoleName": "amplify-fgbtheaters-main-c850c-authRole",
+      "UnauthRoleArn": "arn:aws:iam::767397816314:role/amplify-fgbtheaters-main-c850c-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::767397816314:role/amplify-fgbtheaters-main-c850c-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-fgbtheaters-dev-f2bb9-deployment",
-      "UnauthRoleName": "amplify-fgbtheaters-dev-f2bb9-unauthRole",
-      "StackName": "amplify-fgbtheaters-dev-f2bb9",
-      "StackId": "arn:aws:cloudformation:us-east-1:767397816314:stack/amplify-fgbtheaters-dev-f2bb9/04ddce20-17d6-11ef-be50-12a67e414383",
+      "DeploymentBucketName": "amplify-fgbtheaters-main-c850c-deployment",
+      "UnauthRoleName": "amplify-fgbtheaters-main-c850c-unauthRole",
+      "StackName": "amplify-fgbtheaters-main-c850c",
+      "StackId": "arn:aws:cloudformation:us-east-1:767397816314:stack/amplify-fgbtheaters-main-c850c/c9b8d1e0-eaf3-11ef-9f1d-0ea151c2cfe3",
       "AmplifyAppId": "d5vhylij0llj8"
     }
   },
@@ -30,17 +30,18 @@
             "authenticationType": "API_KEY"
           }
         },
-        "GraphQLAPIIdOutput": "xxmkgnkaejdnllgd2bxkvbrdqu",
-        "GraphQLAPIEndpointOutput": "https://27mbbbtvqrcz3lee7hiubrgyri.appsync-api.us-east-1.amazonaws.com/graphql",
-        "GraphQLAPIKeyOutput": "da2-ap7quaavw5ff5chabsm3woirfa"
+        "GraphQLAPIIdOutput": "vdopupkg5rachke3tpp5i745kq",
+        "GraphQLAPIEndpointOutput": "https://zzzqsonzvbb6xdqzyzbm33gbr4.appsync-api.us-east-1.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-olizhix4d5alzdpnml3nx6h7uu"
       },
       "providerPlugin": "awscloudformation",
       "service": "AppSync",
-      "lastPushTimeStamp": "2024-06-01T22:14:07.669Z",
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-dev-f2bb9-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-main-c850c-deployment/amplify-cfn-templates/api/cloudformation-template.json",
         "logicalId": "apifgbtheaters"
-      }
+      },
+      "lastPushTimeStamp": "2025-02-14T16:54:08.425Z",
+      "lastPushDirHash": "xzR9+xJ9iSDQnlzdlD8wJ71ar5M="
     }
   },
   "auth": {
@@ -67,20 +68,21 @@
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-main-c850c-deployment/amplify-cfn-templates/auth/fgbtheaters2ff27a91-cloudformation-template.json",
+        "logicalId": "authfgbtheaters2ff27a91"
+      },
+      "lastPushTimeStamp": "2025-02-14T16:54:08.425Z",
       "output": {
-        "UserPoolId": "us-east-1_b8PSBz6LY",
-        "AppClientIDWeb": "67u31f1d30iac9c5cedcb1hsoj",
-        "AppClientID": "7h21c7g3f54303pikcv56b97ei",
-        "IdentityPoolId": "us-east-1:4e5ae03b-7e66-451a-98bd-5f54656d8b6b",
-        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:767397816314:userpool/us-east-1_b8PSBz6LY",
-        "IdentityPoolName": "fgbtheaters2ff27a91_identitypool_2ff27a91__dev",
+        "UserPoolId": "us-east-1_3S4DAuOec",
+        "AppClientIDWeb": "63dv96h9a5f422c741lap3h7qf",
+        "AppClientID": "61h4o5akl1plnvopeblnhie7gu",
+        "IdentityPoolId": "us-east-1:7ea9fe65-7607-425c-abb9-ff4a3ee78c4a",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:767397816314:userpool/us-east-1_3S4DAuOec",
+        "IdentityPoolName": "fgbtheaters2ff27a91_identitypool_2ff27a91__main",
         "UserPoolName": "fgbtheaters2ff27a91_userpool_2ff27a91"
       },
-      "lastPushTimeStamp": "2024-06-01T22:14:07.670Z",
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-dev-f2bb9-deployment/amplify-cfn-templates/auth/fgbtheaters2ff27a91-cloudformation-template.json",
-        "logicalId": "authfgbtheaters2ff27a91"
-      }
+      "lastPushDirHash": "k+xRL0k8n/rYyb4VNW2fSC6EGjY="
     }
   },
   "hosting": {
@@ -88,12 +90,13 @@
       "providerPlugin": "awscloudformation",
       "service": "amplifyhosting",
       "type": "manual",
-      "output": {},
-      "lastPushTimeStamp": "2024-06-01T22:14:07.673Z",
       "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-dev-f2bb9-deployment/amplify-cfn-templates/hosting/amplifyhosting-template.json",
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-main-c850c-deployment/amplify-cfn-templates/hosting/amplifyhosting-template.json",
         "logicalId": "hostingamplifyhosting"
-      }
+      },
+      "lastPushTimeStamp": "2025-02-14T16:54:08.425Z",
+      "output": {},
+      "lastPushDirHash": "Z/50xhvy82phz9XXyL9tyjOu+rI="
     }
   },
   "storage": {
@@ -101,15 +104,16 @@
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "S3",
+      "lastPushTimeStamp": "2025-02-14T16:54:08.425Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-main-c850c-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
+        "logicalId": "storagefgbstorage"
+      },
       "output": {
-        "BucketName": "fgbtheatersstoragef2bb9-dev",
+        "BucketName": "fgbtheatersstoragec850c-main",
         "Region": "us-east-1"
       },
-      "lastPushTimeStamp": "2024-06-01T22:14:08.943Z",
-      "providerMetadata": {
-        "s3TemplateURL": "https://s3.amazonaws.com/amplify-fgbtheaters-dev-f2bb9-deployment/amplify-cfn-templates/storage/cloudformation-template.json",
-        "logicalId": "storagefgbstorage"
-      }
+      "lastPushDirHash": "PO0+/KhxBJg6/BjGSXLkqxovkUM="
     }
   }
 }
