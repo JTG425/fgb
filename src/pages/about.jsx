@@ -6,20 +6,21 @@ import jiddo from "../assets/jiddo.png";
 import oldParamount from "../assets/oldParamount.png";
 import newCap from "../assets/newCap.png";
 
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 25,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.25,
+    },
+  },
+};
+
 function About() {
-  const cardVariants = {
-    hidden: {
-      opacity: 0,
-      y: 100,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1,
-      },
-    },
-  };
 
   const oldContainerRef1 = useRef(null);
   const oldContainerRef2 = useRef(null);
@@ -29,7 +30,9 @@ function About() {
   return (
     <div className="page-container">
       <div className="about-container">
-        <h1>About Us</h1>
+        <div className="about-header">
+          <h1>About Us</h1>
+        </div>
         <img src={newCap} alt="newCap" className="newCap" />
         <span className="about-top-text-container">
           <p>
@@ -39,7 +42,7 @@ function About() {
           </p>
         </span>
         <div className="about-content">
-          <motion.div 
+          <motion.div
             className="old-container"
             ref={oldContainerRef1}
             initial="hidden"
@@ -58,7 +61,7 @@ function About() {
               </p>
             </span>
           </motion.div>
-          <motion.div 
+          <motion.div
             className="old-container"
             ref={oldContainerRef2}
             initial="hidden"

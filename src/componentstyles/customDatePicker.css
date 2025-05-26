@@ -40,72 +40,84 @@
 }
 
 .datepicker-container {
-    position: relative; /* Important for z-index stacking */
-    z-index: 11; /* Higher than background */
+    width:  fit-content;
+    height: 65vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    padding: 1rem;
+    border: none;
+    border-radius: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    width: 80vw;
-    height: 50vh;
-    max-width: 500px;
-    max-height: 600px;
-    border: 1px solid #ccc;
-    background: #fff;
-    font-family: Arial, sans-serif;
+    justify-content: center;
+    background: var(--foreground);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     box-shadow: var(--box-shadow);
     border-radius: var(--border-radius);
-    padding: 10px;
+    
 }
 
 .datepicker-header {
+    /* Give the header some breathing room */
     display: flex;
-    justify-content: space-between;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    text-align: center;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
-    width: 80%;
-}
-
-.month-nav {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    color: var(--copy);
+    font-weight: 700;
 }
 
 .current-month {
-    font-weight: bold;
-    font-size: 14px;
-    text-align: center;
-    flex: 1;
+    font-size: 24px;
 }
 
+/* The grid should fill the remaining space for the calendar */
 .datepicker-grid {
+    flex: 1;
+    width: 100vw;
+    gap: 0;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 25px;
-    text-align: center;
-    width: 100%;
-    max-width: 400px;
+    grid-auto-rows: 1fr;
+    align-self: center;
+    justify-self: center;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
 }
 
 .datepicker-day-label {
     font-size: 20px;
+    margin: 0;
+    line-height: normal;
+    text-align: center;
     font-weight: bold;
 }
 
 .datepicker-cell {
-    height: 30px;
-    line-height: 30px;
+    border-radius: 0;
+    margin: 0;
+    padding: 0;
+    min-height: 48px;
+    font-size: 16px;
+    line-height: 0; 
     cursor: pointer;
-    font-size: 14px;
+    width: 100%;
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     border-radius: var(--border-radius);
-    transition: background 0.3s;
 }
 
 .datepicker-cell:hover:not(.disabled):not(.selected) {
-    background: #f0f0f0;
+    background: var(--foreground);
 }
 
 .datepicker-cell.today {
@@ -115,92 +127,16 @@
 
 .datepicker-cell.selected {
     background: var(--primary);
-    color: #fff;
+    color: white;
+    font-weight: bold;
     border: none;
+    box-shadow: var(--box-shadow);
 }
 
 .datepicker-cell.disabled {
-    color: #ccc;
+    color: var(--copy-lighter);
     pointer-events: none;
-}
-
-
-@media (max-width: 600px) {
-    .datepicker-container {
-        width:  fit-content;
-        height: 65vh;
-        max-width: 100vw;
-        max-height: 100vh;
-        padding: 1rem;
-        border: none;
-        border-radius: 0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        background: var(--foreground);
-        backdrop-filter: blur(5px);
-        -webkit-backdrop-filter: blur(5px);
-    }
-
-    .datepicker-header {
-        /* Give the header some breathing room */
-        display: flex;
-        width: 100%;
-        height: auto;
-        margin: 0;
-        text-align: center;
-        justify-content: center;
-        align-items: center;
-        font-weight: 700;
-    }
-
-    .current-month {
-        font-size: 24px;
-    }
-
-    /* The grid should fill the remaining space for the calendar */
-    .datepicker-grid {
-        flex: 1;
-        width: 100vw;
-        gap: 0;
-        display: grid;
-        grid-template-columns: repeat(7, 1fr);
-        grid-auto-rows: 1fr;
-        align-self: center;
-        justify-self: center;
-        align-content: center;
-        justify-content: center;
-        align-items: center;
-        justify-items: center;
-    }
-
-    .datepicker-day-label {
-        font-size: 20px;
-        margin: 0;
-        line-height: normal;
-        text-align: center;
-        font-weight: bold;
-    }
-
-    .datepicker-cell {
-        border-radius: 0;
-        margin: 0;
-        padding: 0;
-        min-height: 48px;
-        font-size: 16px;
-        line-height: 0; 
-        cursor: pointer;
-        width: 100%;
-        height: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        border-radius: var(--border-radius);
-    }
-
-    /* Hover, selected, or other states are inherited from your existing desktop CSS */
+    text-decoration: line-through;
 }
 
 

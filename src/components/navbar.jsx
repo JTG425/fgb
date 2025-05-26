@@ -3,25 +3,34 @@ import {Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "../componentstyles/navbar.css";
 import DropDown from "./dropdown";
-import NavLogo from "../assets/navLogo.svg";
+import Logo from "./logo";
 import { Context } from "../App";
 import { useContext } from "react";
+
+const buttonVariants = {
+  Selected: {
+    background: "var(--primary)",
+    color: "#fbfbfb",
+    outline: "none"
+  },
+  NotSelected: {
+    background: "var(--foreground-glass)",
+    color: "var(--copy)",
+    outline: "none"
+  },
+  hovered: {
+    background: "var(--primary)",
+    scale: 1.05,
+
+  }
+};
 
 function NavBar() {
   const props = useContext(Context);
   const {pages, currentPage, setCurrentPage} = props;
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const buttonVariants = {
-    Selected: {
-      background: "#940303",
-      color: "#fbfbfb",
-    },
-    NotSelected: {
-      background: "#fbfbfb",
-      color: "#292323",
-    },
-  };
+
 
 
   const handleButtonClick = (pageName) => {
@@ -39,16 +48,8 @@ function NavBar() {
       exit={{ opacity: 0 }}
       >
       <div className="nav-content-container">
-        <Link to="/">
-          <motion.img
-            key="nav-home-logo"
-            whileHover={{ scale: 1.01 }}
-            whileTap={{ scale: 0.98 }}
-            src={NavLogo}
-            alt="nav-logo"
-            className="nav-logo"
-            onClick={() => handleButtonClick("Home")}
-          />
+        <Link to="/" onClick={() => handleButtonClick("Home")}>
+          <Logo />
         </Link>
         <div className="nav-buttons-container">
           <Link to="/">
@@ -59,6 +60,7 @@ function NavBar() {
               initial={currentPage === "Home" ? "Selected" : "NotSelected"}
               animate={currentPage === "Home" ? "Selected" : "NotSelected"}
               variants={buttonVariants}
+              whileHover="hovered"
               transition={{ duration: 0.25 }}
               onClick={() => handleButtonClick("Home")}
             >
@@ -74,6 +76,7 @@ function NavBar() {
                 initial={currentPage === pageName ? "Selected" : "NotSelected"}
                 animate={currentPage === pageName ? "Selected" : "NotSelected"}
                 variants={buttonVariants}
+                whileHover="hovered"
                 transition={{ duration: 0.25 }}
                 onClick={() => handleButtonClick(pageName)}
               >

@@ -6,16 +6,17 @@
     align-items: center;
     width: 100%;
     height: fit-content;
-    margin-top: 25px;
+    margin-top: 50px;
     margin-bottom: 25px;
     max-width: 1000px;
+    gap: 1rem;
 }
 
 
 .tickets-terms {
     width: 100%;
     background: var(--foreground);
-    border: var(--border);
+    border: 1px solid var(--border);
     border-radius: none;
     box-shadow: var(--box-shadow);
     padding: 0.5rem 1rem;
@@ -25,6 +26,9 @@
     z-index: 1;
     -ms-overflow-style: none;  /* Internet Explorer 10+ */
     scrollbar-width: none;  /* Firefox */
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    
     
 }
 
@@ -39,17 +43,18 @@
     align-items: center;
     width: 100%;
     background: var(--foreground);
-    border: var(--border);
+    border: 1px solid var(--border);
     border-radius: none;
     box-shadow: var(--box-shadow);
     padding: 0;
     overflow: scroll;
-    margin-bottom: 50px;
     overscroll-behavior: auto;
     margin-top: 10px;
     z-index: 1;
-    -ms-overflow-style: none;  /* Internet Explorer 10+ */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .tickets h2 {
@@ -64,6 +69,14 @@
     justify-content: center;
     align-items: center;
     z-index: 1;
+    background: var(--foreground);
+    padding: 1rem;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: var(--box-shadow);
+    border-radius: 0;
+    border: 1px solid var(--border);
+
 }
 
 .tickets-header h3 {
@@ -139,7 +152,6 @@
     justify-content: center;
     align-items: center;
     z-index: 1;
-
 }
 
 .buy-ticket-container::-webkit-scrollbar {
@@ -150,10 +162,13 @@
     width: 90%;
     border-collapse: collapse;
     margin-top: 0;
-    margin-bottom: 0;
-    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: 1rem;
     z-index: 1;
     overflow: hidden;
+    border-radius: var(--border-radius);
+    border: 2px solid var(--border);
+    background: transparent;
 }
 
 .prices table tr {
@@ -191,6 +206,8 @@
     margin-top: -1.5rem;
     z-index: 1;
     overflow: hidden;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .gift-card img {
@@ -270,7 +287,7 @@
     align-items: center;
     width: 100%;
     background: var(--foreground);
-    border: var(--border);
+    border: 1px solid var(--border);
     border-radius: none;
     box-shadow: var(--box-shadow);
     padding: 1rem;

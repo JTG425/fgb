@@ -5,21 +5,23 @@ import { FaPhoneAlt } from "react-icons/fa";
 import icon3 from "../assets/3.png";
 import icon11 from "../assets/11.png";
 
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 25,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+    },
+  },
+};
+
 function Rentals(props) {
 
-  const cardVariants = {
-    hidden: {
-      opacity: 0,
-      y: 100,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1,
-      },
-    },
-  };
+
 
   const rentalCardRef1 = useRef(null);
   const rentalCardRef2 = useRef(null);
@@ -31,7 +33,9 @@ function Rentals(props) {
 
   return (
     <div className="rentals-and-gifts-container">
+      <div className="rentals-header">
       <h2>Rentals</h2>
+      </div>
       <div className="rental-card">
         <div className="card-text">
           <p>

@@ -1,43 +1,78 @@
+/* Light Mode */
 :root {
-  --primary: #940303;
-  --primary-content: #fd9999;
-  --primary-dark: #620202;
-  --primary-light: #c60404;
+  --primary: rgb(149, 21, 18);
+  --primary-content: rgb(246, 178, 176);
+  --primary-dark: rgb(103, 15, 13);
+  --primary-light: rgb(194, 27, 23);
+  
+  --secondary: rgb(149, 21, 18);
+  --secondary-content: rgb(246, 178, 176);
+  --secondary-dark: rgb(103, 15, 13);
+  --secondary-light: rgb(194, 27, 23);
+  
+  --background: rgb(240, 240, 240);
+  --foreground: rgba(251, 251, 251, 0.95);
+  --border: rgb(223, 223, 223);
+  
+  --copy: rgb(38, 38, 38);
+  --copy-light: rgb(102, 102, 102);
+  --copy-lighter: rgb(140, 140, 140);
+  
+  --success: rgb(18, 149, 18);
+  --warning: rgb(149, 149, 18);
+  --error: rgb(149, 18, 18);
+  --success-content: rgb(176, 246, 176);
+  --warning-content: rgb(0, 0, 0);
+  --error-content: rgb(246, 176, 176);
 
-  --secondary: #940f03;
-  --secondary-content: #fda199;
-  --secondary-dark: #620a02;
-  --secondary-light: #c61404;
 
-  --background: #f1efef;
+  --background-blur: rgba(240, 240, 240, 0.5);
   --foreground-solid: rgba(251, 251, 251, 1);
-  --foreground: rgba(251, 251, 251, 0.90);
-  --foreground-glass: rgba(251, 251, 251, 0.50);
-  /* --foreground: #fbfbfb; */
-  --border: #e2dddd;
-
-  --copy: #292323;
-  --copy-light: #6e5e5e;
-  --copy-lighter: #958484;
-
-  --success: #039403;
-  --warning: #949403;
-  --error: #940303;
-  --success-content: #99fd99;
-  --warning-content: #000000;
-  --error-content: #fd9999;
-  --iconography: #f0e3d1;
+  --foreground-glass: rgba(223, 223, 223, 0.50);
+  --foreground-head: rgba(251, 251, 251, 0.75);
 
   --border-radius: 0.375rem;
-  /* --box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1); */
   --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    background-color: rgb(240, 239, 239);
+    background: rgb(240, 239, 239);
+    --gold: rgb(198 152 102);
+}
 
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: rgb(26, 26, 26);
+    --foreground: rgba(38, 38, 38, 0.95);
+    --border: rgb(64, 64, 64);
+    
+    --copy: rgb(251, 251, 251);
+    --copy-light: rgb(217, 217, 217);
+    --copy-lighter: rgb(166, 166, 166);
 
+    --background-blur: rgba(26, 26, 26, 0.5);
+    --foreground-solid: rgba(38, 38, 38, 1);
+    --foreground-glass: rgba(38, 38, 38, 0.50);
+    --foreground-head: rgba(38, 38, 38, 0.75);
+
+    background-color: rgb(27, 24, 24);
+    background: rgb(27, 24, 24);
+
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+    background-color: var(--background);
+    background: var(--background);
+  }
 }
 
 body {
   background: var(--background);
   overscroll-behavior: none;
+  background-color: var(--background);
+  background: var(--background);
 }
 
 a {
@@ -77,6 +112,7 @@ a {
   /* Firefox */
   overscroll-behavior: none;
   padding-top: 2rem;
+  padding-bottom: 0;
 }
 
 
@@ -134,7 +170,7 @@ a {
   scrollbar-width: none;
   /* Firefox */
   overflow-y: hidden;
-  overflow-x: visible;
+  overflow-x: hidden;
   padding-bottom: 25px;
 }
 
@@ -160,9 +196,13 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 60px;
+  height: fit-content;
+  padding: 1rem;
   width: 100vw;
-  margin-top: 25px;
+  margin: 0;
+  background: var(--foreground-solid);
+  border: none;
+
 }
 
 .footer p {
@@ -188,7 +228,8 @@ a {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 11;
+  z-index: 9;
+  background: var(--background);
 
 }
 

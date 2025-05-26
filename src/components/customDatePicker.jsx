@@ -3,6 +3,31 @@ import { CiCalendar } from "react-icons/ci";
 import { motion, AnimatePresence } from "framer-motion";
 import '../componentstyles/customDatePicker.css';
 
+const containerVariants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: {
+        opacity: 1,
+        scale: 1,
+        transition: { duration: 0.3 }
+    },
+    exit: { opacity: 0, scale: 0.95, transition: { duration: 0.2 } }
+};
+
+const buttonVariants = {
+    hovered: {
+        backgroundColor: "var(--primary)",
+        color: "var(--copy)",
+        boxShadow: "0px 0px 10px rgba(148, 3, 3, 0.5)",
+        transition: { duration: 0.2 }
+    },
+    nothovered: {
+        backgroundColor: "var(--foreground)",
+        color: "var(--copy)",
+        boxShadow: "var(--box-shadow)",
+        transition: { duration: 0.2 }
+    },
+};
+
 const CustomDatepicker = ({ setDate }) => {
     const today = new Date();
     const [currentMonth, setCurrentMonth] = useState(today.getMonth());
@@ -106,32 +131,8 @@ const CustomDatepicker = ({ setDate }) => {
         setShowDatePicker((prev) => !prev);
     };
 
-    // Framer Motion variants for the toggle button
-    const buttonVariants = {
-        hovered: {
-          backgroundColor: "var(--primary)",
-          color: "var(--foreground)",
-          boxShadow: "0px 0px 10px rgba(148, 3, 3, 0.5)",
-          transition: { duration: 0.2 }
-        },
-        nothovered: {
-          backgroundColor: "var(--foreground)",
-          color: "var(--copy)",
-          boxShadow: "var(--box-shadow)",
-          transition: { duration: 0.2 }
-        },
-    };
 
-    // Framer Motion container variants
-    const containerVariants = {
-        hidden: { opacity: 0, scale: 0.95 },
-        visible: {
-            opacity: 1,
-            scale: 1,
-            transition: { duration: 0.3 }
-        },
-        exit: { opacity: 0, scale: 0.95, transition: { duration: 0.2 } }
-    };
+
 
     return (
         <div className="datepicker-wrapper">
@@ -149,71 +150,71 @@ const CustomDatepicker = ({ setDate }) => {
             </motion.button>
 
             <AnimatePresence>
-            {showDatePicker && (
-                <motion.div
-                    className='datepicker-background'
-                    onClick={() => setShowDatePicker(false)}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                >
+                {showDatePicker && (
                     <motion.div
-                        className="datepicker-container"
-                        onClick={(e) => e.stopPropagation()} // Prevent clicks inside container from closing datepicker
-                        variants={containerVariants}
-                        initial="hidden"
-                        animate="visible"
-                        exit="exit"
+                        className='datepicker-background'
+                        onClick={() => setShowDatePicker(false)}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.3 }}
                     >
-                        <div className="datepicker-header">
-                            <button className="month-nav prev" onClick={handlePrevMonth}>&lt;</button>
-                            <div className="current-month">
-                                {monthNames[currentMonth]} {currentYear}
+                        <motion.div
+                            className="datepicker-container"
+                            onClick={(e) => e.stopPropagation()} // Prevent clicks inside container from closing datepicker
+                            variants={containerVariants}
+                            initial="hidden"
+                            animate="visible"
+                            exit="exit"
+                        >
+                            <div className="datepicker-header">
+                                <button className="month-nav prev" onClick={handlePrevMonth}>&lt;</button>
+                                <div className="current-month">
+                                    {monthNames[currentMonth]} {currentYear}
+                                </div>
+                                <button className="month-nav next" onClick={handleNextMonth}>&gt;</button>
                             </div>
-                            <button className="month-nav next" onClick={handleNextMonth}>&gt;</button>
-                        </div>
-                        <div className="datepicker-grid">
-                            <div className="datepicker-day-label">Sun</div>
-                            <div className="datepicker-day-label">Mon</div>
-                            <div className="datepicker-day-label">Tue</div>
-                            <div className="datepicker-day-label">Wed</div>
-                            <div className="datepicker-day-label">Thu</div>
-                            <div className="datepicker-day-label">Fri</div>
-                            <div className="datepicker-day-label">Sat</div>
+                            <div className="datepicker-grid">
+                                <div className="datepicker-day-label">Sun</div>
+                                <div className="datepicker-day-label">Mon</div>
+                                <div className="datepicker-day-label">Tue</div>
+                                <div className="datepicker-day-label">Wed</div>
+                                <div className="datepicker-day-label">Thu</div>
+                                <div className="datepicker-day-label">Fri</div>
+                                <div className="datepicker-day-label">Sat</div>
 
-                            {days.map((day, idx) => {
-                                const cellDate = day ? new Date(currentYear, currentMonth, day) : null;
-                                const cellDateCompare = cellDate ? new Date(cellDate.getFullYear(), cellDate.getMonth(), cellDate.getDate()) : null;
-                                const todayCompare = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+                                {days.map((day, idx) => {
+                                    const cellDate = day ? new Date(currentYear, currentMonth, day) : null;
+                                    const cellDateCompare = cellDate ? new Date(cellDate.getFullYear(), cellDate.getMonth(), cellDate.getDate()) : null;
+                                    const todayCompare = new Date(today.getFullYear(), today.getMonth(), today.getDate());
 
-                                const isToday = cellDateCompare && cellDateCompare.getTime() === todayCompare.getTime();
-                                const isSelected = cellDateCompare && selectedDate &&
-                                    cellDateCompare.getTime() === new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()).getTime();
+                                    const isToday = cellDateCompare && cellDateCompare.getTime() === todayCompare.getTime();
+                                    const isSelected = cellDateCompare && selectedDate &&
+                                        cellDateCompare.getTime() === new Date(selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()).getTime();
 
-                                const isDisabled = cellDateCompare && cellDateCompare.getTime() < todayCompare.getTime();
+                                    const isDisabled = cellDateCompare && cellDateCompare.getTime() < todayCompare.getTime();
 
-                                return (
-                                    <motion.div
-                                        key={idx}
-                                        className={[
-                                            'datepicker-cell',
-                                            isToday ? 'today' : '',
-                                            isSelected ? 'selected' : '',
-                                            isDisabled ? 'disabled' : ''
-                                        ].join(' ')}
-                                        onClick={() => !isDisabled && handleSelectDate(day)}
-                                        whileHover={{ scale: !isDisabled ? 1.08 : 1, transition: { duration: 0.1 } }}
-                                        whileTap={{ scale: !isDisabled ? 0.95 : 1 }}
-                                    >
-                                        {day || ''}
-                                    </motion.div>
-                                );
-                            })}
-                        </div>
+                                    return (
+                                        <motion.div
+                                            key={idx}
+                                            className={[
+                                                'datepicker-cell',
+                                                isToday ? 'today' : '',
+                                                isSelected ? 'selected' : '',
+                                                isDisabled ? 'disabled' : ''
+                                            ].join(' ')}
+                                            onClick={() => !isDisabled && handleSelectDate(day)}
+                                            whileHover={{ scale: !isDisabled ? 1.08 : 1, transition: { duration: 0.1 } }}
+                                            whileTap={{ scale: !isDisabled ? 0.95 : 1 }}
+                                        >
+                                            {day || ''}
+                                        </motion.div>
+                                    );
+                                })}
+                            </div>
+                        </motion.div>
                     </motion.div>
-                </motion.div>
-            )}
+                )}
             </AnimatePresence>
         </div>
     );

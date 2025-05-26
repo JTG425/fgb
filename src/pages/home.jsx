@@ -60,7 +60,6 @@ function Home() {
       >
       <SlideShow slideshowData={slideshow} />
       <div className="home-container">
-        <h2>Showtimes</h2>
         <SelectTheater
           selected={selectedTheater}
           setSelected={handleTheaterChange}

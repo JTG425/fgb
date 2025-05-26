@@ -12,10 +12,9 @@
     position: fixed;
     top: 0;
     z-index: 10;
-    background: rgba(251, 251, 251, 0.75);
-    backdrop-filter: blur(5px);
+    background: var(--foreground-head);
     -webkit-backdrop-filter: blur(5px);
-    filter: drop-shadow(0 5px 5px rgba(0, 0, 0, 0.1));
+    backdrop-filter: blur(25px);
 }
 
 .nav-content-container {
@@ -49,6 +48,8 @@
     cursor: pointer;
     box-shadow: var(--box-shadow);
     overflow: hidden;
+    background: transparent;
+    border: 1px solid var(--border);
 }
 
 
@@ -68,11 +69,15 @@
 
 .nav-logo {
     position: relative;
-    top: 0;
+    top: 5px;
     left: 0;
     width: auto;
     height: 45px;
     z-index: 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -80,4 +85,16 @@
     .nav-container {
         display: none;
     }
+    .nav-logo {
+        top: 0px;
+    }
+}
+
+@media screen and (min-width: 1000px) {
+    .nav-container {
+        top: 10px;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border);
+    }
+    
 }

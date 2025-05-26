@@ -4,7 +4,7 @@
     justify-content: flex-start;
     overflow: hidden;
     height: fit-content;
-    margin-top: 25px;
+    margin-top: 50px;
     margin-bottom: 50px;
     width: 100%;
     max-width: 1000px;
@@ -33,13 +33,14 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 90%;
+    width: 92%;
     align-self: center;
     background: var(--foreground);
     box-shadow: var(--box-shadow);
     padding: 1rem;
     z-index: 1;
     margin-bottom: 25px;
+    border: 1px solid var(--border);
 }
 
 .info p {

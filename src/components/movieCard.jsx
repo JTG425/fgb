@@ -1,9 +1,13 @@
 import "../componentstyles/moviecard.css";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { FaInfoCircle } from "react-icons/fa";
 import { IoCloseOutline } from "react-icons/io5";
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+
+import 'react-loading-skeleton/dist/skeleton.css'
 import noImage from "../assets/noimage.png";
+import { SuspenseImage } from "./suspenseImage";
 
 const convertToStandardTime = (militaryTime) => {
   const hoursMinutes = militaryTime.match(/(\d{2})(\d{2})/);
@@ -67,7 +71,7 @@ function MovieCard(props) {
       boxShadow: "0px 0px 10px 0px rgba(148, 3, 3, 0.75)",
     },
     nothovered: {
-      background: "#fbfbfb",
+      background: "var(--foreground)",
       color: "#940303",
       boxShadow: "0px 0px 0px 0px rgba(148, 3, 3, 0)",
     },
@@ -83,7 +87,7 @@ function MovieCard(props) {
       width: "100px",
     },
     nothovered: {
-      background: "#fbfbfb",
+      background: "var(--foreground)",
       color: "#940303",
       boxShadow: "0px 0px 0px 0px rgba(148, 3, 3, 0)",
       overflowX: "hidden",
@@ -116,20 +120,29 @@ function MovieCard(props) {
                 exit={{ opacity: 0, y: 100 }}
                 transition={{ duration: 0.5, type: "spring" }}
               >
-                <motion.img
-                  key={`movie-${filmIndex}-${film.name}-poster`}
-                  className="poster"
-                  src={
-                    film.poster ===
-                      "https://fgbtheatersstoragef2bb9-dev.s3.amazonaws.com/public/images/noimage.png"
-                      ? noImage
-                      : film.poster
-                  }
-                  alt={film.name}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                />
+                <div className="poster-container">
+                  <Suspense
+                    fallback={
+                      <div className="poster-skeleton">
+                        <SkeletonTheme baseColor="var(--background)" highlightColor="var(--foreground)" >
+                          <Skeleton width={200} height={300} />
+                        </SkeletonTheme>
+                      </div>
+                    }
+                  >
+                    <SuspenseImage
+                      className="poster"
+                      src={
+                        film.poster ===
+                          "https://fgbtheatersstoragef2bb9-dev.s3.amazonaws.com/public/images/noimage.png"
+                          ? noImage
+                          : film.poster
+                      }
+                      alt={film.name}
+
+                    />
+                  </Suspense>
+                </div>
                 <motion.div
                   key={`movie-${filmIndex}-${film.name}-header`}
                   className="film-header"
@@ -200,7 +213,7 @@ function MovieCard(props) {
                           transition={{ duration: 0.5 }}
                         >
                           <span className="trailer-header">
-                          <h2>{film.name}</h2>
+                            <h2>{film.name}</h2>
                           </span>
                           <iframe
                             title="trailer"

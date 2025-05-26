@@ -17,6 +17,8 @@ import "./pagestyles/admin.css";
 import { useContext } from "react";
 import { getUrl } from 'aws-amplify/storage';
 import { PulseLoader } from "react-spinners";
+import Logo from "./components/logo";
+import useSystemTheme from "./useSystemTheme";
 
 
 
@@ -27,41 +29,36 @@ Amplify.configure(amplifyconfig);
 export const Context = React.createContext(null);
 
 
-const fetchFile = async (filepath) => {
+const fetchData = async () => {
   try {
-    const signedUrl = await getUrl({
-      path: filepath,
-      options: {
-        validateObjectExistence: false,
-        expiresIn: 60,
-        useAccelerateEndpoint: true
-      },
+    const cacheKey = 'theaterCache';
+    const cachedData = JSON.parse(localStorage.getItem(cacheKey)) || {};
+    const response = await fetch(import.meta.env.VITE_AWS_API_GATEWAY_URL);
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`);
+    }
+    const apiData = await response.json();
+    const categories = ["Capitol", "Paramount", "Upcoming", "Slideshow"];
+    const newData = {};
+    categories.forEach((category) => {
+      const apiEntry = apiData[category] && apiData[category][0];
+      if (!apiEntry) return;
+      if (cachedData[category] && cachedData[category].eTag === apiEntry.eTag) {
+        newData[category] = cachedData[category].data;
+      } else {
+        newData[category] = apiEntry.data;
+        cachedData[category] = {
+          data: apiEntry.data,
+          eTag: apiEntry.eTag,
+        };
+      }
     });
-    const response = await fetch(signedUrl.url.href);
-    const text = await response.text();
-    return text;
-  } catch (error) {
-    console.error(`Error fetching ${path}:`, error);
-    throw error;
-  }
-};
-
-const fetchAllData = async () => {
-  try {
-    const [capShows, parShows, slideshow, upcoming, current] = await Promise.all([
-      fetchFile("public/schedule/RTS_Schedule_Capitol.json"),
-      fetchFile("public/schedule/RTS_Schedule_Paramount.json"),
-      fetchFile("public/slideshow/slideshow.json"),
-      fetchFile("public/schedule/Upcoming.json"),
-      fetchFile("public/schedule/Current.json"),
-    ]);
-
+    localStorage.setItem(cacheKey, JSON.stringify(cachedData));
     return {
-      capShows: JSON.parse(capShows),
-      parShows: JSON.parse(parShows),
-      slideshow: JSON.parse(slideshow),
-      upcoming: JSON.parse(upcoming),
-      current: JSON.parse(current),
+      capShows: newData["Capitol"],
+      parShows: newData["Paramount"],
+      upcoming: newData["Upcoming"],
+      slideshow: newData["Slideshow"],
       loading: false,
     };
   } catch (error) {
@@ -70,6 +67,7 @@ const fetchAllData = async () => {
   }
 };
 
+
 function App() {
   const [capShows, setCapShows] = useState(null);
   const [parShows, setParShows] = useState(null);
@@ -77,19 +75,42 @@ function App() {
   const [upcoming, setUpcoming] = useState(null);
   const [current, setCurrent] = useState(null);
   const [loading, setLoading] = useState(true);
+  const theme = useSystemTheme();
 
   useEffect(() => {
-    const loadData = async () => {
-      const fetchedData = await fetchAllData();
-      setCapShows(fetchedData.capShows);
-      setParShows(fetchedData.parShows);
-      setSlideshow(fetchedData.slideshow);
-      setUpcoming(fetchedData.upcoming);
-      setCurrent(fetchedData.current);
+    const cacheKey = 'theaterCache';
+    const cachedRaw = localStorage.getItem(cacheKey);
+    if (cachedRaw) {
+      const cachedData = JSON.parse(cachedRaw);
+      if (cachedData["Capitol"]) {
+        setCapShows(cachedData["Capitol"].data);
+      }
+      if (cachedData["Paramount"]) {
+        setParShows(cachedData["Paramount"].data);
+      }
+      if (cachedData["Upcoming"]) {
+        setUpcoming(cachedData["Upcoming"].data);
+      }
+      if (cachedData["Slideshow"]) {
+        setSlideshow(cachedData["Slideshow"].data);
+      }
       setLoading(false);
+    }
+    
+    const loadData = async () => {
+      const fetchedData = await fetchData();
+      if (fetchedData) {
+        setCapShows(fetchedData.capShows);
+        setParShows(fetchedData.parShows);
+        setSlideshow(fetchedData.slideshow);
+        setUpcoming(fetchedData.upcoming);
+        setCurrent(fetchedData.current);
+        setLoading(false);
+      }
     };
     loadData();
   }, []);
+  
 
 
   /* Determine the Subdomain and setCurrentPage to that (For Navbar Appearance) */
@@ -143,11 +164,6 @@ function App() {
 
   const handlePageChange = (page) => setCurrentPage(page);
 
-
-
-
-
-
   return (
     <Context.Provider value={{
       capShows: capShows,
@@ -158,6 +174,7 @@ function App() {
       loading: loading,
       pages: pages,
       currentPage: currentPage,
+      theme: theme,
       setCurrentPage: handlePageChange
     }}>
       <div className="App">
@@ -170,7 +187,8 @@ function App() {
               initial={{ opacity: 1 }}
               exit={{ opacity: 0 }}
             >
-              <PulseLoader color={"#940303"} size={20} />
+              <Logo />
+              {/* <PulseLoader color={"#940303"} size={20} /> */}
             </motion.div>
           )}
           </AnimatePresence>
@@ -247,15 +265,15 @@ function App() {
               <span className="footer-socials">
                 <SocialIcon
                   key="facebook-icon"
-                  bgColor="#f1efef"
-                  fgColor="#292323"
+                  bgColor="var(--foreground)"
+                  fgColor="var(--primary)"
                   url="https://www.facebook.com/profile.php?id=61556431721748"
                   target="_blank"
                 />
                 <SocialIcon
                   key="insta-icon"
-                  bgColor="#f1efef"
-                  fgColor="#292323"
+                  bgColor="var(--foreground)"
+                  fgColor="var(--primary)"
                   url="https://www.instagram.com/fgbtheaters/"
                   target="_blank"
                 />
@@ -278,9 +296,9 @@ function PageWrapper({ children, keyString }) {
     <AnimatePresence mode="wait">
       <motion.div
         key={keyString}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        exit={{ opacity: 0, y: 10 }}
+        initial={{ opacity: 0}}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
         transition={{ duration: 0.5 }}
       >
         {children}

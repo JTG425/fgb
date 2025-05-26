@@ -23,11 +23,11 @@ const SliderToggle = ({ selected, setSelected }) => {
             fontSize: "0.80rem",
         },
         notselected: {
-            color: "#292323",
+            color: "var(--copy)",
             fontSize: "0.75rem",
         },
         hovered: {
-            color: "#958484",
+            color: "var(--copy-light)",
         }
     }
 

@@ -1,42 +1,37 @@
 .dropdown-top-bar {
     display: none;
-    flex-direction: row;
     box-shadow: var(--box-shadow);
     border-radius: 0;
     width: 100vw;
-    height: 200px;
+    height: 75px;
+    overflow-y: hidden;
     position: fixed;
     top: 0;
     z-index: 15;
-    background: var(--foreground-solid);
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-bottom: 10px;
+    background: var(--foreground-head);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(25px);
+    padding: 1rem;
 }
 
-.mobile-logo {
-    width: 75px;
-    height: auto;
-    margin-left: 5px;
+.dropdown-header {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     padding: 0;
 }
 
-.dropdown {
-    display: none;
-    flex-direction: column;
-    gap: 20px;
-    position: fixed;
-    top: 0px;
-    right: 0;
-    justify-content: center;
-    align-items: center;
-    padding-top: 100px;
-    padding-bottom: 1rem;
+.dropdown-content {
     width: 100%;
-    background: var(--foreground-solid);
-    border-radius: 0;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
-    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+    padding: 1rem;
+
 }
 
 .show-dropdown-button {
@@ -53,42 +48,43 @@
 
 .dropdown-button {
     position: relative;
-    width: 80vw;
+    width: 90vw;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding-left: 25px;
-    padding-right: 25px;
-    background: var(--foreground);
-    border: var(--border);
+    padding: 1rem;
+    background: transparent;
+    border: 1px solid var(--border);
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
     cursor: pointer;
     z-index: 5;
+    font-size: 24px;
 }
 
 .icon {
     width: 30px;
     height: 30px;
     fill: var(--primary);
-    color: var(--foreground);
     z-index: 5;
+
 }
 
-.dropdown-menu button p {
+.dropdown-button p {
     margin: 0;
     text-decoration: none;
-    font-size: 28px;
+    font-size: 24px;
     z-index: 5;
 }
 
 @media screen and (max-width: 675px) {
     .dropdown-top-bar {
         display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-end;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+
     }
     .dropdown {
         display: flex;

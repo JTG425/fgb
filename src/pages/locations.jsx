@@ -6,9 +6,13 @@ import { FaPhoneAlt } from "react-icons/fa";
 import Map, { Marker } from "react-map-gl";
 import masks from "../assets/16.png";
 import stars from "../assets/12.png";
+import { Context } from "../App";
+import { useContext } from "react";
 
 function CapitolMap() {
   const key = import.meta.env.VITE_MAPBOX_API_KEY;
+  const { theme } = useContext(Context);
+
   return (
     <Map
       className="Map"
@@ -19,7 +23,7 @@ function CapitolMap() {
         zoom: 14,
       }}
       style={{ width: "400px", height: "400px" }}
-      mapStyle="mapbox://styles/mapbox/streets-v9"
+      mapStyle={`mapbox://styles/mapbox/${theme}-v11`}
     >
       <Marker latitude={44.26092378286133} longitude={-72.57836915903455} />
     </Map>
@@ -28,6 +32,7 @@ function CapitolMap() {
 
 function ParamountMap() {
   const key = import.meta.env.VITE_MAPBOX_API_KEY;
+  const { theme } = useContext(Context);
   return (
     <Map
       className="Map"
@@ -38,7 +43,7 @@ function ParamountMap() {
         zoom: 14,
       }}
       style={{ width: "400px", height: "400px" }}
-      mapStyle="mapbox://styles/mapbox/streets-v9"
+      mapStyle={`mapbox://styles/mapbox/${theme}-v11`}
     >
       <Marker latitude={44.19952086200256} longitude={-72.50370899940566} />
     </Map>

@@ -5,6 +5,34 @@ import { motion, useInView } from "framer-motion";
 import Gift from "./gift";
 import icon9 from "../assets/9.png";
 import icon1 from "../assets/1.png";
+import Prices from "../components/prices";
+
+const buttonVariants = {
+  hovered: {
+    background: "#940303",
+    color: "#fbfbfb",
+    boxShadow: "0px 0px 10px 0px rgba(148, 3, 3, 0.75)",
+  },
+  nothovered: {
+    background: "var(--foreground)",
+    color: "var(--copy)",
+    boxShadow: "0px 0px 0px 0px rgba(148, 3, 3, 0)",
+  },
+};
+
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 25,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1,
+    },
+  },
+};
 
 function Tickets() {
   const [confirmed, setConfirmed] = useState(true);
@@ -13,32 +41,7 @@ function Tickets() {
     setConfirmed(e.target.checked);
   };
 
-  const buttonVariants = {
-    hovered: {
-      background: "#940303",
-      color: "#fbfbfb",
-      boxShadow: "0px 0px 10px 0px rgba(148, 3, 3, 0.75)",
-    },
-    nothovered: {
-      background: "#fbfbfb",
-      color: "#940303",
-      boxShadow: "0px 0px 0px 0px rgba(148, 3, 3, 0)",
-    },
-  };
 
-  const cardVariants = {
-    hidden: {
-      opacity: 0,
-      y: 100,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1,
-      },
-    },
-  };
 
   const tickRef1 = useRef(null);
   const tickRef2 = useRef(null);
@@ -57,38 +60,7 @@ function Tickets() {
         <img className="film-reel1" src={icon9} />
         <img className="tickets-icon" src={icon1} />
         <div className="buy-ticket-container">
-          <div className="prices">
-            <table>
-              <thead>
-                <tr className="prices-row">
-                  <th className="prices-cell" colSpan="5">Prices</th>
-                </tr>
-                <tr>
-                  <th>Show</th>
-                  <th>Adult</th>
-                  <th>Child</th>
-                  <th>Senior</th>
-                  <th>Military</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Standard</td>
-                  <td>$12.84</td>
-                  <td>$9.63</td>
-                  <td>$9.37</td>
-                  <td>$9.37</td>
-                </tr>
-                <tr>
-                  <td>Matinee</td>
-                  <td>$9.37</td>
-                  <td>$9.37</td>
-                  <td>$9.37</td>
-                  <td>$9.37</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <Prices />
           <motion.div className="tickets-button">
             <a
               href="https://app.formovietickets.com/?id=fgbtheatres"
@@ -101,7 +73,6 @@ function Tickets() {
                 whileHover="hovered"
                 whileTap={{ scale: 0.98 }}
                 variants={buttonVariants}
-                disabled={confirmed === false}
               >
                 Buy Tickets Now
               </motion.button>
@@ -115,7 +86,6 @@ function Tickets() {
           animate={inView1 ? "visible" : "hidden"}
           variants={cardVariants}
         >
-          <Gift />
         </motion.div>
         <motion.div
           className="tickets-terms"

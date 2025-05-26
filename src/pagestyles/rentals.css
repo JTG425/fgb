@@ -3,9 +3,27 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 30px;
+    margin-top: 100px;
     margin-bottom: 50px;
+    gap: 1rem;
 }
+
+.rentals-header {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    background: var(--foreground);
+    padding: 0.5rem;
+    border: 1px solid var(--border);
+}
+
+.rentals-header h2 {
+    line-height: 1rem;
+    font-weight: bold;
+}
+
 
 
 
@@ -34,8 +52,6 @@
 }
 
 .gift-rentals-button {
-    margin-top: 10px;
-    margin-bottom: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -52,12 +68,20 @@
     border-radius: var(--border-radius);
 }
 
+.rentals-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
 .rental-card {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-bottom: 1.5rem;
     padding: 1.5rem;
     border: 1px solid var(--border);
     border-radius: 0;
@@ -189,7 +213,7 @@
 
 @media screen and (max-width: 675px) {
     .rentals-and-gifts-container {
-        margin-top: 40px;
+        margin-top: 75px;
     }
 
     .gift-card {
