@@ -1,38 +1,32 @@
 .about-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-top: 25px;
-    padding: 0 1rem;
+    justify-content: flex-start;
+    overflow: hidden;
+    height: fit-content;
+    margin-top: 50px;
+    margin-bottom: 50px;
     width: 100%;
     max-width: 1000px;
-    height: fit-content;
-    padding-bottom: 5rem;
+    gap: 1rem;
 }
 
 .about-header {
+    display: flex;
+    justify-content: center;
+    margin: 0px;
     width: 100%;
     background: var(--foreground);
-    max-width: 1000px;
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem;
     box-shadow: var(--box-shadow);
+    padding: 1rem;
     border: 1px solid var(--border);
-    margin-bottom: 1rem;
-
-
+    max-width: 1000px;
 }
 
-.about-header h1 {
-    color: var(--copy);
+.about-header h2 {
+    display: flex;
+    justify-content: flex-start;
     margin: 0;
-    font-size: 2rem;
-    text-align: center;
 }
 
 .about-content {
@@ -43,7 +37,6 @@
     width: 100%;
     max-width: 1000px;
     gap: 1rem;
-    margin-top: 25px;
 
 }
 
@@ -55,7 +48,6 @@
     max-width: 1000px;
     box-shadow: var(--box-shadow);
     border: 1px solid var(--border);
-    margin-bottom: 1rem;
 }
 
 .oldCap {
@@ -163,3 +155,29 @@
 
 
 
+@media screen and (min-width: 1000px) {
+    .about-header {
+        border-radius: var(--border-radius);
+    }
+
+    .newCap {
+        border-radius: var(--border-radius);
+    }
+
+    .old-container {
+        border-radius: var(--border-radius);
+    }
+
+    .old-images {
+        border-radius: var(--border-radius);
+    }
+
+    .about-top-text-container {
+        border-radius: var(--border-radius);
+    }
+
+    
+
+
+    
+}

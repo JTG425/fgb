@@ -5,14 +5,13 @@
     justify-content: center;
     align-items: center;
     gap: 1rem;
-    padding: 1rem;
 }
 
 
 .showtype {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
     gap: 1rem;
     width: 100%;
@@ -20,9 +19,9 @@
     background: var(--foreground-blur);
     border-radius: var(--border-radius);
     padding: 1rem;
-    margin-bottom: 1rem;
     border: 1px solid var(--border);
     max-width: 800px;
+    
 }
 
 .showtype p {

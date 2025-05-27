@@ -1,7 +1,7 @@
 import "../pagestyles/locations.css";
 import "../pagestyles/home.css";
 import React, { Suspense } from "react";
-import { motion } from "framer-motion";
+import { motion as m } from "framer-motion";
 import { FaPhoneAlt } from "react-icons/fa";
 import Map, { Marker } from "react-map-gl";
 import masks from "../assets/16.png";
@@ -51,6 +51,23 @@ function ParamountMap() {
 }
 
 function Locations(props) {
+
+  const buttonVariants = {
+    hovered: {
+      background: "var(--primary)",
+      color: "#fbfbfb",
+      boxShadow: "0px 0px 10px 0px rgba(148, 3, 3, 0.75)",
+    },
+    nothovered: {
+      background: "var(--foreground)",
+      color: "var(--copy)",
+      boxShadow: "0px 0px 0px 0px rgba(148, 3, 3, 0)",
+    },
+  };
+
+
+
+
   return (
     <div className="page-container">
       <div className="locations">
@@ -65,7 +82,7 @@ function Locations(props) {
           </p>
         </span>
         <div className="maps">
-          <motion.div className="cap-map">
+          <div className="map">
             <h3>Capitol Theaters</h3>
             <p>93 State St, Montpelier, VT 05602</p>
             <br />
@@ -75,14 +92,21 @@ function Locations(props) {
               </Suspense>
             </div>
             <div className="map-cover"></div>
-            <motion.a href="tel:18022290343" className="call">
+            <m.a 
+              href="tel:18022290343" 
+              className="call"
+              whileHover="hovered"
+              whileTap="hovered"
+              initial="nothovered"
+              variants={buttonVariants}
+            >
               <span className="call-content">
                 <FaPhoneAlt />
                 <p>(802)-229-0343</p>
               </span>
-            </motion.a>
-          </motion.div>
-          <motion.div className="par-map">
+            </m.a>
+          </div>
+          <div className="map">
             <h3>Paramount Theaters</h3>
             <p>237 N Main St, Barre, VT 05641</p>
             <br />
@@ -92,13 +116,20 @@ function Locations(props) {
               </Suspense>
             </div>
             <div className="map-cover"></div>
-            <motion.a href="tel:18024790078" className="call">
+            <m.a 
+              href="tel:18022290343" 
+              className="call"
+              whileHover="hovered"
+              whileTap="hovered"
+              initial="nothovered"
+              variants={buttonVariants}
+            >
               <span className="call-content">
                 <FaPhoneAlt />
                 <p>(802)-479-0078</p>
               </span>
-            </motion.a>
-          </motion.div>
+            </m.a>
+          </div>
         </div>
       </div>
     </div>

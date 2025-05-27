@@ -3,7 +3,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 100px;
+    margin-top: 90px;
     margin-bottom: 50px;
     gap: 1rem;
 }
@@ -309,4 +309,16 @@
         line-height: 1rem;
     }
 
+}
+
+@media screen and (min-width: 1000px) {
+    .rentals-header {
+        border-radius: var(--border-radius);
+    }
+
+    .rental-card  {
+        border-radius: var(--border-radius);
+    }
+
+    
 }

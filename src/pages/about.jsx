@@ -5,6 +5,7 @@ import oldCap from "../assets/oldCap.png";
 import jiddo from "../assets/jiddo.png";
 import oldParamount from "../assets/oldParamount.png";
 import newCap from "../assets/newCap.png";
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
 const cardVariants = {
   hidden: {
@@ -31,9 +32,9 @@ function About() {
     <div className="page-container">
       <div className="about-container">
         <div className="about-header">
-          <h1>About Us</h1>
+          <h2>About Us</h2>
         </div>
-        <img src={newCap} alt="newCap" className="newCap" />
+          {<img src={newCap} alt="newCap" className="newCap" /> || <Skeleton width={200} height={50} />}
         <span className="about-top-text-container">
           <p>
             FGB Theaters, including the Capitol Theater and Paramount Theater,

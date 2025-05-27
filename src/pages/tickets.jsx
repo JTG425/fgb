@@ -9,7 +9,7 @@ import Prices from "../components/prices";
 
 const buttonVariants = {
   hovered: {
-    background: "#940303",
+    background: "var(--primary)",
     color: "#fbfbfb",
     boxShadow: "0px 0px 10px 0px rgba(148, 3, 3, 0.75)",
   },
@@ -55,11 +55,11 @@ function Tickets() {
       <div className="tickets">
         <div className="tickets-header">
           <h2>Buy Tickets</h2>
-          <h3>Skip The Line, Buy Online!</h3>
         </div>
         <img className="film-reel1" src={icon9} />
         <img className="tickets-icon" src={icon1} />
         <div className="buy-ticket-container">
+        <h3>Skip The Line, Buy Online!</h3>
           <Prices />
           <motion.div className="tickets-button">
             <a
