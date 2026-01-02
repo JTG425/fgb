@@ -1,24 +1,23 @@
 import "./App.css";
 import "react-day-picker/dist/style.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, lazy, Suspense } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { SocialIcon } from "react-social-icons";
 import amplifyconfig from "./amplifyconfiguration.json";
 import { Amplify } from "aws-amplify";
 import NavBar from "./components/navbar";
-import Home from "./pages/home";
-import Tickets from "./pages/tickets";
-import Locations from "./pages/locations";
-import About from "./pages/about";
-import Rentals from "./pages/rentals";
-import Admin from "./pages/admin";
-import "./pagestyles/admin.css";
-import { useContext } from "react";
-import { getUrl } from 'aws-amplify/storage';
 import { PulseLoader } from "react-spinners";
 import Logo from "./components/logo";
 import useSystemTheme from "./useSystemTheme";
+
+// Lazy load pages for better code splitting
+const Home = lazy(() => import("./pages/home"));
+const Tickets = lazy(() => import("./pages/tickets"));
+const Locations = lazy(() => import("./pages/locations"));
+const About = lazy(() => import("./pages/about"));
+const Rentals = lazy(() => import("./pages/rentals"));
+const Admin = lazy(() => import("./pages/admin"));
 
 
 
@@ -198,59 +197,65 @@ function App() {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <Routes location={location} key={location.pathname}>
-              <Route
-                key="home"
-                path="/"
-                element={
-                  <PageWrapper keyString="PW-home-key">
-                    <Home />
-                  </PageWrapper>
-                }
-              />
-              <Route
-                key="home"
-                path="/home"
-                element={
-                  <PageWrapper keyString="PW-home-key">
-                    <Home />
-                  </PageWrapper>
-                }
-              />
-              <Route
-                path="/tickets"
-                element={
-                  <PageWrapper keyString="PW-tickets-key">
-                    <Tickets />
-                  </PageWrapper>
-                }
-              />
-              <Route
-                path="/locations"
-                element={
-                  <PageWrapper keyString="PW-locations-key">
-                    <Locations key={import.meta.env.GOOGLE_MAPS_API_KEY} />
-                  </PageWrapper>
-                }
-              />
-              <Route
-                path="/rentals"
-                element={
-                  <PageWrapper keyString="PW-rentals-key">
-                    <Rentals />
-                  </PageWrapper>
-                }
-              />
-              <Route
-                path="/about"
-                element={
-                  <PageWrapper keyString="PW-about-key">
-                    <About />
-                  </PageWrapper>
-                }
-              />
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
+            <Suspense fallback={
+              <div className="loading-container">
+                <Logo />
+              </div>
+            }>
+              <Routes location={location} key={location.pathname}>
+                <Route
+                  key="home"
+                  path="/"
+                  element={
+                    <PageWrapper keyString="PW-home-key">
+                      <Home />
+                    </PageWrapper>
+                  }
+                />
+                <Route
+                  key="home"
+                  path="/home"
+                  element={
+                    <PageWrapper keyString="PW-home-key">
+                      <Home />
+                    </PageWrapper>
+                  }
+                />
+                <Route
+                  path="/tickets"
+                  element={
+                    <PageWrapper keyString="PW-tickets-key">
+                      <Tickets />
+                    </PageWrapper>
+                  }
+                />
+                <Route
+                  path="/locations"
+                  element={
+                    <PageWrapper keyString="PW-locations-key">
+                      <Locations key={import.meta.env.GOOGLE_MAPS_API_KEY} />
+                    </PageWrapper>
+                  }
+                />
+                <Route
+                  path="/rentals"
+                  element={
+                    <PageWrapper keyString="PW-rentals-key">
+                      <Rentals />
+                    </PageWrapper>
+                  }
+                />
+                <Route
+                  path="/about"
+                  element={
+                    <PageWrapper keyString="PW-about-key">
+                      <About />
+                    </PageWrapper>
+                  }
+                />
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </Suspense>
           </motion.div>
           <AnimatePresence mode="sync">
           {!loading && (

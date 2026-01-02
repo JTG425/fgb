@@ -1,12 +1,12 @@
 // Slideshow.jsx
 "use client";
 import "../componentstyles/slideshow.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, memo, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { wrap } from "@popmotion/popcorn";
 import BackgroundTransition from "./BackgroundTransition";
 
-export default function Slideshow(props) {
+function Slideshow(props) {
   const slideshowData = props.slideshowData;
   const [currentSlide, setCurrentSlide] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -54,8 +54,8 @@ export default function Slideshow(props) {
     setCurrentSlide(curr => wrap(0, slideCount, curr + newDirection));
   };
 
-  // Variants for slide content (as before)
-  const slideContentVariants = {
+  // Variants for slide content (memoized)
+  const slideContentVariants = useMemo(() => ({
     enter: (direction) => ({
       x: direction > 0 ? "25%" : "-25%",
       opacity: 0,
@@ -71,12 +71,12 @@ export default function Slideshow(props) {
       opacity: 0,
       scale: 0.85,
     }),
-  };
+  }), []);
 
-  const blurVariants = {
+  const blurVariants = useMemo(() => ({
     initial: { filter: "blur(10px)" },
     animate: { filter: "blur(0px)" },
-  };
+  }), []);
 
   useEffect(() => {
     if (!imagesLoaded || slideCount <= 1) return;
@@ -130,6 +130,7 @@ export default function Slideshow(props) {
                   className="slide-image"
                   src={slideshowData[currentSlide].Image}
                   alt={slideshowData[currentSlide].Title}
+                  loading="lazy"
                 />
               </span>
             )}
@@ -143,3 +144,5 @@ export default function Slideshow(props) {
     </div>
   );
 }
+
+export default memo(Slideshow);
