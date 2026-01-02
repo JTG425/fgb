@@ -34,7 +34,7 @@ function About() {
         <div className="about-header">
           <h2>About Us</h2>
         </div>
-          {<img src={newCap} alt="newCap" className="newCap" /> || <Skeleton width={200} height={50} />}
+          {<img src={newCap} alt="newCap" className="newCap" loading="lazy" /> || <Skeleton width={200} height={50} />}
         <span className="about-top-text-container">
           <p>
             FGB Theaters, including the Capitol Theater and Paramount Theater,
@@ -51,8 +51,8 @@ function About() {
             variants={cardVariants}
           >
             <span className="old-images">
-              <img src={oldCap} alt="oldCap" className="oldCap" />
-              <img src={oldParamount} alt="oldParamount" className="oldParamount" />
+              <img src={oldCap} alt="oldCap" className="oldCap" loading="lazy" />
+              <img src={oldParamount} alt="oldParamount" className="oldParamount" loading="lazy" />
             </span>
             <span className="about-text-container">
               <p>
@@ -69,7 +69,7 @@ function About() {
             animate={inView2 ? "visible" : "hidden"}
             variants={cardVariants}
           >
-            <img src={jiddo} alt="jiddo" className="jiddo" />
+            <img src={jiddo} alt="jiddo" className="jiddo" loading="lazy" />
             <span className="about-text-container">
               <p>
                 Our theaters are equipped with the latest in digital projection

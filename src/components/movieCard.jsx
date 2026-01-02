@@ -1,6 +1,6 @@
 import "../componentstyles/moviecard.css";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState, Suspense } from "react";
+import { useEffect, useState, Suspense, memo, useMemo, useCallback } from "react";
 import { FaInfoCircle } from "react-icons/fa";
 import { IoCloseOutline } from "react-icons/io5";
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
@@ -35,7 +35,7 @@ const createDisplayTime = (time) => {
 
 function MovieCard(props) {
   const date = props.date;
-  const displayDate = createDisplayDate(date);
+  const displayDate = useMemo(() => createDisplayDate(date), [date]);
   const capShows = props.capShows;
   const parShows = props.parShows;
   const [shows, setShows] = useState(capShows);
@@ -46,7 +46,7 @@ function MovieCard(props) {
   const [showTrailer, setShowTrailer] = useState(false);
   const [trailerIndex, setTrailerIndex] = useState(0);
 
-  const cardVariants = {
+  const cardVariants = useMemo(() => ({
     hidden: {
       opacity: 0,
       y: 100,
@@ -58,13 +58,13 @@ function MovieCard(props) {
         duration: 1,
       },
     },
-  };
+  }), []);
 
   useEffect(() => {
     setShows(selectedTheater === "capitol" ? capShows : parShows);
-  }, [selectedTheater]);
+  }, [selectedTheater, capShows, parShows]);
 
-  const buttonVariants = {
+  const buttonVariants = useMemo(() => ({
     hovered: {
       background: "#940303",
       color: "#fbfbfb",
@@ -75,9 +75,9 @@ function MovieCard(props) {
       color: "#940303",
       boxShadow: "0px 0px 0px 0px rgba(148, 3, 3, 0)",
     },
-  };
+  }), []);
 
-  const trailerButtonVariants = {
+  const trailerButtonVariants = useMemo(() => ({
     hovered: {
       background: "#940303",
       color: "#fbfbfb",
@@ -94,7 +94,7 @@ function MovieCard(props) {
       overflowY: "hidden",
       width: "50px",
     },
-  };
+  }), []);
 
   useEffect(() => {
     const currentShows = selectedTheater === "capitol" ? capShows : parShows;
@@ -278,4 +278,4 @@ function MovieCard(props) {
   );
 }
 
-export default MovieCard;
+export default memo(MovieCard);

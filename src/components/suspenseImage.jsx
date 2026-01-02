@@ -48,13 +48,14 @@ function getImageResource(src) {
 export function SuspenseImage({ src, alt, ...props }) {
   getImageResource(src).read();
   return (
-  <motion.img 
-    src={src} 
-    alt={alt} 
+  <motion.img
+    src={src}
+    alt={alt}
     initial={{ opacity: 0 }}
     animate={{ opacity: 1 }}
     exit={{ opacity: 0 }}
-    {...props} 
+    loading="lazy"
+    {...props}
     />
   );
 }

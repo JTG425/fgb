@@ -71,8 +71,8 @@ function Locations(props) {
   return (
     <div className="page-container">
       <div className="locations">
-        <img className="masks-icon" src={masks} />
-        <img className="stars-icon" src={stars} />
+        <img className="masks-icon" src={masks} loading="lazy" alt="masks decoration" />
+        <img className="stars-icon" src={stars} loading="lazy" alt="stars decoration" />
         <h2>Locations</h2>
         <span className="info">
           <p>
