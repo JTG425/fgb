@@ -1,45 +1,44 @@
 import "../pagestyles/tickets.css";
 import "../pagestyles/home.css";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, memo, useMemo, useCallback } from "react";
 import { motion, useInView } from "framer-motion";
-import Gift from "./gift";
 import icon9 from "../assets/9.png";
 import icon1 from "../assets/1.png";
 import Prices from "../components/prices";
 
-const buttonVariants = {
-  hovered: {
-    background: "var(--primary)",
-    color: "#fbfbfb",
-    boxShadow: "0px 0px 10px 0px rgba(148, 3, 3, 0.75)",
-  },
-  nothovered: {
-    background: "var(--foreground)",
-    color: "var(--copy)",
-    boxShadow: "0px 0px 0px 0px rgba(148, 3, 3, 0)",
-  },
-};
-
-const cardVariants = {
-  hidden: {
-    opacity: 0,
-    y: 25,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 1,
-    },
-  },
-};
-
 function Tickets() {
   const [confirmed, setConfirmed] = useState(true);
 
-  const handleCheckbox = (e) => {
+  const buttonVariants = useMemo(() => ({
+    hovered: {
+      background: "var(--primary)",
+      color: "#fbfbfb",
+      boxShadow: "0px 0px 10px 0px rgba(148, 3, 3, 0.75)",
+    },
+    nothovered: {
+      background: "var(--foreground)",
+      color: "var(--copy)",
+      boxShadow: "0px 0px 0px 0px rgba(148, 3, 3, 0)",
+    },
+  }), []);
+
+  const cardVariants = useMemo(() => ({
+    hidden: {
+      opacity: 0,
+      y: 25,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+      },
+    },
+  }), []);
+
+  const handleCheckbox = useCallback((e) => {
     setConfirmed(e.target.checked);
-  };
+  }, []);
 
 
 
@@ -56,8 +55,8 @@ function Tickets() {
         <div className="tickets-header">
           <h2>Buy Tickets</h2>
         </div>
-        <img className="film-reel1" src={icon9} />
-        <img className="tickets-icon" src={icon1} />
+        <img className="film-reel1" src={icon9} loading="lazy" alt="film reel decoration" />
+        <img className="tickets-icon" src={icon1} loading="lazy" alt="tickets decoration" />
         <div className="buy-ticket-container">
         <h3>Skip The Line, Buy Online!</h3>
           <Prices />
@@ -79,7 +78,7 @@ function Tickets() {
             </a>
           </motion.div>
         </div>
-        <img className="film-reel2" src={icon9} />
+        <img className="film-reel2" src={icon9} loading="lazy" alt="film reel decoration" />
         <motion.div
           ref={tickRef1}
           initial="hidden"
@@ -147,4 +146,4 @@ function Tickets() {
   );
 }
 
-export default Tickets;
+export default memo(Tickets);

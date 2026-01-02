@@ -1,27 +1,26 @@
-import { useRef } from "react";
+import { useRef, memo, useMemo } from "react";
 import { motion, useInView } from "framer-motion";
 import "../pagestyles/about.css";
 import oldCap from "../assets/oldCap.png";
 import jiddo from "../assets/jiddo.png";
 import oldParamount from "../assets/oldParamount.png";
 import newCap from "../assets/newCap.png";
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
-
-const cardVariants = {
-  hidden: {
-    opacity: 0,
-    y: 25,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.25,
-    },
-  },
-};
+import Skeleton from 'react-loading-skeleton'
 
 function About() {
+  const cardVariants = useMemo(() => ({
+    hidden: {
+      opacity: 0,
+      y: 25,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.25,
+      },
+    },
+  }), []);
 
   const oldContainerRef1 = useRef(null);
   const oldContainerRef2 = useRef(null);
@@ -84,4 +83,4 @@ function About() {
   );
 }
 
-export default About;
+export default memo(About);

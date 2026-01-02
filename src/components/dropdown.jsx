@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import "../componentstyles/dropdown.css";
 import Logo from "./logo";
 import { useState, useContext } from "react";
@@ -143,4 +144,4 @@ function DropDown() {
   );
 }
 
-export default DropDown;
+export default memo(DropDown);

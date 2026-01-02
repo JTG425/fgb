@@ -1,12 +1,10 @@
-import { useState, Suspense, useEffect } from "react";
+import { useState, Suspense, useEffect, memo, useMemo, useCallback } from "react";
 import "../pagestyles/home.css";
 import "../componentstyles/datepicker.css";
 import SlideShow from "../components/slideshow";
 import MovieCard from "../components/movieCard";
 import SelectTheater from "../components/selecttheater";
 import Upcoming from "../components/upcoming";
-import { CiCalendarDate } from "react-icons/ci";
-import { Day, DayPicker } from "react-day-picker";
 import { motion, AnimatePresence } from "motion/react"
 import icon7 from "../assets/7.png";
 import CustomDatepicker from "../components/customDatePicker";
@@ -31,36 +29,33 @@ const handleDisplayDate = (date) => {
   return `${month} / ${day} / ${year}`;
 };
 
-const buttonVariants = {
-  hovered: {
-    backgroundColor: "var(--primary)",
-    color: "var(--copy)",
-    boxShadow: "0px 0px 10px rgba(148, 3, 3, 0.5)",
-    transition: { duration: 0.2 }
-  },
-  nothovered: {
-    backgroundColor: "var(--foreground)",
-    color: "var(--copy)",
-    boxShadow: "var(--box-shadow)",
-    transition: { duration: 0.2 }
-  },
-};
-
-
-
-
 function Home() {
   const { capShows, parShows, upcoming, loading, slideshow } = useContext(Context);
   const [date, setDate] = useState(handleDateFormating(new Date()));
   const [selectedTheater, setSelectedTheater] = useState("capitol");
 
-  const handleTheaterChange = (theater) => {
-    setSelectedTheater(theater);
-  };
+  const buttonVariants = useMemo(() => ({
+    hovered: {
+      backgroundColor: "var(--primary)",
+      color: "var(--copy)",
+      boxShadow: "0px 0px 10px rgba(148, 3, 3, 0.5)",
+      transition: { duration: 0.2 }
+    },
+    nothovered: {
+      backgroundColor: "var(--foreground)",
+      color: "var(--copy)",
+      boxShadow: "var(--box-shadow)",
+      transition: { duration: 0.2 }
+    },
+  }), []);
 
-  const handleDateChange = (date) => {
+  const handleTheaterChange = useCallback((theater) => {
+    setSelectedTheater(theater);
+  }, []);
+
+  const handleDateChange = useCallback((date) => {
     setDate(handleDateFormating(date));
-  }
+  }, []);
 
 
   return (
@@ -96,8 +91,8 @@ function Home() {
               setSelected={handleTheaterChange}
             />
             <CustomDatepicker setDate={handleDateChange} />
-            <img className="home-icon1" src={icon7} />
-            <img className="home-icon2" src={icon7} />
+            <img className="home-icon1" src={icon7} loading="lazy" alt="decoration" />
+            <img className="home-icon2" src={icon7} loading="lazy" alt="decoration" />
             <div className="movies-container">
               {selectedTheater === "capitol" ? (
                 <MovieCard
@@ -123,4 +118,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default memo(Home);

@@ -1,6 +1,6 @@
 import "../pagestyles/locations.css";
 import "../pagestyles/home.css";
-import React, { Suspense } from "react";
+import React, { Suspense, memo, useMemo } from "react";
 import { motion as m } from "framer-motion";
 import { FaPhoneAlt } from "react-icons/fa";
 import Map, { Marker } from "react-map-gl";
@@ -9,7 +9,7 @@ import stars from "../assets/12.png";
 import { Context } from "../App";
 import { useContext } from "react";
 
-function CapitolMap() {
+const CapitolMap = memo(function CapitolMap() {
   const key = import.meta.env.VITE_MAPBOX_API_KEY;
   const { theme } = useContext(Context);
 
@@ -28,9 +28,9 @@ function CapitolMap() {
       <Marker latitude={44.26092378286133} longitude={-72.57836915903455} />
     </Map>
   );
-}
+});
 
-function ParamountMap() {
+const ParamountMap = memo(function ParamountMap() {
   const key = import.meta.env.VITE_MAPBOX_API_KEY;
   const { theme } = useContext(Context);
   return (
@@ -48,11 +48,10 @@ function ParamountMap() {
       <Marker latitude={44.19952086200256} longitude={-72.50370899940566} />
     </Map>
   );
-}
+});
 
 function Locations(props) {
-
-  const buttonVariants = {
+  const buttonVariants = useMemo(() => ({
     hovered: {
       background: "var(--primary)",
       color: "#fbfbfb",
@@ -63,7 +62,7 @@ function Locations(props) {
       color: "var(--copy)",
       boxShadow: "0px 0px 0px 0px rgba(148, 3, 3, 0)",
     },
-  };
+  }), []);
 
 
 
@@ -136,4 +135,4 @@ function Locations(props) {
   );
 }
 
-export default Locations;
+export default memo(Locations);

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { motion } from "motion/react";
 import React, { forwardRef } from "react";
 
@@ -47,4 +48,4 @@ export const BackgroundTransition = forwardRef(({ slide, transitionKey }, ref) =
   );
 });
 
-export default BackgroundTransition;
+export default memo(BackgroundTransition);

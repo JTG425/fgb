@@ -11,7 +11,7 @@
     border: none;
     width: 100%;
     height: fit-content;
-    border-radius: none;
+    border-radius: 0;
     margin-bottom: 0px;
     background: transparent;
     display: flex;
@@ -46,7 +46,7 @@
 .film-name {
     margin: 0;
     margin-bottom: 1px;
-    font-size: autox;
+    font-size: auto;
 }
 
 
@@ -139,15 +139,6 @@
     cursor: pointer;
 }
 
-.poster-loading {
-    width: 200px;
-    height: 300px;
-    background-color: var(--foreground);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-}
 
 .no-shows {
     display: flex;
@@ -174,14 +165,6 @@
     margin-bottom: 1.5rem;
 }
 
-.film-trailer-link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: fit-content;
-    width: fit-content;
-    cursor: pointer;
-}
 
 .film-trailer {
     display: flex;
@@ -350,7 +333,7 @@
 
     .movieCard {
         width: fit-content;
-        border-radius: none;
+        border-radius: 0;
     }
 
     .film-name {

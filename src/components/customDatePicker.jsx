@@ -1,3 +1,4 @@
+import { memo, useMemo } from "react";
 import React, { useState, useEffect } from 'react';
 import { CiCalendar } from "react-icons/ci";
 import { motion, AnimatePresence } from "framer-motion";
@@ -220,4 +221,4 @@ const CustomDatepicker = ({ setDate }) => {
     );
 };
 
-export default CustomDatepicker;
+export default memo(CustomDatepicker);

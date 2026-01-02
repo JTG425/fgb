@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, memo, useCallback } from 'react';
 import { motion, useAnimation } from 'motion/react';
 import '../componentstyles/upcoming.css';
 import leftCurtain from "../assets/leftcurtain.png";
@@ -44,7 +44,7 @@ function Upcoming({ upcoming, handleDateChange }) {
                   </a>
                   <p>{show.rating}</p>
                 </span>
-                <img src={show.poster} alt={`${show.name} poster`} />
+                <img src={show.poster} alt={`${show.name} poster`} loading="lazy" />
                 <p>{handleUpcomingDate(show.StartDate)}</p>
               </motion.div>
             ))}
@@ -55,4 +55,4 @@ function Upcoming({ upcoming, handleDateChange }) {
   );
 }
 
-export default Upcoming;
+export default memo(Upcoming);

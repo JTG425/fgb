@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { motion as m } from 'framer-motion';
 import "../componentstyles/navbar.css";
 
@@ -55,7 +56,7 @@ const letters = [
 
 ]
 
-export default function Logo() {
+export default memo(function Logo() {
     const drawVariant = {
         hidden: { pathLength: 0, opacity: 0 },
         visible: { pathLength: 1, opacity: 1 },
@@ -98,5 +99,4 @@ export default function Logo() {
         </m.svg>
 
     )
-
-}
+});

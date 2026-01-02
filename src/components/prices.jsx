@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { motion } from "framer-motion";
 import '../componentstyles/prices.css';
 
@@ -35,4 +36,4 @@ function Prices() {
     )
 }
 
-export default Prices;
+export default memo(Prices);

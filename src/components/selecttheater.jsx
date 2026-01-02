@@ -98,4 +98,4 @@ const SliderToggle = ({ selected, setSelected }) => {
     );
 };
 
-export default SelectTheater;
+export default memo(SelectTheater);

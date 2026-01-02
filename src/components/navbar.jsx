@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, memo, useMemo } from "react";
 import {Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "../componentstyles/navbar.css";
@@ -7,27 +7,26 @@ import Logo from "./logo";
 import { Context } from "../App";
 import { useContext } from "react";
 
-const buttonVariants = {
-  Selected: {
-    background: "var(--primary)",
-    color: "#fbfbfb",
-    outline: "none"
-  },
-  NotSelected: {
-    background: "var(--foreground-glass)",
-    color: "var(--copy)",
-    outline: "none"
-  },
-  hovered: {
-    background: "var(--primary)",
-    scale: 1.05,
-
-  }
-};
-
 function NavBar() {
   const props = useContext(Context);
   const {pages, currentPage, setCurrentPage} = props;
+
+  const buttonVariants = useMemo(() => ({
+    Selected: {
+      background: "var(--primary)",
+      color: "#fbfbfb",
+      outline: "none"
+    },
+    NotSelected: {
+      background: "var(--foreground-glass)",
+      color: "var(--copy)",
+      outline: "none"
+    },
+    hovered: {
+      background: "var(--primary)",
+      scale: 1.05,
+    }
+  }), []);
   const [showDropdown, setShowDropdown] = useState(false);
 
 
@@ -91,4 +90,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default memo(NavBar);
