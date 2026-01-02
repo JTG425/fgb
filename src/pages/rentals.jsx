@@ -1,25 +1,22 @@
-import { useRef } from "react";
+import { useRef, memo, useMemo } from "react";
 import { motion, useInView } from "framer-motion";
 import "../pagestyles/rentals.css";
 import { FaPhoneAlt } from "react-icons/fa";
-import icon3 from "../assets/3.png";
-import icon11 from "../assets/11.png";
-
-const cardVariants = {
-  hidden: {
-    opacity: 0,
-    y: 25,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-    },
-  },
-};
 
 function Rentals(props) {
+  const cardVariants = useMemo(() => ({
+    hidden: {
+      opacity: 0,
+      y: 25,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.5,
+      },
+    },
+  }), []);
 
 
 
@@ -137,4 +134,4 @@ function Rentals(props) {
   );
 }
 
-export default Rentals;
+export default memo(Rentals);

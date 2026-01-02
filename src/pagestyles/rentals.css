@@ -24,50 +24,6 @@
     font-weight: bold;
 }
 
-
-
-
-.card-header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.card-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-}
-
-.card-footer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.gift-rentals-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.75rem;
-    width: 175px;
-    font-size: 1rem;
-    line-height: 1.25rem;
-    font-weight: bold;
-    background: transparent;
-    border: none;
-    color: var(--copy);
-    outline: 2px solid var(--primary);
-    cursor: pointer;
-    border-radius: var(--border-radius);
-}
-
 .rentals-container {
     width: 100%;
     display: flex;
@@ -91,59 +47,9 @@
     width: 100%;
 }
 
-
-
-.card-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: justify;
-    text-justify: inter-word;
-    width: 100%;
-}
-.card-text h3 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 1.5rem;
-    line-height: 1rem;
-    font-weight: bold;
-
-}
-
-.card-text p {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.25rem;
-    margin-bottom: 10px;
-}
-
-.card-text-2 {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: left;
-    text-justify: inter-word;
-    width: 100%;
-}
-.card-text-2 h3 {
-    margin-top: 0;
-    margin-bottom: 10px;
-    font-size: 1.5rem;
-    line-height: 1rem;
-    font-weight: bold;
-
-}
-
-.card-text-2 p {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.25rem;
-    margin-bottom: 5px;
-}
-
-.card-content {
+/* Consolidated card content styles */
+.card-content,
+.card-content-3 {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -152,6 +58,9 @@
     width: 100%;
 }
 
+/* Consolidated card text styles - base styles shared by all variants */
+.card-text,
+.card-text-2,
 .card-text-3 {
     display: flex;
     flex-direction: column;
@@ -161,19 +70,42 @@
     text-justify: inter-word;
     width: 100%;
 }
+
+.card-text-2 {
+    text-align: left;
+}
+
+.card-text h3,
+.card-text-2 h3,
 .card-text-3 h3 {
     margin-top: 0;
     margin-bottom: 10px;
     font-size: 1.5rem;
     line-height: 1rem;
     font-weight: bold;
-
 }
 
+.card-text h3 {
+    margin-bottom: 20px;
+}
+
+.card-text p,
+.card-text-2 p,
 .card-text-3 p {
     margin: 0;
     font-size: 1rem;
     line-height: 1.25rem;
+}
+
+.card-text p {
+    margin-bottom: 10px;
+}
+
+.card-text-2 p {
+    margin-bottom: 5px;
+}
+
+.card-text-3 p {
     margin-top: 5px;
 }
 
@@ -209,116 +141,47 @@
     margin-bottom: 25px;
 }
 
-
-
+/* Mobile styles - only override what's different */
 @media screen and (max-width: 675px) {
     .rentals-and-gifts-container {
         margin-top: 75px;
     }
 
-    .gift-card {
-        flex-direction: column;
-        align-items: center;
-    }
-
     .gift-card img {
         width: 90%;
-        height: auto;
     }
 
-    .gift-card-text {
-        margin-left: 0;
-        margin-top: 1rem;
-    }
-
-    .rental-card {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        margin-bottom: 1.5rem;
-        padding: 1.5rem;
-        border: 1px solid var(--border);
-        border-radius: 0;
-        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        background: var(--foreground);
-        max-width: 1500px;
-        width: 100%;
-    }
-    
     .card-content {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        padding: 0.5rem 1rem;
         gap: 25px;
-        width: 100%;
     }
-    
-    
-    
-    .card-text {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: justify;
-        text-justify: inter-word;
-        width: 100%;
+
+    .card-text,
+    .card-text-2 {
         gap: 20px;
     }
 
     .card-text-2 {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: justify;
-        text-justify: inter-word;
-        width: 100%;
         gap: 10px;
+        text-align: justify;
     }
 
     .card-text h3 {
-        margin-top: 0;
         margin-bottom: -10px;
-        font-size: 1.5rem;
-        line-height: 1rem;
-        font-weight: bold;
-    
-    }
-    
-    .card-text p {
-        margin: 0;
-        font-size: 1rem;
-        line-height: 1.25rem;
-        margin-bottom: 10px;
     }
 
     .card-text-2 h3 {
-        margin-top: 0;
         margin-bottom: 0;
-        font-size: 1.5rem;
-        line-height: 1rem;
-        font-weight: bold;
-    
-    }
-    .card-text-2 p {
-        font-size: 1rem;
-        line-height: 1rem;
     }
 
+    .card-text-2 p {
+        line-height: 1rem;
+    }
 }
 
+/* Desktop styles - border radius for larger screens */
 @media screen and (min-width: 1000px) {
-    .rentals-header {
+    .rentals-header,
+    .rental-card {
         border-radius: var(--border-radius);
     }
-
-    .rental-card  {
-        border-radius: var(--border-radius);
-    }
-
-    
 }
