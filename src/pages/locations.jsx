@@ -69,7 +69,7 @@ function Locations(props) {
 
 
   return (
-    <div className="page-container">
+    <div className="locations-container">
       <div className="locations">
         <img className="masks-icon" src={masks} loading="lazy" alt="masks decoration" />
         <img className="stars-icon" src={stars} loading="lazy" alt="stars decoration" />
@@ -87,9 +87,9 @@ function Locations(props) {
             <p>93 State St, Montpelier, VT 05602</p>
             <br />
             <div className="map-container">
-              <Suspense fallback={<div>Loading...</div>}>
+              {/* <Suspense fallback={<div>Loading...</div>}> */}
                 <CapitolMap />
-              </Suspense>
+              {/* </Suspense> */}
             </div>
             <div className="map-cover"></div>
             <m.a 

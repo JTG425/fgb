@@ -12,8 +12,12 @@ import { RiMovie2Line } from "react-icons/ri";
 import { Context } from "../App";
 
 const dropdownVariants = {
-  hidden: { opacity: 1, height: "75px" },
-  visible: { opacity: 1, height: "500px" },
+  hidden: { opacity: 1, height: "40px" },
+  visible: { 
+    opacity: 1, 
+    height: "450px"
+
+  },
 };
 
 function DropDown() {

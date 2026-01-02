@@ -147,7 +147,7 @@ a {
   /* max-width: 1000px; */
   height: fit-content;
   background: var(--background);
-  margin-top: 40px;
+  margin-top: 30px;
   -ms-overflow-style: none;
   /* Internet Explorer 10+ */
   scrollbar-width: none;
