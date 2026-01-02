@@ -32,8 +32,9 @@ function Rentals(props) {
 
 
   return (
-    <div className="rentals-and-gifts-container">
-      <div className="rentals-header">
+    <div className="page-container">
+      <div className="rentals-container">
+      <div className="rental-card-header">
       <h2>Rentals</h2>
       </div>
       <div className="rental-card">
@@ -51,7 +52,7 @@ function Rentals(props) {
           </span>
         </motion.a>
       </div>
-      <div className="rentals-container">
+      <div className="rentals-card-container">
         <motion.div 
           className="rental-card"
           ref={rentalCardRef1}
@@ -132,6 +133,7 @@ function Rentals(props) {
             </span>
           </div>
         </motion.div>
+      </div>
       </div>
     </div>
   );

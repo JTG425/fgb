@@ -1,10 +1,11 @@
 .about-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     justify-content: flex-start;
     overflow: hidden;
     height: fit-content;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-bottom: 50px;
     width: 100%;
     max-width: 1000px;
@@ -15,7 +16,7 @@
     display: flex;
     justify-content: center;
     margin: 0px;
-    width: 100%;
+    width: 95%;
     background: var(--foreground);
     box-shadow: var(--box-shadow);
     padding: 1rem;
@@ -34,7 +35,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 95%;
     max-width: 1000px;
     gap: 1rem;
 
@@ -44,7 +45,7 @@
 
 .newCap {
     height: auto;
-    width: 100%;
+    width: 95%;
     max-width: 1000px;
     box-shadow: var(--box-shadow);
     border: 1px solid var(--border);
@@ -84,7 +85,7 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
+    width: 95%;
     height: 100%;
     max-width: 1000px;
     gap: 25px;
@@ -113,7 +114,7 @@
     align-items: center;
     justify-content: center;
     margin: 0;
-    width: 100%;
+    width: 95%;
     max-width: 1000px;
     height: auto;
     padding: 1rem;
@@ -125,7 +126,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 90%;
     max-width: 1000px;
     height: fit-content;
     background: var(--foreground);
@@ -175,9 +176,7 @@
     .about-top-text-container {
         border-radius: var(--border-radius);
     }
-
-    
-
-
-    
+    .about-container {
+        margin-top: 50px;
+    }  
 }

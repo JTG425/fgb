@@ -2,8 +2,8 @@
     display: none;
     box-shadow: var(--box-shadow);
     border-radius: 0;
-    width: 100vw;
-    height: 75px;
+    width: 100%;
+    height: 70px;
     overflow-y: hidden;
     position: fixed;
     top: 0;
@@ -15,12 +15,11 @@
 }
 
 .dropdown-header {
-    width: 100%;
+    width: 95%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0;
 }
 
 .dropdown-content {
@@ -84,7 +83,6 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-
     }
     .dropdown {
         display: flex;

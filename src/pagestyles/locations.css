@@ -1,14 +1,30 @@
+.locations-container {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    height: fit-content;
+    background: var(--background);
+    margin-top: 30px;
+    -ms-overflow-style: none;
+    max-width: 1000px;
+    scrollbar-width: none;
+}
+
 .locations {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    overflow: hidden;
+    align-items: center;
     height: fit-content;
     margin-top: 50px;
     margin-bottom: 50px;
     width: 100%;
-    max-width: 1000px;
+
     gap: 1rem;
+    padding: 0;
 }
 
 .locations h2 {
@@ -38,16 +54,16 @@
 
 .info {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    margin: 0px;
     width: 100%;
-    align-self: center;
     background: var(--foreground);
     box-shadow: var(--box-shadow);
     padding: 1rem;
-    z-index: 1;
     border: 1px solid var(--border);
+    max-width: 1000px;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
 }
 
 .info p {
@@ -62,11 +78,12 @@
 }
 
 .maps {
-    display: flex;
     width: 100%;
+    display: flex;
     flex-direction: row;
     justify-content: space-between;   
     align-items: space-between;
+    gap: 1rem;
 }
 
 .map-container {
@@ -107,7 +124,7 @@
 
 .call {
     display: flex;
-    width: 100%;
+    width: 50%;
     background: var(--foreground);
     box-shadow: var(--box-shadow);
     padding: 0.5rem;
@@ -123,6 +140,11 @@
 }
 
 .call-content {
+    width: 100%;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -155,6 +177,7 @@
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
+        align-self: center;
         gap: 1rem;
     }
 
