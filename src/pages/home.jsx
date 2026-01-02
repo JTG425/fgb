@@ -31,6 +31,21 @@ const handleDisplayDate = (date) => {
   return `${month} / ${day} / ${year}`;
 };
 
+const buttonVariants = {
+  hovered: {
+    backgroundColor: "var(--primary)",
+    color: "var(--copy)",
+    boxShadow: "0px 0px 10px rgba(148, 3, 3, 0.5)",
+    transition: { duration: 0.2 }
+  },
+  nothovered: {
+    backgroundColor: "var(--foreground)",
+    color: "var(--copy)",
+    boxShadow: "var(--box-shadow)",
+    transition: { duration: 0.2 }
+  },
+};
+
 
 
 
@@ -50,44 +65,60 @@ function Home() {
 
   return (
     <AnimatePresence mode="wait">
-    {!loading && (
-    <motion.div 
-      className="page-container"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      
-      >
-      <SlideShow slideshowData={slideshow} />
-      <div className="home-container">
-        <SelectTheater
-          selected={selectedTheater}
-          setSelected={handleTheaterChange}
-        />
-        <CustomDatepicker setDate={handleDateChange} />
-        <img className="home-icon1" src={icon7} />
-        <img className="home-icon2" src={icon7} />
-        <div className="movies-container">
-          {selectedTheater === "capitol" ? (
-            <MovieCard
-              date={date}
-              capShows={capShows}
-              parShows={parShows}
-              selectedTheater={selectedTheater}
+      {!loading && (
+        <motion.div
+          className="page-container"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+
+        >
+          <SlideShow slideshowData={slideshow} />
+          <div className="home-container">
+            <div className="giftcard-container">
+            <h2>Happy Holidays!</h2>
+            <p>Give the Gift of an FGB Theaters Gift Card this year!</p>
+            <a href="https://61849.formovietickets.com:2235/app/rtsweb/gift" target="_blank">
+              <motion.button
+                className="giftcard-button"
+                initial="nothovered"
+                whileHover="hovered"
+                whileTap={{ scale: 0.98 }}
+                variants={buttonVariants}
+              >
+                <motion.p whileHover={{ color: "#fbfbfb" }}>Buy Now</motion.p>
+              </motion.button>
+            </a>
+            </div>
+
+            <SelectTheater
+              selected={selectedTheater}
+              setSelected={handleTheaterChange}
             />
-          ) : (
-            <MovieCard
-              date={date}
-              capShows={capShows}
-              parShows={parShows}
-              selectedTheater={selectedTheater}
-            />
-          )}
-        </div>
-      </div>
-        <Upcoming upcoming={upcoming} handleDateChange={handleDateChange} />
-    </motion.div>
-    )}
+            <CustomDatepicker setDate={handleDateChange} />
+            <img className="home-icon1" src={icon7} />
+            <img className="home-icon2" src={icon7} />
+            <div className="movies-container">
+              {selectedTheater === "capitol" ? (
+                <MovieCard
+                  date={date}
+                  capShows={capShows}
+                  parShows={parShows}
+                  selectedTheater={selectedTheater}
+                />
+              ) : (
+                <MovieCard
+                  date={date}
+                  capShows={capShows}
+                  parShows={parShows}
+                  selectedTheater={selectedTheater}
+                />
+              )}
+            </div>
+          </div>
+          <Upcoming upcoming={upcoming} handleDateChange={handleDateChange} />
+        </motion.div>
+      )}
     </AnimatePresence>
   );
 }
