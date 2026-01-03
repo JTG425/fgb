@@ -14,8 +14,6 @@ import About from "./pages/about";
 import Rentals from "./pages/rentals";
 import Admin from "./pages/admin";
 import "./pagestyles/admin.css";
-import { useContext } from "react";
-import { getUrl } from 'aws-amplify/storage';
 import { PulseLoader } from "react-spinners";
 import Logo from "./components/logo";
 import useSystemTheme from "./useSystemTheme";
@@ -73,7 +71,6 @@ function App() {
   const [parShows, setParShows] = useState(null);
   const [slideshow, setSlideshow] = useState(null);
   const [upcoming, setUpcoming] = useState(null);
-  const [current, setCurrent] = useState(null);
   const [loading, setLoading] = useState(true);
   const theme = useSystemTheme();
 
@@ -104,7 +101,6 @@ function App() {
         setParShows(fetchedData.parShows);
         setSlideshow(fetchedData.slideshow);
         setUpcoming(fetchedData.upcoming);
-        setCurrent(fetchedData.current);
         setLoading(false);
       }
     };
@@ -115,7 +111,7 @@ function App() {
 
   /* Determine the Subdomain and setCurrentPage to that (For Navbar Appearance) */
   const location = window.location.pathname;
-  var page = 'Home';
+  let page = 'Home';
   switch (location) {
     case "/":
       page = "Home";
@@ -168,7 +164,6 @@ function App() {
     <Context.Provider value={{
       capShows: capShows,
       parShows: parShows,
-      current: current,
       upcoming: upcoming,
       slideshow: slideshow,
       loading: loading,
@@ -181,7 +176,7 @@ function App() {
         <BrowserRouter>
           <NavBar />
           <AnimatePresence>
-          {(loading && currentPage=="Home" ) && (
+          {(loading && currentPage === "Home") && (
             <motion.div
               className="loading-container"
               initial={{ opacity: 1 }}
@@ -200,7 +195,7 @@ function App() {
           >
             <Routes location={location} key={location.pathname}>
               <Route
-                key="home"
+                key="root"
                 path="/"
                 element={
                   <PageWrapper keyString="PW-home-key">
