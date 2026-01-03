@@ -1,0 +1,79 @@
+[
+    {
+        "name": "AVATAR FIRE AND ASH",
+        "rating": "PG13",
+        "length": "202",
+        "website": "https://www.themoviedb.org/movie/83533-avatar-fire-and-ash?language=en-US",
+        "RtsCode": "AV13719",
+        "StartDate": "20251219",
+        "poster": "https://fgbtheatersstoragec850c-main.s3.us-east-1.amazonaws.com/public/images/AV13719/poster.webp",
+        "trailer": "https://www.youtube.com/embed/Ma1x7ikpid8",
+        "background": []
+    },
+    {
+        "name": "MARTY SUPREME",
+        "rating": "R",
+        "length": "159",
+        "website": "https://www.themoviedb.org/movie/1317288-marty-supreme?language=en-US",
+        "RtsCode": "MA3406",
+        "StartDate": "20251225",
+        "poster": "https://fgbtheatersstoragec850c-main.s3.us-east-1.amazonaws.com/public/images/MA3406/poster.webp",
+        "trailer": "https://www.youtube.com/embed/s9gSuKaKcqM",
+        "background": []
+    },
+    {
+        "name": "SONG SUNG BLUE",
+        "rating": "PG13",
+        "length": "143",
+        "website": "https://www.themoviedb.org/movie/1371185-song-sung-blue?language=en-US",
+        "RtsCode": "SO517",
+        "StartDate": "20251225",
+        "poster": "https://fgbtheatersstoragec850c-main.s3.us-east-1.amazonaws.com/public/images/SO517/poster.webp",
+        "trailer": "https://www.youtube.com/embed/ssZU6xUM-YI",
+        "background": []
+    },
+    {
+        "name": "THE HOUSEMAID",
+        "rating": "R",
+        "length": "141",
+        "website": "https://www.themoviedb.org/movie/1368166-the-housemaid?language=en-US",
+        "RtsCode": "TH27642",
+        "StartDate": "20251219",
+        "poster": "https://fgbtheatersstoragec850c-main.s3.us-east-1.amazonaws.com/public/images/TH27642/poster.webp",
+        "trailer": "https://www.youtube.com/embed/Rsio1MkEkt4",
+        "background": []
+    },
+    {
+        "name": "ZOOTOPIA 2",
+        "rating": "PG",
+        "length": "118",
+        "website": "https://www.themoviedb.org/movie/1084242-zootopia-2?language=en-US",
+        "RtsCode": "ZO24145",
+        "StartDate": "20251126",
+        "poster": "https://fgbtheatersstoragec850c-main.s3.us-east-1.amazonaws.com/public/images/ZO24145/poster.webp",
+        "trailer": "https://www.youtube.com/embed/knk2Fzxd9zc",
+        "background": []
+    },
+    {
+        "name": "ANACONDA",
+        "rating": "PG13",
+        "length": "109",
+        "website": "https://www.themoviedb.org/movie/1234731-anaconda?language=en-US",
+        "RtsCode": "AN10844",
+        "StartDate": "20251225",
+        "poster": "https://fgbtheatersstoragec850c-main.s3.us-east-1.amazonaws.com/public/images/AN10844/poster.webp",
+        "trailer": "https://www.youtube.com/embed/F29F6nIasuw",
+        "background": []
+    },
+    {
+        "name": "THE SPONGEBOB MOVIE: SEARCH FOR SQUAREPANTS",
+        "rating": "PG",
+        "length": "100",
+        "website": "https://www.themoviedb.org/movie/991494-the-spongebob-movie-search-for-squarepants?language=en-US",
+        "RtsCode": "SE22328",
+        "StartDate": "20251219",
+        "poster": "https://fgbtheatersstoragec850c-main.s3.us-east-1.amazonaws.com/public/images/SE22328/poster.webp",
+        "trailer": "https://www.youtube.com/embed/gvJ0655TBas",
+        "background": []
+    }
+]
