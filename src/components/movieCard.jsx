@@ -3,9 +3,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState, Suspense } from "react";
 import { FaInfoCircle } from "react-icons/fa";
 import { IoCloseOutline } from "react-icons/io5";
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
-import 'react-loading-skeleton/dist/skeleton.css'
+import "react-loading-skeleton/dist/skeleton.css";
 import noImage from "../assets/noimage.png";
 import { SuspenseImage } from "./suspenseImage";
 
@@ -31,7 +31,7 @@ const createDisplayTime = (time) => {
   const hours = Math.floor(time / 60);
   const minutes = time % 60;
   return `${hours}HR ${minutes}MIN`;
-}
+};
 
 function MovieCard(props) {
   const date = props.date;
@@ -124,7 +124,10 @@ function MovieCard(props) {
                   <Suspense
                     fallback={
                       <div className="poster-skeleton">
-                        <SkeletonTheme baseColor="var(--background)" highlightColor="var(--foreground)" >
+                        <SkeletonTheme
+                          baseColor="var(--background)"
+                          highlightColor="var(--foreground)"
+                        >
                           <Skeleton width={200} height={300} />
                         </SkeletonTheme>
                       </div>
@@ -134,12 +137,11 @@ function MovieCard(props) {
                       className="poster"
                       src={
                         film.poster ===
-                          "https://fgbtheatersstoragef2bb9-dev.s3.amazonaws.com/public/images/noimage.png"
+                        "https://fgbtheatersstoragef2bb9-dev.s3.amazonaws.com/public/images/noimage.png"
                           ? noImage
                           : film.poster
                       }
                       alt={film.name}
-
                     />
                   </Suspense>
                 </div>
@@ -215,14 +217,16 @@ function MovieCard(props) {
                           <span className="trailer-header">
                             <h2>{film.name}</h2>
                           </span>
-                          <iframe
-                            title="trailer"
-                            class="youtube-trailer"
-                            type="text/html"
-                            src={`${film.trailer}?autoplay=1`}
-                            width="480"
-                            height="390"
-                          />
+                          {film.trailer !== "" && (
+                            <iframe
+                              title="trailer"
+                              class="youtube-trailer"
+                              type="text/html"
+                              src={`${film.trailer}?autoplay=1`}
+                              width="480"
+                              height="390"
+                            />
+                          )}
                           <div className="movie-info-container">
                             <div className="movie-info">
                               <span className="movie-stats">
