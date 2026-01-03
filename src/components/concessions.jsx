@@ -7,7 +7,7 @@ import { TbCandy } from "react-icons/tb";
 
 
 
-function Concessions(props) {
+function Concessions() {
     return (
         <div className='concessions'>
             <h4>Concessions</h4>

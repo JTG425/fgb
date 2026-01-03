@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import React, { forwardRef } from "react";
+import { forwardRef } from "react";
 
 export const BackgroundTransition = forwardRef(({ slide, transitionKey }, ref) => {
   const isFirstSlide =
