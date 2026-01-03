@@ -41,28 +41,9 @@ function MovieCard(props) {
   const [shows, setShows] = useState(capShows);
   const selectedTheater = props.selectedTheater;
   const [isAnyMovies, setIsAnyMovies] = useState(true);
-  const [inView, setInView] = useState(false);
   const [trailerButtonHovered, setTrailerButtonHovered] = useState(false);
   const [showTrailer, setShowTrailer] = useState(false);
   const [trailerIndex, setTrailerIndex] = useState(0);
-
-  const cardVariants = {
-    hidden: {
-      opacity: 0,
-      y: 100,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 1,
-      },
-    },
-  };
-
-  useEffect(() => {
-    setShows(selectedTheater === "capitol" ? capShows : parShows);
-  }, [selectedTheater]);
 
   const buttonVariants = {
     hovered: {
@@ -82,7 +63,7 @@ function MovieCard(props) {
       background: "#940303",
       color: "#fbfbfb",
       boxShadow: "0px 0px 10px 0px rgba(148, 3, 3, 0.75)",
-      overflowX: "shown",
+      overflowX: "visible",
       overflowY: "hidden",
       width: "100px",
     },
@@ -220,7 +201,7 @@ function MovieCard(props) {
                           {film.trailer !== "" && (
                             <iframe
                               title="trailer"
-                              class="youtube-trailer"
+                              className="youtube-trailer"
                               type="text/html"
                               src={`${film.trailer}?autoplay=1`}
                               width="480"
