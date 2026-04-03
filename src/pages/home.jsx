@@ -1,17 +1,13 @@
-import { useState, Suspense, useEffect } from "react";
+import { useState, useContext } from "react";
 import "../pagestyles/home.css";
-import "../componentstyles/datepicker.css";
 import SlideShow from "../components/slideshow";
 import MovieCard from "../components/movieCard";
 import SelectTheater from "../components/selecttheater";
 import Upcoming from "../components/upcoming";
-import { CiCalendarDate } from "react-icons/ci";
-import { Day, DayPicker } from "react-day-picker";
 import { motion, AnimatePresence } from "motion/react"
 import icon7 from "../assets/7.png";
 import CustomDatepicker from "../components/customDatePicker";
 import { Context } from "../App";
-import { useContext } from "react";
 
 
 
@@ -22,13 +18,6 @@ const handleDateFormating = (date) => {
   const formattedMonth = month < 10 ? `0${month}` : month.toString();
   const formattedDay = day < 10 ? `0${day}` : day.toString();
   return `${formattedMonth}${formattedDay}${year}`;
-};
-
-const handleDisplayDate = (date) => {
-  const month = date.slice(0, 2);
-  const day = date.slice(2, 4);
-  const year = date.slice(4, 8);
-  return `${month} / ${day} / ${year}`;
 };
 
 const buttonVariants = {
@@ -78,7 +67,7 @@ function Home() {
             <div className="giftcard-container">
             <h2>Happy Holidays!</h2>
             <p>Give the Gift of an FGB Theaters Gift Card this year!</p>
-            <a href="https://61849.formovietickets.com:2235/app/rtsweb/gift" target="_blank">
+            <a href="https://61849.formovietickets.com:2235/app/rtsweb/gift" target="_blank" rel="noopener noreferrer">
               <motion.button
                 className="giftcard-button"
                 initial="nothovered"
@@ -96,24 +85,15 @@ function Home() {
               setSelected={handleTheaterChange}
             />
             <CustomDatepicker setDate={handleDateChange} />
-            <img className="home-icon1" src={icon7} />
-            <img className="home-icon2" src={icon7} />
+            <img className="home-icon1" src={icon7} alt="Decorative film reel" />
+            <img className="home-icon2" src={icon7} alt="Decorative film reel" />
             <div className="movies-container">
-              {selectedTheater === "capitol" ? (
-                <MovieCard
-                  date={date}
-                  capShows={capShows}
-                  parShows={parShows}
-                  selectedTheater={selectedTheater}
-                />
-              ) : (
-                <MovieCard
-                  date={date}
-                  capShows={capShows}
-                  parShows={parShows}
-                  selectedTheater={selectedTheater}
-                />
-              )}
+              <MovieCard
+                date={date}
+                capShows={capShows}
+                parShows={parShows}
+                selectedTheater={selectedTheater}
+              />
             </div>
           </div>
           <Upcoming upcoming={upcoming} handleDateChange={handleDateChange} />

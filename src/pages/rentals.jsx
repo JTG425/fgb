@@ -2,8 +2,6 @@ import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import "../pagestyles/rentals.css";
 import { FaPhoneAlt } from "react-icons/fa";
-import icon3 from "../assets/3.png";
-import icon11 from "../assets/11.png";
 
 const cardVariants = {
   hidden: {
@@ -19,10 +17,7 @@ const cardVariants = {
   },
 };
 
-function Rentals(props) {
-
-
-
+function Rentals() {
   const rentalCardRef1 = useRef(null);
   const rentalCardRef2 = useRef(null);
   const rentalCardRef3 = useRef(null);
@@ -30,37 +25,34 @@ function Rentals(props) {
   const inView2 = useInView(rentalCardRef2, { once: true });
   const inView3 = useInView(rentalCardRef3, { once: true });
 
-
   return (
-    <div className="rentals-and-gifts-container">
-      <div className="rentals-header">
-      <h2>Rentals</h2>
-      </div>
-      <div className="rental-card">
-        <div className="card-text">
+    <div className="page-container">
+      <div className="rentals-container">
+        <div className="rentals-header">
+          <h2>Rentals</h2>
+        </div>
+        <div className="rentals-contact-card">
           <p>
             <i>
               <b>For more information contact the Capitol Theater</b>
             </i>
           </p>
+          <a href="tel:18025223576" className="rentals-phone-link">
+            <span className="rentals-phone-content">
+              <FaPhoneAlt />
+              <p>(802)-522-3576</p>
+            </span>
+          </a>
         </div>
-        <motion.a href="tel:18025223576" className="call">
-          <span className="call-content">
-            <FaPhoneAlt />
-            <p>(802)-522-3576</p>
-          </span>
-        </motion.a>
-      </div>
-      <div className="rentals-container">
-        <motion.div 
-          className="rental-card"
-          ref={rentalCardRef1}
-          initial="hidden"
-          animate={inView1 ? "visible" : "hidden"}
-          variants={cardVariants}
+        <div className="rentals-content">
+          <motion.div
+            className="rentals-info-card"
+            ref={rentalCardRef1}
+            initial="hidden"
+            animate={inView1 ? "visible" : "hidden"}
+            variants={cardVariants}
           >
-          <div className="card-content">
-            <span className="card-text">
+            <div className="rentals-info-text">
               <h3>Special Events</h3>
               <p>
                 Do you have something "Big" planned? Our Neon lit Marquee will
@@ -77,18 +69,16 @@ function Rentals(props) {
                 whole School! Our digital projection offers more flexiblility
                 than ever before!
               </p>
-            </span>
-          </div>
-        </motion.div>
-        <motion.div 
-          className="rental-card"
-          ref={rentalCardRef2}
-          initial="hidden"
-          animate={inView2 ? "visible" : "hidden"}
-          variants={cardVariants}
+            </div>
+          </motion.div>
+          <motion.div
+            className="rentals-info-card"
+            ref={rentalCardRef2}
+            initial="hidden"
+            animate={inView2 ? "visible" : "hidden"}
+            variants={cardVariants}
           >
-          <div className="card-content">
-            <span className="card-text-2">
+            <div className="rentals-info-text">
               <h3>Birthday Parties</h3>
               <p>Celebrate Your Childs Birthday at the Movies!</p>
               <p>
@@ -107,19 +97,16 @@ function Rentals(props) {
                   <b>FREE movie ticket and kids pack for the birthday child!</b>
                 </li>
               </ul>
-            </span>
-          </div>
-        </motion.div>
-        <motion.div 
-          className="rental-card"
-          ref={rentalCardRef3}
-          initial="hidden"
-          animate={inView3 ? "visible" : "hidden"}
-          variants={cardVariants}
-          
+            </div>
+          </motion.div>
+          <motion.div
+            className="rentals-info-card"
+            ref={rentalCardRef3}
+            initial="hidden"
+            animate={inView3 ? "visible" : "hidden"}
+            variants={cardVariants}
           >
-          <div className="card-content-3">
-            <span className="card-text-3">
+            <div className="rentals-info-text">
               <h3>Advertisements</h3>
               <p>
                 Advertise your business on the big screen! Reach a larger
@@ -129,9 +116,9 @@ function Rentals(props) {
                 Showcase your business with the power of Hollywood and let
                 advertising on our big screens deliver blockbuster results.
               </p>
-            </span>
-          </div>
-        </motion.div>
+            </div>
+          </motion.div>
+        </div>
       </div>
     </div>
   );

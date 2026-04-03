@@ -42,7 +42,7 @@
     width: 100%;
     background: var(--foreground);
     border: 1px solid var(--border);
-    border-radius: none;
+    border-radius: 0;
     box-shadow: var(--box-shadow);
     padding: 1rem;
     overflow: scroll;
@@ -224,7 +224,7 @@
     }
 
     .tickets-terms {
-        border-radius: none;
+        border-radius: 0;
         width: 100%;
     }
 

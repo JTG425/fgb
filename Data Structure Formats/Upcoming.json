@@ -1,0 +1,112 @@
+[
+    {
+        "name": "\"WUTHERING HEIGHTS",
+        "rating": "PG13",
+        "length": "115",
+        "website": "https://www.themoviedb.org/movie/1316092-wuthering-heights?language=en-US",
+        "RtsCode": "WU16419",
+        "StartDate": "20260213",
+        "poster": "https://fgbtheatersstoragec850c-main.s3.us-east-1.amazonaws.com/public/images/WU16419/poster.webp",
+        "trailer": "https://www.youtube.com/embed/DUHFC8Y_Wb8",
+        "background": []
+    },
+    {
+        "name": "\"WUTHERING HEIGHTS\"",
+        "rating": "PG13",
+        "length": "114",
+        "website": "https://www.themoviedb.org/movie/1316092-wuthering-heights?language=en-US",
+        "RtsCode": "WU10563",
+        "StartDate": "20260213",
+        "poster": "https://fgbtheatersstoragec850c-main.s3.us-east-1.amazonaws.com/public/images/WU10563/poster.webp",
+        "trailer": "https://www.youtube.com/embed/DUHFC8Y_Wb8",
+        "background": []
+    },
+    {
+        "name": "CHARLIE THE WONDERDOG",
+        "rating": "PG",
+        "length": "102",
+        "website": "https://www.imdb.com/title/tt29612071",
+        "RtsCode": "CH21607",
+        "StartDate": "20260116",
+        "poster": "https://fgbtheatersstoragec850c-main.s3.us-east-1.amazonaws.com/public/images/CH21607/poster.webp",
+        "trailer": "",
+        "background": []
+    },
+    {
+        "name": "DEAD MANS WIRE",
+        "rating": "R",
+        "length": "115",
+        "website": "https://deadmansline.com/dead-mans-wire/",
+        "RtsCode": "DE28218",
+        "StartDate": "20260109",
+        "poster": "https://fgbtheatersstoragec850c-main.s3.us-east-1.amazonaws.com/public/images/DE28218/poster.webp",
+        "trailer": "https://www.youtube.com/embed/aHAwgnJL78Y",
+        "background": []
+    },
+    {
+        "name": "GOAT",
+        "rating": "PG",
+        "length": "100",
+        "website": "https://www.themoviedb.org/movie/1297842-goat?language=en-US",
+        "RtsCode": "GO13292",
+        "StartDate": "20260213",
+        "poster": "https://fgbtheatersstoragec850c-main.s3.us-east-1.amazonaws.com/public/images/GO13292/poster.webp",
+        "trailer": "https://www.youtube.com/embed/kmY-rYS7yng",
+        "background": []
+    },
+    {
+        "name": "GREENLAND 2 MIGRATION",
+        "rating": "PG13",
+        "length": "106",
+        "website": "https://www.greenland2.movie/",
+        "RtsCode": "GR19608",
+        "StartDate": "20260109",
+        "poster": "https://fgbtheatersstoragec850c-main.s3.us-east-1.amazonaws.com/public/images/GR19608/poster.webp",
+        "trailer": "https://www.youtube.com/embed/_FEOCxb6gC0",
+        "background": []
+    },
+    {
+        "name": "MERCY",
+        "rating": "R",
+        "length": "110",
+        "website": "https://www.imdb.com/title/tt31050594",
+        "RtsCode": "ME9879",
+        "StartDate": "20260123",
+        "poster": "https://fgbtheatersstoragec850c-main.s3.us-east-1.amazonaws.com/public/images/ME9879/poster.webp",
+        "trailer": "https://www.youtube.com/embed/JUADqWkJiiE",
+        "background": []
+    },
+    {
+        "name": "PRIMATE",
+        "rating": "R",
+        "length": "99",
+        "website": "https://www.primatemovie.com/",
+        "RtsCode": "PR12856",
+        "StartDate": "20260109",
+        "poster": "https://fgbtheatersstoragec850c-main.s3.us-east-1.amazonaws.com/public/images/PR12856/poster.webp",
+        "trailer": "https://www.youtube.com/embed/4dyCqeNsamw",
+        "background": []
+    },
+    {
+        "name": "PRIVATE LIFE",
+        "rating": "R",
+        "length": "115",
+        "website": "https://www.sonyclassics.com/film/aprivatelife/",
+        "RtsCode": "PR14888",
+        "StartDate": "20260116",
+        "poster": "https://fgbtheatersstoragec850c-main.s3.us-east-1.amazonaws.com/public/images/PR14888/poster.webp",
+        "trailer": "",
+        "background": []
+    },
+    {
+        "name": "COMEDY ILLUSIONIST BEN PRATT",
+        "rating": null,
+        "length": "90",
+        "website": null,
+        "RtsCode": "BE23585",
+        "StartDate": "20260117",
+        "poster": "https://fgbtheatersstoragec850c-main.s3.us-east-1.amazonaws.com/public/images/BE23585/poster.webp",
+        "trailer": "",
+        "background": []
+    }
+]

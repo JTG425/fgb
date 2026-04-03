@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { motion, useAnimation } from 'motion/react';
+import { motion } from 'motion/react';
 import '../componentstyles/upcoming.css';
 import leftCurtain from "../assets/leftcurtain.png";
 import rightCurtain from "../assets/rightcurtain.png";

@@ -11,7 +11,7 @@
     border: none;
     width: 100%;
     height: fit-content;
-    border-radius: none;
+    border-radius: 0;
     margin-bottom: 0px;
     background: transparent;
     display: flex;
@@ -46,7 +46,7 @@
 .film-name {
     margin: 0;
     margin-bottom: 1px;
-    font-size: autox;
+    font-size: auto;
 }
 
 
@@ -90,7 +90,7 @@
     font-size: 1rem;
     background: var(--secondary);
     color: var(--foreground);
-    box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--box-shadow);
     width: 200px;
     height: fit-content;
     outline: 2px solid var(--primary);
@@ -350,7 +350,7 @@
 
     .movieCard {
         width: fit-content;
-        border-radius: none;
+        border-radius: 0;
     }
 
     .film-name {

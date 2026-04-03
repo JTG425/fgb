@@ -26,12 +26,7 @@ const buttonVariants = {
 };
 
 function NavBar() {
-  const props = useContext(Context);
-  const {pages, currentPage, setCurrentPage} = props;
-  const [showDropdown, setShowDropdown] = useState(false);
-
-
-
+  const {currentPage, setCurrentPage} = useContext(Context);
 
   const handleButtonClick = (pageName) => {
     setCurrentPage(pageName);
@@ -48,7 +43,7 @@ function NavBar() {
       exit={{ opacity: 0 }}
       >
       <div className="nav-content-container">
-        <Link to="/" onClick={() => handleButtonClick("Home")}>
+        <Link to="/">
           <Logo />
         </Link>
         <div className="nav-buttons-container">
