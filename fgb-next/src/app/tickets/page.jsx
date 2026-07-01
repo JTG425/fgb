@@ -1,0 +1,127 @@
+"use client";
+
+import "@/styles/pagestyles/tickets.css";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import Prices from "@/components/prices";
+
+const buttonVariants = {
+  hovered: {
+    background: "var(--primary)",
+    color: "#fbfbfb",
+    boxShadow: "0px 0px 10px 0px rgba(148, 3, 3, 0.75)",
+  },
+  nothovered: {
+    background: "var(--foreground)",
+    color: "var(--copy)",
+    boxShadow: "0px 0px 0px 0px rgba(148, 3, 3, 0)",
+  },
+};
+
+const cardVariants = {
+  hidden: {
+    opacity: 0,
+    y: 25,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1,
+    },
+  },
+};
+
+export default function Tickets() {
+  const termsRef = useRef(null);
+  const termsInView = useInView(termsRef, { once: true });
+
+  return (
+    <div className="page-container">
+      <div className="tickets">
+        <div className="tickets-header">
+          <h2>Buy Tickets</h2>
+        </div>
+        <img className="film-reel1" src="/assets/9.png" alt="" aria-hidden="true" />
+        <img className="tickets-icon" src="/assets/1.png" alt="" aria-hidden="true" />
+        <div className="buy-ticket-container">
+          <h3>Skip The Line, Buy Online!</h3>
+          <Prices />
+          <motion.div className="tickets-button">
+            <a
+              href="https://app.formovietickets.com/?id=fgbtheatres"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <motion.button
+                className="buy-button"
+                initial="nothovered"
+                whileHover="hovered"
+                whileTap={{ scale: 0.98 }}
+                variants={buttonVariants}
+              >
+                Buy Tickets Now
+              </motion.button>
+            </a>
+          </motion.div>
+        </div>
+        <img className="film-reel2" src="/assets/9.png" alt="" aria-hidden="true" />
+        <motion.div
+          className="tickets-terms"
+          ref={termsRef}
+          initial="hidden"
+          animate={termsInView ? "visible" : "hidden"}
+          variants={cardVariants}
+        >
+          <h3>Print At Home</h3>
+          <p>
+            When you purchase your tickets online, a confirmation email will be
+            sent to you, accompanied by a set of bar codes, and 12 numbers.
+            These can be brought straight to the ticket-taker stationed in front
+            of the theatre or the will call window.
+          </p>
+
+          <h3>Order &amp; Pick-up Online Tickets</h3>
+          <p>
+            Please make sure to check the date and showtime of the movie you
+            wish to buy tickets for. Tickets are valid only for the date and
+            showtime purchased. You will need a credit card to purchase online
+            tickets, and there is a non-refundable $1.00 service fee for each
+            ticket.
+          </p>
+          <p>
+            You will receive an email confirmation receipt with the purchase
+            number and a set of bar codes. Some ISP&apos;s will block the
+            confirmation email, but that does NOT mean that there was a problem
+            with the transaction.
+          </p>
+          <p>
+            <b>
+              <i>
+                *You need the confirmation email and/or credit card you used to
+                purchase the tickets in order to pick them up at the theatre.*
+              </i>
+            </b>
+          </p>
+          <h3>Cancellations</h3>
+          <p>
+            You will need to present the same credit card at the theatre to
+            process any refunds, cancellations or exchanges. Service charges are
+            not refundable due to 3rd party fees.
+          </p>
+          <p>
+            <span>
+              <b>
+                <i>
+                  Refunds can only be issued on or before the specific start
+                  time on the ticket purchased. Please contact the theatre prior
+                  to showtime if unable to attend (802-223-4778).
+                </i>
+              </b>
+            </span>
+          </p>
+        </motion.div>
+      </div>
+    </div>
+  );
+}

@@ -1,0 +1,23 @@
+{
+  "name": "fgb-next",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "framer-motion": "^11.15.0",
+    "mapbox-gl": "^3.3.0",
+    "next": "^14.2.15",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-fast-marquee": "^1.6.5",
+    "react-icons": "^5.2.1",
+    "react-loading-skeleton": "^3.5.0",
+    "react-map-gl": "^7.1.7",
+    "react-social-icons": "^6.16.0"
+  }
+}
