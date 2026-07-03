@@ -7,6 +7,7 @@ import { SocialIcon } from "react-social-icons";
 import amplifyconfig from "./amplifyconfiguration.json";
 import { Amplify } from "aws-amplify";
 import NavBar from "./components/navbar";
+import BackgroundScene from "./components/BackgroundScene";
 import Home from "./pages/home";
 import Tickets from "./pages/tickets";
 import Locations from "./pages/locations";
@@ -175,6 +176,7 @@ function App() {
       <div className="App">
         <BrowserRouter>
           <NavBar />
+          <BackgroundScene />
           <AnimatePresence>
           {(loading && currentPage === "Home") && (
             <motion.div

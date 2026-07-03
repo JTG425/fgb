@@ -137,7 +137,8 @@ a {
   width: 100vw;
   /* max-width: 1000px; */
   height: fit-content;
-  background: var(--background);
+  /* transparent so the fixed 3D background canvas shows through */
+  background: transparent;
   margin-top: 40px;
   -ms-overflow-style: none;
   /* Internet Explorer 10+ */
@@ -154,7 +155,8 @@ a {
   justify-content: flex-start;
   width: 100vw;
   height: fit-content;
-  background: var(--background);
+  /* transparent so the fixed 3D background canvas shows through */
+  background: transparent;
   margin-top: 25px;
   -ms-overflow-style: none;
   /* Internet Explorer 10+ */
