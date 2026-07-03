@@ -3,8 +3,6 @@ import "../pagestyles/home.css";
 import React, { useState, useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import Gift from "./gift";
-import icon9 from "../assets/9.png";
-import icon1 from "../assets/1.png";
 import Prices from "../components/prices";
 
 const buttonVariants = {
@@ -56,8 +54,6 @@ function Tickets() {
         <div className="tickets-header">
           <h2>Buy Tickets</h2>
         </div>
-        <img className="film-reel1" src={icon9} />
-        <img className="tickets-icon" src={icon1} />
         <div className="buy-ticket-container">
         <h3>Skip The Line, Buy Online!</h3>
           <Prices />
@@ -79,7 +75,6 @@ function Tickets() {
             </a>
           </motion.div>
         </div>
-        <img className="film-reel2" src={icon9} />
         <motion.div
           ref={tickRef1}
           initial="hidden"

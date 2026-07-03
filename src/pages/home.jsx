@@ -5,7 +5,6 @@ import MovieCard from "../components/movieCard";
 import SelectTheater from "../components/selecttheater";
 import Upcoming from "../components/upcoming";
 import { motion, AnimatePresence } from "motion/react"
-import icon7 from "../assets/7.png";
 import CustomDatepicker from "../components/customDatePicker";
 import { Context } from "../App";
 
@@ -85,8 +84,6 @@ function Home() {
               setSelected={handleTheaterChange}
             />
             <CustomDatepicker setDate={handleDateChange} />
-            <img className="home-icon1" src={icon7} alt="Decorative film reel" />
-            <img className="home-icon2" src={icon7} alt="Decorative film reel" />
             <div className="movies-container">
               <MovieCard
                 date={date}
