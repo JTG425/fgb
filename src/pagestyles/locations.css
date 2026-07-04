@@ -129,26 +129,6 @@
     align-items: center;
 }
 
-.masks-icon {
-    position: absolute;
-    width: auto;
-    height: 250px;
-    top: -100px;
-    transform: rotateZ(-25deg);
-    z-index: 0;
-}
-
-.stars-icon {
-    position: absolute;
-    width: auto;
-    height: 20%;
-    left: 50%;
-    right: 50%;
-    transform: translate(-50%, -50%);
-    bottom: -125px;
-    z-index: 0;
-}
-
 @media screen and (max-width: 925px) {
     .maps {
         display: flex;
@@ -169,15 +149,6 @@
         align-items: center;
         width: 100%;
     }
-
-
-    .stars-icon {
-        display: none;
-    }
-    .masks-icon {
-        top: 125px;
-    }
-
 
 }
 
