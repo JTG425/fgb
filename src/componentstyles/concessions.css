@@ -1,0 +1,58 @@
+.concessions-decor {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.decor-slot {
+  position: absolute;
+  perspective: 900px;
+}
+
+.decor-item {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.decor-slot svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  opacity: 0.55;
+  filter: drop-shadow(0 14px 18px rgba(20, 8, 4, 0.28));
+}
+
+@media (prefers-color-scheme: dark) {
+  .decor-slot svg {
+    opacity: 0.42;
+    filter: drop-shadow(0 14px 20px rgba(0, 0, 0, 0.55));
+  }
+}
+
+/* Gentle idle bob layered under the scroll-driven 3D tilt */
+.decor-float {
+  animation-name: decor-bob;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@keyframes decor-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-9px);
+  }
+}
+
+/* The gutters vanish on smaller screens — hide the decor rather than let
+   it collide with content (and skip the animation cost on phones). */
+/* @media screen and (max-width: 950px) {
+  .concessions-decor {
+    display: none;
+  }
+} */

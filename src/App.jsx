@@ -17,6 +17,7 @@ import "./pagestyles/admin.css";
 import { PulseLoader } from "react-spinners";
 import Logo from "./components/logo";
 import useSystemTheme from "./useSystemTheme";
+import ConcessionsDecor from "./components/concessionsDecor";
 
 
 
@@ -173,6 +174,7 @@ function App() {
       setCurrentPage: handlePageChange
     }}>
       <div className="App">
+        {/* <ConcessionsDecor /> */}
         <BrowserRouter>
           <NavBar />
           <AnimatePresence>

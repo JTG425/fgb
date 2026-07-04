@@ -63,7 +63,6 @@
 
 body {
   background: var(--background);
-  overscroll-behavior: none;
 }
 
 a {
@@ -101,7 +100,6 @@ a {
   /* Internet Explorer 10+ */
   scrollbar-width: none;
   /* Firefox */
-  overscroll-behavior: none;
   padding-top: 2rem;
   padding-bottom: 0;
 }

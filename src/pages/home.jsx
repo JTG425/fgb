@@ -64,27 +64,13 @@ function Home() {
         >
           <SlideShow slideshowData={slideshow} />
           <div className="home-container">
-            <div className="giftcard-container">
-            <h2>Happy Holidays!</h2>
-            <p>Give the Gift of an FGB Theaters Gift Card this year!</p>
-            <a href="https://61849.formovietickets.com:2235/app/rtsweb/gift" target="_blank" rel="noopener noreferrer">
-              <motion.button
-                className="giftcard-button"
-                initial="nothovered"
-                whileHover="hovered"
-                whileTap={{ scale: 0.98 }}
-                variants={buttonVariants}
-              >
-                <motion.p whileHover={{ color: "#fbfbfb" }}>Buy Now</motion.p>
-              </motion.button>
-            </a>
-            </div>
-
+            <div className="home-options">
             <SelectTheater
               selected={selectedTheater}
               setSelected={handleTheaterChange}
             />
             <CustomDatepicker setDate={handleDateChange} />
+            </div>
             <img className="home-icon1" src={icon7} alt="Decorative film reel" />
             <img className="home-icon2" src={icon7} alt="Decorative film reel" />
             <div className="movies-container">
