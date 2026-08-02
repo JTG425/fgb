@@ -1,156 +1,200 @@
-.rentals-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    width: 100%;
-    max-width: 1000px;
-    gap: 1rem;
+.rental-hero-aside {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
 }
 
-.rentals-header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    background: var(--foreground);
-    padding: 1rem;
-    border: 1px solid var(--border);
-    border-radius: 0;
-    box-shadow: var(--box-shadow);
+.rental-hero-aside > svg {
+  flex: 0 0 auto;
+  color: var(--accent-text);
+  font-size: 1.4rem;
 }
 
-.rentals-header h2 {
-    margin: 0;
-    font-weight: bold;
+.rental-contact-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid color-mix(in srgb, var(--primary) 38%, var(--border));
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--primary) 7%, var(--foreground));
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.08);
 }
 
-.rentals-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    gap: 1rem;
+.rental-contact-banner div > span {
+  display: block;
+  margin-bottom: 0.2rem;
+  color: var(--accent-text);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
 }
 
-.rentals-contact-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1.5rem;
-    border: 1px solid var(--border);
-    border-radius: 0;
-    box-shadow: var(--box-shadow);
-    background: var(--foreground);
-    max-width: 1000px;
-    width: 100%;
-    gap: 1rem;
-}
-
-.rentals-contact-card p {
-    margin: 0;
-    font-size: 1rem;
-    text-align: center;
+.rental-contact-banner h2 {
+  margin: 0;
+  font-size: clamp(1.25rem, 3vw, 1.7rem);
+  letter-spacing: -0.03em;
 }
 
 .rentals-phone-link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    background: var(--foreground);
-    box-shadow: var(--box-shadow);
-    outline: 2px solid var(--primary);
-    cursor: pointer;
-    border-radius: var(--border-radius);
-    text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  gap: 0.55rem;
+  min-height: 46px;
+  padding: 0.68rem 0.9rem;
+  color: #fff;
+  font-size: 0.8rem;
+  font-weight: 800;
+  border: 1px solid var(--primary-light);
+  border-radius: 0.75rem;
+  background: linear-gradient(145deg, var(--primary-light), var(--primary-dark));
+  box-shadow: 0 9px 22px rgba(103, 15, 13, 0.24);
+  transition: transform 0.2s ease;
 }
 
-.rentals-phone-content {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
+.rentals-phone-link:hover {
+  color: #fff;
+  transform: translateY(-2px);
 }
 
-.rentals-phone-content p {
-    margin: 0;
-    font-size: 1rem;
+.rentals-phone-link:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
 }
 
-.rentals-info-card {
-    display: flex;
+.rental-options {
+  padding-top: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.rental-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.rental-info-card {
+  min-width: 0;
+  padding: 1.35rem;
+  border: 1px solid var(--border);
+  border-radius: 1.05rem;
+  background: var(--foreground);
+  box-shadow: 0 17px 44px rgba(0, 0, 0, 0.1);
+}
+
+.rental-card-icon {
+  width: 42px;
+  height: 42px;
+  padding: 0.68rem;
+  color: var(--accent-text);
+  border-radius: 0.75rem;
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+.rental-card-eyebrow {
+  display: block;
+  margin-top: 1.2rem;
+  color: var(--copy-lighter);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+}
+
+.rental-info-card h3 {
+  margin: 0.35rem 0 1rem;
+  font-size: 1.25rem;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.rental-feature-list {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.rental-feature-list div {
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--border);
+}
+
+.rental-feature-list strong {
+  color: var(--copy);
+  font-size: 0.78rem;
+}
+
+.rental-feature-list p,
+.rental-card-copy {
+  margin: 0.3rem 0 0;
+  color: var(--copy-light);
+  font-size: 0.8rem;
+  line-height: 1.65;
+}
+
+.rental-price-callout {
+  padding: 1rem;
+  border: 1px solid color-mix(in srgb, var(--primary) 28%, var(--border));
+  border-radius: 0.85rem;
+  background: color-mix(in srgb, var(--primary) 7%, transparent);
+}
+
+.rental-price-callout strong {
+  display: block;
+  color: var(--copy);
+  font-size: 1.8rem;
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.rental-price-callout span {
+  display: block;
+  margin-top: 0.35rem;
+  color: var(--copy-light);
+  font-size: 0.7rem;
+}
+
+.rental-benefits {
+  display: grid;
+  gap: 0.7rem;
+  margin: 1rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--copy-light);
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.rental-benefits li::marker {
+  color: var(--accent-text);
+}
+
+@media screen and (max-width: 900px) {
+  .rental-card-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .rental-info-card:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .rental-contact-banner {
+    align-items: flex-start;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 1.5rem;
-    border: 1px solid var(--border);
-    border-radius: 0;
-    box-shadow: var(--box-shadow);
-    background: var(--foreground);
-    max-width: 1000px;
+  }
+
+  .rentals-phone-link {
     width: 100%;
-}
+  }
 
-.rentals-info-text {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: justify;
-    text-justify: inter-word;
-    width: 100%;
-}
+  .rental-card-grid {
+    grid-template-columns: 1fr;
+  }
 
-.rentals-info-text h3 {
-    margin-top: 0;
-    margin-bottom: 1rem;
-    font-size: 1.5rem;
-    font-weight: bold;
-    text-align: center;
-}
-
-.rentals-info-text p {
-    margin: 0;
-    font-size: 1rem;
-    line-height: 1.5rem;
-    margin-bottom: 1rem;
-}
-
-.rentals-info-text ul {
-    margin: 0;
-    padding-left: 1.5rem;
-    width: 100%;
-}
-
-.rentals-info-text li {
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-    line-height: 1.5rem;
-}
-
-@media screen and (max-width: 675px) {
-    .rentals-container {
-        margin-top: 50px;
-    }
-}
-
-@media screen and (min-width: 1000px) {
-    .rentals-header {
-        border-radius: var(--border-radius);
-    }
-
-    .rentals-contact-card {
-        border-radius: var(--border-radius);
-    }
-
-    .rentals-info-card {
-        border-radius: var(--border-radius);
-    }
+  .rental-info-card:first-child {
+    grid-column: auto;
+  }
 }

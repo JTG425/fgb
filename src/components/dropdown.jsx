@@ -1,141 +1,121 @@
 import "../componentstyles/dropdown.css";
-import Logo from "./logo";
-import { useState, useContext } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Link } from "react-router-dom";
-import { RxHamburgerMenu } from "react-icons/rx";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
+import { Link, useLocation } from "react-router-dom";
+import { RxCross2, RxHamburgerMenu } from "react-icons/rx";
 import { FiHome } from "react-icons/fi";
-import { FaTicketSimple } from "react-icons/fa6";
-import { FaMapLocation } from "react-icons/fa6";
-import { FaRegCircleQuestion } from "react-icons/fa6";
+import { FaMapLocation, FaRegCircleQuestion, FaTicketSimple } from "react-icons/fa6";
 import { RiMovie2Line } from "react-icons/ri";
-import { Context } from "../App";
+import Logo from "./logo";
 
-const dropdownVariants = {
-  hidden: { opacity: 1, height: "75px" },
-  visible: { opacity: 1, height: "500px" },
-};
+const mobileNavItems = [
+  { route: "/", label: "Home", Icon: FiHome },
+  { route: "/tickets", label: "Buy Tickets", Icon: FaTicketSimple },
+  { route: "/locations", label: "Our Locations", Icon: FaMapLocation },
+  { route: "/rentals", label: "Rentals", Icon: RiMovie2Line },
+  { route: "/about", label: "About Us", Icon: FaRegCircleQuestion },
+];
 
 function DropDown() {
-  const { currentPage, setCurrentPage } = useContext(Context);
-  const [isContainerOpen, setIsContainerOpen] = useState(false);
-  const [areChildrenVisible, setAreChildrenVisible] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const { pathname } = useLocation();
+  const headerRef = useRef(null);
+  const menuButtonRef = useRef(null);
+  const menuRef = useRef(null);
 
-  const toggleDropdown = (page) => {
-    setCurrentPage(page);
-    if (!isContainerOpen) {
-      setIsContainerOpen(true);
-      setTimeout(() => {
-        setAreChildrenVisible(true);
-      }, 250);
-    } else {
-      setAreChildrenVisible(false);
-    }
-  };
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
+  useEffect(() => {
+    if (!isOpen) return undefined;
 
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
 
-  const buttons = [
-    {
-      key: "dropdown-button-key-home",
-      route: "/",
-      page: "Home",
-      label: "Home",
-      Icon: FiHome,
-      enterDelay: 0,
-      exitDelay: 0.4,
-    },
-    {
-      key: "dropdown-button-key-tickets",
-      route: "/tickets",
-      page: "Tickets",
-      label: "Buy Tickets",
-      Icon: FaTicketSimple,
-      enterDelay: 0.1,
-      exitDelay: 0.3,
-    },
-    {
-      key: "dropdown-button-key-locations",
-      route: "/locations",
-      page: "Locations",
-      label: "Our Locations",
-      Icon: FaMapLocation,
-      enterDelay: 0.2,
-      exitDelay: 0.2,
-    },
-    {
-      key: "dropdown-button-key-rentals",
-      route: "/rentals",
-      page: "Rentals",
-      label: "Rentals",
-      Icon: RiMovie2Line,
-      enterDelay: 0.3,
-      exitDelay: 0.1,
-    },
-    {
-      key: "dropdown-button-key-about",
-      route: "/about",
-      page: "About",
-      label: "About Us",
-      Icon: FaRegCircleQuestion,
-      enterDelay: 0.4,
-      exitDelay: 0,
-    },
-  ];
+    const handlePointerDown = (event) => {
+      if (!headerRef.current?.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("pointerdown", handlePointerDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("pointerdown", handlePointerDown);
+    };
+  }, [isOpen]);
+
+  const isCurrentPath = (route) =>
+    route === "/" ? pathname === "/" || pathname === "/home" : pathname === route;
 
   return (
-    <motion.div
-      className="dropdown-top-bar"
-      initial="hidden"
-      animate={isContainerOpen ? "visible" : "hidden"}
-      variants={dropdownVariants}
-      transition={{ duration: 0.25, ease: "easeInOut" }}
-    >
-      <span className="dropdown-header">
-        <Link to="/">
+    <header className="dropdown-top-bar" ref={headerRef}>
+      <div className="dropdown-header">
+        <Link
+          to="/"
+          className="mobile-nav-brand"
+          aria-label="FGB Theaters home"
+        >
           <Logo />
         </Link>
-        <motion.button
-          whileHover={{ scale: 1.02 }}
-          whileTap={{ scale: 0.98 }}
+        <button
+          type="button"
           className="show-dropdown-button"
-          onClick={() => toggleDropdown(currentPage)}
+          ref={menuButtonRef}
+          onClick={() => setIsOpen((open) => !open)}
+          aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+          aria-expanded={isOpen}
+          aria-controls="mobile-navigation"
         >
-          <RxHamburgerMenu />
-        </motion.button>
-      </span>
-      <motion.div className="dropdown-content">
-        <AnimatePresence
-          mode="popLayout"
-          onExitComplete={() => setIsContainerOpen(false)}
-        >
-          {areChildrenVisible &&
-            buttons.map(({ key, route, page, label, Icon, enterDelay, exitDelay }) => (
-              <motion.span
-                key={key}
-                initial={{ opacity: 0, x: 10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{
-                  opacity: 0,
-                  x: 10,
-                  transition: { duration: 0.25, delay: exitDelay },
-                }}
-                transition={{ duration: 0.25, delay: enterDelay }}
-              >
-                <Link to={route}>
-                  <button
-                    className="dropdown-button"
-                    onClick={() => toggleDropdown(page)}
+          {isOpen ? <RxCross2 aria-hidden="true" /> : <RxHamburgerMenu aria-hidden="true" />}
+        </button>
+      </div>
+
+      <AnimatePresence>
+        {isOpen && (
+          <motion.nav
+            id="mobile-navigation"
+            className="dropdown-content"
+            ref={menuRef}
+            aria-label="Mobile navigation"
+            initial={{ opacity: 0, y: -12 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <span className="mobile-menu-eyebrow">Explore FGB</span>
+            {mobileNavItems.map(({ route, label, Icon }, index) => {
+              const active = isCurrentPath(route);
+
+              return (
+                <motion.div
+                  key={route}
+                  initial={{ opacity: 0, x: 12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.24, delay: index * 0.035 }}
+                >
+                  <Link
+                    to={route}
+                    className={`dropdown-button${active ? " active" : ""}`}
+                    aria-current={active ? "page" : undefined}
                   >
-                    <Icon className="icon" />
-                    <p>{label}</p>
-                  </button>
-                </Link>
-              </motion.span>
-            ))}
-        </AnimatePresence>
-      </motion.div>
-    </motion.div>
+                    <Icon className="dropdown-icon" aria-hidden="true" />
+                    <span>{label}</span>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </motion.nav>
+        )}
+      </AnimatePresence>
+    </header>
   );
 }
 

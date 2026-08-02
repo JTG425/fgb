@@ -1,7 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { CiCalendar } from "react-icons/ci";
+import { IoCloseOutline } from "react-icons/io5";
 import { motion, AnimatePresence } from "framer-motion";
 import "../componentstyles/customDatePicker.css";
 
@@ -62,12 +63,71 @@ const getDaysInMonth = (month, year) => {
 const atMidnight = (date) =>
   new Date(date.getFullYear(), date.getMonth(), date.getDate());
 
-const CustomDatepicker = ({ setDate }) => {
+const CustomDatepicker = ({ setDate, value }) => {
   const today = new Date();
-  const [currentMonth, setCurrentMonth] = useState(today.getMonth());
-  const [currentYear, setCurrentYear] = useState(today.getFullYear());
-  const [selectedDate, setSelectedDate] = useState(today);
+  const initialDate = value instanceof Date ? value : today;
+  const [currentMonth, setCurrentMonth] = useState(initialDate.getMonth());
+  const [currentYear, setCurrentYear] = useState(initialDate.getFullYear());
+  const [selectedDate, setSelectedDate] = useState(initialDate);
   const [showDatePicker, setShowDatePicker] = useState(false);
+  const triggerRef = useRef(null);
+  const dialogRef = useRef(null);
+
+  useEffect(() => {
+    if (!(value instanceof Date) || Number.isNaN(value.getTime())) return;
+    setSelectedDate(value);
+    setCurrentMonth(value.getMonth());
+    setCurrentYear(value.getFullYear());
+  }, [value]);
+
+  useEffect(() => {
+    if (!showDatePicker) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    const trigger = triggerRef.current;
+    document.body.style.overflow = "hidden";
+
+    const focusFrame = window.requestAnimationFrame(() => {
+      const selectedButton = dialogRef.current?.querySelector("[data-selected='true']");
+      const firstAvailableDate = dialogRef.current?.querySelector(
+        ".datepicker-cell:not(:disabled):not(.empty)"
+      );
+      (selectedButton || firstAvailableDate)?.focus();
+    });
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setShowDatePicker(false);
+        return;
+      }
+
+      if (event.key !== "Tab" || !dialogRef.current) return;
+      const focusable = Array.from(
+        dialogRef.current.querySelectorAll("button:not(:disabled)")
+      );
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      trigger?.focus();
+    };
+  }, [showDatePicker]);
 
   const days = getDaysInMonth(currentMonth, currentYear);
   const todayTime = atMidnight(today).getTime();
@@ -98,10 +158,13 @@ const CustomDatepicker = ({ setDate }) => {
   return (
     <div className="datepicker-wrapper">
       <button
+        type="button"
         className="datepicker-button"
+        ref={triggerRef}
         onClick={() => setShowDatePicker((prev) => !prev)}
         aria-haspopup="dialog"
         aria-expanded={showDatePicker}
+        aria-label={`Choose show date, selected ${formatDisplayDate(selectedDate)}`}
       >
         <CiCalendar size="22px" aria-hidden="true" />
         {formatDisplayDate(selectedDate)}
@@ -119,16 +182,33 @@ const CustomDatepicker = ({ setDate }) => {
           >
             <motion.div
               className="datepicker-container"
+              ref={dialogRef}
               role="dialog"
-              aria-label="Choose a date"
+              aria-modal="true"
+              aria-labelledby="datepicker-title"
               onClick={(e) => e.stopPropagation()}
               variants={containerVariants}
               initial="hidden"
               animate="visible"
               exit="exit"
             >
+              <div className="datepicker-dialog-heading">
+                <div>
+                  <span>Showtimes</span>
+                  <h2 id="datepicker-title">Choose a date</h2>
+                </div>
+                <button
+                  type="button"
+                  className="datepicker-close"
+                  onClick={() => setShowDatePicker(false)}
+                  aria-label="Close date picker"
+                >
+                  <IoCloseOutline aria-hidden="true" />
+                </button>
+              </div>
               <div className="datepicker-header">
                 <button
+                  type="button"
                   className="month-nav"
                   onClick={handlePrevMonth}
                   aria-label="Previous month"
@@ -139,6 +219,7 @@ const CustomDatepicker = ({ setDate }) => {
                   {monthNames[currentMonth]} {currentYear}
                 </div>
                 <button
+                  type="button"
                   className="month-nav"
                   onClick={handleNextMonth}
                   aria-label="Next month"
@@ -157,17 +238,15 @@ const CustomDatepicker = ({ setDate }) => {
                   if (!day) {
                     return <div className="datepicker-cell empty" key={idx} />;
                   }
-                  const cellTime = new Date(
-                    currentYear,
-                    currentMonth,
-                    day
-                  ).getTime();
+                  const cellDate = new Date(currentYear, currentMonth, day);
+                  const cellTime = cellDate.getTime();
                   const isToday = cellTime === todayTime;
                   const isSelected = cellTime === selectedTime;
                   const isDisabled = cellTime < todayTime;
 
                   return (
                     <button
+                      type="button"
                       key={idx}
                       className={[
                         "datepicker-cell",
@@ -178,6 +257,15 @@ const CustomDatepicker = ({ setDate }) => {
                         .join(" ")}
                       disabled={isDisabled}
                       onClick={() => handleSelectDate(day)}
+                      data-selected={isSelected ? "true" : undefined}
+                      aria-current={isToday ? "date" : undefined}
+                      aria-pressed={isSelected}
+                      aria-label={cellDate.toLocaleDateString("en-US", {
+                        weekday: "long",
+                        month: "long",
+                        day: "numeric",
+                        year: "numeric",
+                      })}
                     >
                       {day}
                     </button>

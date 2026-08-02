@@ -1,87 +1,62 @@
-import { useState } from "react";
-import {Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { motion } from "framer-motion";
+import { FaTicketSimple } from "react-icons/fa6";
 import "../componentstyles/navbar.css";
 import DropDown from "./dropdown";
 import Logo from "./logo";
-import { Context } from "../App";
-import { useContext } from "react";
 
-const buttonVariants = {
-  Selected: {
-    background: "var(--primary)",
-    color: "#fbfbfb",
-    outline: "none"
-  },
-  NotSelected: {
-    background: "var(--foreground-glass)",
-    color: "var(--copy)",
-    outline: "none"
-  },
-  hovered: {
-    background: "var(--primary)",
-    scale: 1.05,
-
-  }
-};
+const navItems = [
+  { label: "Home", path: "/" },
+  { label: "Buy Tickets", path: "/tickets", featured: true },
+  { label: "Locations", path: "/locations" },
+  { label: "Rentals", path: "/rentals" },
+  { label: "About", path: "/about" },
+];
 
 function NavBar() {
-  const {currentPage, setCurrentPage} = useContext(Context);
+  const { pathname } = useLocation();
 
-  const handleButtonClick = (pageName) => {
-    setCurrentPage(pageName);
-  };
+  const isCurrentPath = (path) =>
+    path === "/" ? pathname === "/" || pathname === "/home" : pathname === path;
 
   return (
     <>
-    <DropDown />
-    <motion.div 
-      key="nav-container-key"
-      className="nav-container"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      <DropDown />
+      <motion.header
+        className="nav-container"
+        initial={{ opacity: 0, y: -12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
       >
-      <div className="nav-content-container">
-        <Link to="/">
-          <Logo />
-        </Link>
-        <div className="nav-buttons-container">
-          <Link to="/">
-            <motion.button
-              key="nav-home-button"
-              whileTap={{ scale: 0.98 }}
-              className="nav-button"
-              initial={currentPage === "Home" ? "Selected" : "NotSelected"}
-              animate={currentPage === "Home" ? "Selected" : "NotSelected"}
-              variants={buttonVariants}
-              whileHover="hovered"
-              transition={{ duration: 0.25 }}
-              onClick={() => handleButtonClick("Home")}
-            >
-              Home
-            </motion.button>
+        <nav className="nav-content-container" aria-label="Primary navigation">
+          <Link
+            to="/"
+            className="nav-brand"
+            aria-label="FGB Theaters home"
+          >
+            <Logo />
           </Link>
-          {["Tickets", "Locations", "Rentals", "About"].map((pageName) => (
-            <Link to={`/${pageName.toLowerCase()}`} key={pageName}>
-              <motion.button
-                key={`nav-${pageName}-button`}
-                whileTap={{ scale: 0.98 }}
-                className="nav-button"
-                initial={currentPage === pageName ? "Selected" : "NotSelected"}
-                animate={currentPage === pageName ? "Selected" : "NotSelected"}
-                variants={buttonVariants}
-                whileHover="hovered"
-                transition={{ duration: 0.25 }}
-                onClick={() => handleButtonClick(pageName)}
-              >
-                {pageName}
-              </motion.button>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </motion.div>
+
+          <div className="nav-buttons-container">
+            {navItems.map(({ label, path, featured }) => {
+              const active = isCurrentPath(path);
+
+              return (
+                <motion.div key={path} whileTap={{ scale: 0.97 }}>
+                  <Link
+                    to={path}
+                    className={`nav-button${active ? " active" : ""}${featured ? " featured" : ""}`}
+                    aria-current={active ? "page" : undefined}
+                  >
+                    {featured && <FaTicketSimple aria-hidden="true" />}
+                    <span>{label}</span>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+        </nav>
+      </motion.header>
     </>
   );
 }

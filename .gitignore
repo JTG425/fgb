@@ -11,7 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
-Archive.zip
+*.zip
 
 # Editor directories and files
 .vscode/*
@@ -26,5 +26,4 @@ Archive.zip
 *.env
 
 .env
-
 

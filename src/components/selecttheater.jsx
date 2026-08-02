@@ -17,14 +17,14 @@ const SelectTheater = ({ selected, setSelected }) => {
   return (
     <div
       className="select-theater-container"
-      role="tablist"
+      role="group"
       aria-label="Choose a theater"
     >
       {THEATERS.map(({ id, label, town }) => (
         <button
+          type="button"
           key={id}
-          role="tab"
-          aria-selected={selected === id}
+          aria-pressed={selected === id}
           className={`toggle-button${selected === id ? " selected" : ""}`}
           onClick={() => setSelected(id)}
         >

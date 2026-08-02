@@ -1,51 +1,169 @@
-.home-icon1 {
-  position: absolute;
-  width: auto;
-  height: auto;
-  /* right: 0px; */
-  left: calc(50% - 1000px);
-  right: calc(50% - 1000px);
-  top: -250px;
-  z-index: 0;
-  transform: scale(0.5);
+.page-container.home-page {
+  margin-top: 0;
+  overflow: clip;
 }
 
-.home-icon2 {
-  position: absolute;
-  width: auto;
-  height: auto;
-  /* right: 0px; */
-  right: calc(50% - 1000px);
-  left: calc(50% - 1300px);
-  top: 550px;
-  z-index: 0;
-  transform: scale(0.5) rotateY(180deg);
+.home-main {
+  width: 100%;
 }
 
+.home-container {
+  position: relative;
+  width: 100%;
+  padding: clamp(3.5rem, 7vw, 6rem) 1.25rem clamp(4rem, 7vw, 6.5rem);
+  background:
+    radial-gradient(circle at 12% 12%, rgba(149, 21, 18, 0.09), transparent 28rem),
+    var(--background);
+  overflow: visible;
+}
+
+.home-main.no-slideshow .home-container {
+  padding-top: clamp(8rem, 14vw, 10rem);
+}
+
+.showtimes-section {
+  width: min(100%, 1100px);
+  margin: 0 auto;
+}
+
+.showtimes-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2.5rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.showtimes-heading-copy {
+  flex: 1 1 320px;
+}
+
+.showtimes-heading-copy h1 {
+  margin: 0;
+  color: var(--copy);
+  font-size: clamp(2rem, 4vw, 3.15rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+}
+
+.showtimes-heading-copy p {
+  max-width: 430px;
+  margin: 0.85rem 0 0;
+  color: var(--copy-light);
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.home-options {
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  padding: 0.55rem;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--foreground-solid) 92%, transparent);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.1);
+}
+
+.showtimes-context {
+  margin-top: 1.25rem;
+  color: var(--copy-lighter);
+  font-size: 0.78rem;
+  letter-spacing: 0.03em;
+}
+
+.showtimes-context strong {
+  color: var(--copy-light);
+  font-weight: 700;
+}
+
+#showtimes-heading {
+  scroll-margin-top: 7rem;
+}
 
 .movies-container {
   position: relative;
-}
-
-
-.date-icon {
-  width: 35px;
-  height: 35px;
-  fill: var(--icon);
-}
- 
-.home-options {
-  display: flex;
-  flex-direction: row;
   width: 100%;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
+  margin-top: 1rem;
 }
 
-@media screen and (max-width: 768px) {
-  .home-options {
+.schedule-error {
+  width: 100%;
+  padding: clamp(1.5rem, 5vw, 2.75rem);
+  border: 1px solid color-mix(in srgb, var(--primary) 42%, var(--border));
+  border-radius: 1.25rem;
+  background:
+    linear-gradient(115deg, color-mix(in srgb, var(--primary) 9%, transparent), transparent 52%),
+    var(--foreground);
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.09);
+}
+
+.schedule-error h2 {
+  margin: 0;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  letter-spacing: -0.03em;
+}
+
+.schedule-error p {
+  max-width: 58ch;
+  margin: 0.65rem 0 0;
+  color: var(--copy-light);
+  font-size: 0.9rem;
+  line-height: 1.65;
+}
+
+.schedule-error a {
+  color: var(--copy);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+}
+
+@media screen and (max-width: 950px) {
+  .showtimes-header {
+    align-items: stretch;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1.5rem;
+  }
+
+  .showtimes-heading-copy {
+    flex-basis: auto;
+  }
+
+  .home-options {
+    justify-content: flex-start;
+    align-self: flex-start;
+  }
+}
+
+@media screen and (max-width: 675px) {
+  .home-container {
+    padding: 3.25rem 0.9rem 4.25rem;
+  }
+
+  .home-main.no-slideshow .home-container {
+    padding-top: 6.5rem;
+  }
+
+  .showtimes-header {
+    gap: 1.25rem;
+  }
+
+  .showtimes-heading-copy h1 {
+    font-size: 2.35rem;
+  }
+
+  .home-options {
+    width: 100%;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 0.45rem;
+    border-radius: 0.9rem;
+  }
+
+  .showtimes-context {
+    padding-left: 0.15rem;
   }
 }

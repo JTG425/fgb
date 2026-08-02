@@ -1,100 +1,125 @@
 .nav-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 0;
-    width: 100vw;
-    max-width: 1000px;
-    height: 75px;
-    position: fixed;
-    top: 0;
-    z-index: 10;
-    background: var(--foreground-head);
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(25px);
+  position: fixed;
+  top: 0.85rem;
+  right: 0;
+  left: 0;
+  z-index: 20;
+  width: min(calc(100% - 2rem), 1100px);
+  height: 68px;
+  padding: 0 0.7rem 0 1rem;
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border-radius: 1rem;
+  background: color-mix(in srgb, var(--foreground-solid) 82%, transparent);
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.15);
+  backdrop-filter: blur(24px) saturate(1.15);
+  margin: 0 auto;
 }
 
 .nav-content-container {
-    width: 100%;
-    max-width: 1000px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  gap: 2rem;
+}
+
+.nav-brand,
+.mobile-nav-brand {
+  display: inline-flex;
+  align-items: center;
+  flex: 0 0 auto;
+  min-width: 86px;
+  color: var(--copy);
 }
 
 .nav-buttons-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: center;
-    /* margin-right: 15px; */
-    gap: 20px;
-
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.3rem;
 }
 
 .nav-button {
-    position: relative;
-    width: 90px;
-    padding: 0.5rem 1rem;
-    border: none;
-    outline: none;
-    border-radius: var(--border-radius);
-    font-size: 0.75rem;
-    cursor: pointer;
-    box-shadow: var(--box-shadow);
-    overflow: hidden;
-    background: transparent;
-    border: 1px solid var(--border);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.42rem;
+  min-height: 42px;
+  padding: 0.65rem 0.9rem;
+  color: var(--copy-light);
+  font-size: 0.76rem;
+  font-weight: 750;
+  letter-spacing: 0.015em;
+  border: 1px solid transparent;
+  border-radius: 0.72rem;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.nav-button::after {
+  content: "";
+  position: absolute;
+  right: 0.85rem;
+  bottom: 0.3rem;
+  left: 0.85rem;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--primary-light);
+  opacity: 0;
+  transform: scaleX(0.45);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.nav-button:hover {
+  color: var(--copy);
+  border-color: var(--border);
+  background: color-mix(in srgb, var(--copy) 5%, transparent);
+}
+
+.nav-button.active {
+  color: var(--copy);
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+.nav-button.active::after {
+  opacity: 1;
+  transform: scaleX(1);
 }
 
 
 
-.nav-button p {
-    margin: 0;
-    text-decoration: none;
-    font-size: 0.75rem;
-    font-weight: bold;
-}
 
-
-.icon {
-    color: var(--primary);
-    font-size: 1.75rem;
+.nav-button:focus-visible,
+.nav-brand:focus-visible,
+.mobile-nav-brand:focus-visible {
+  outline: 3px solid var(--focus-ring);
+  outline-offset: 3px;
 }
 
 .nav-logo {
-    position: relative;
-    top: 5px;
-    left: 0;
-    width: auto;
-    height: 45px;
-    z-index: 5;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  display: block;
+  width: auto;
+  height: 43px;
+  color: var(--copy);
 }
-
 
 @media screen and (max-width: 675px) {
-    .nav-container {
-        display: none;
-    }
-    .nav-logo {
-        top: 0px;
-    }
+  .nav-container {
+    display: none;
+  }
+
+  .nav-logo {
+    height: 42px;
+  }
 }
 
-@media screen and (min-width: 1000px) {
-    .nav-container {
-        top: 10px;
-        border-radius: var(--border-radius);
-        border: 1px solid var(--border);
-    }
-    
+@media (prefers-reduced-motion: reduce) {
+  .nav-button,
+  .nav-button::after {
+    transition: none;
+  }
 }

@@ -1,15 +1,13 @@
 import "../pagestyles/locations.css";
-import "../pagestyles/home.css";
-import React, { Suspense } from "react";
-import { motion as m } from "framer-motion";
+import { Suspense, useContext } from "react";
+import { motion } from "framer-motion";
+import { FaLocationDot } from "react-icons/fa6";
 import { FaPhoneAlt } from "react-icons/fa";
+import { MdOutlineAccessTime } from "react-icons/md";
 import Map, { Marker } from "react-map-gl";
-import masks from "../assets/16.png";
-import stars from "../assets/12.png";
 import { Context } from "../App";
-import { useContext } from "react";
 
-function CapitolMap() {
+function TheaterMap({ latitude, longitude, label }) {
   const key = import.meta.env.VITE_MAPBOX_API_KEY;
   const { theme } = useContext(Context);
 
@@ -17,121 +15,114 @@ function CapitolMap() {
     <Map
       className="Map"
       mapboxAccessToken={key}
-      initialViewState={{
-        longitude: -72.57836915903455,
-        latitude: 44.26092378286133,
-        zoom: 14,
-      }}
-      style={{ width: "400px", height: "400px" }}
+      initialViewState={{ longitude, latitude, zoom: 14 }}
+      style={{ width: "100%", height: "100%" }}
       mapStyle={`mapbox://styles/mapbox/${theme}-v11`}
+      aria-label={`${label} map`}
     >
-      <Marker latitude={44.26092378286133} longitude={-72.57836915903455} />
+      <Marker latitude={latitude} longitude={longitude} />
     </Map>
   );
 }
 
-function ParamountMap() {
-  const key = import.meta.env.VITE_MAPBOX_API_KEY;
-  const { theme } = useContext(Context);
+const locations = [
+  {
+    name: "Capitol Theater",
+    city: "Montpelier, Vermont",
+    address: "93 State St, Montpelier, VT 05602",
+    phoneDisplay: "(802) 229-0343",
+    phoneHref: "tel:18022290343",
+    latitude: 44.26092378286133,
+    longitude: -72.57836915903455,
+  },
+  {
+    name: "Paramount Theater",
+    city: "Barre, Vermont",
+    address: "237 N Main St, Barre, VT 05641",
+    phoneDisplay: "(802) 479-0078",
+    phoneHref: "tel:18024790078",
+    latitude: 44.19952086200256,
+    longitude: -72.50370899940566,
+  },
+];
+
+function Locations() {
   return (
-    <Map
-      className="Map"
-      mapboxAccessToken={key}
-      initialViewState={{
-        longitude: -72.50370899940566,
-        latitude: 44.19952086200256,
-        zoom: 14,
-      }}
-      style={{ width: "400px", height: "400px" }}
-      mapStyle={`mapbox://styles/mapbox/${theme}-v11`}
-    >
-      <Marker latitude={44.19952086200256} longitude={-72.50370899940566} />
-    </Map>
-  );
-}
-
-function Locations(props) {
-
-  const buttonVariants = {
-    hovered: {
-      background: "var(--primary)",
-      color: "#fbfbfb",
-      boxShadow: "0px 0px 10px 0px rgba(148, 3, 3, 0.75)",
-    },
-    nothovered: {
-      background: "var(--foreground)",
-      color: "var(--copy)",
-      boxShadow: "0px 0px 0px 0px rgba(148, 3, 3, 0)",
-    },
-  };
-
-
-
-
-  return (
-    <div className="page-container">
-      <div className="locations">
-        <img className="masks-icon" src={masks} />
-        <img className="stars-icon" src={stars} />
-        <h2>Locations</h2>
-        <span className="info">
-          <p>
-            <b>Hours of Operation:</b> The box office opens 30 minutes before
-            the show and remains open for 20 minutes after the last show of the
-            day.
-          </p>
-        </span>
-        <div className="maps">
-          <div className="map">
-            <h3>Capitol Theaters</h3>
-            <p>93 State St, Montpelier, VT 05602</p>
-            <br />
-            <div className="map-container">
-              <Suspense fallback={<div>Loading...</div>}>
-                <CapitolMap />
-              </Suspense>
-            </div>
-            <div className="map-cover"></div>
-            <m.a 
-              href="tel:18022290343" 
-              className="call"
-              whileHover="hovered"
-              whileTap="hovered"
-              initial="nothovered"
-              variants={buttonVariants}
-            >
-              <span className="call-content">
-                <FaPhoneAlt />
-                <p>(802)-229-0343</p>
-              </span>
-            </m.a>
+    <div className="page-container site-page-container">
+      <main id="main-content" className="content-page locations-page" tabIndex="-1">
+        <section className="page-hero">
+          <div className="page-hero-copy">
+            <span className="section-eyebrow">Montpelier, VT • Barre, VT</span>
+            <h1>Our Locations</h1>
+            <p>
+              Plan your next movie night at our downtown locations in
+              Montpelier and Barre.
+            </p>
           </div>
-          <div className="map">
-            <h3>Paramount Theaters</h3>
-            <p>237 N Main St, Barre, VT 05641</p>
-            <br />
-            <div className="map-container">
-              <Suspense fallback={<div>Loading...</div>}>
-                <ParamountMap />
-              </Suspense>
+          <div className="page-hero-aside hours-summary">
+            <MdOutlineAccessTime aria-hidden="true" />
+            <div>
+              <strong>Box-office hours</strong>
+              Opens 30 minutes before the first show and remains open for 20
+              minutes after the last show begins.
             </div>
-            <div className="map-cover"></div>
-            <m.a 
-              href="tel:18022290343" 
-              className="call"
-              whileHover="hovered"
-              whileTap="hovered"
-              initial="nothovered"
-              variants={buttonVariants}
-            >
-              <span className="call-content">
-                <FaPhoneAlt />
-                <p>(802)-479-0078</p>
-              </span>
-            </m.a>
           </div>
-        </div>
-      </div>
+        </section>
+
+        <section className="locations-section page-section" aria-labelledby="location-list-heading">
+          <div className="page-section-heading">
+            <div>
+              <span className="section-eyebrow">Choose your theater</span>
+              <h2 id="location-list-heading">Two downtown theaters</h2>
+            </div>
+            <p>
+              Call either box office for location-specific questions, or explore
+              the maps below before your visit.
+            </p>
+          </div>
+          <div className="location-grid">
+            {locations.map((location, index) => (
+              <motion.article
+                className="location-card"
+                key={location.name}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+              >
+                <div className="location-card-heading">
+                  <span className="location-number">0{index + 1}</span>
+                  <div>
+                    <span>{location.city}</span>
+                    <h3>{location.name}</h3>
+                  </div>
+                </div>
+
+                <div className="location-map-frame">
+                  <Suspense fallback={<div className="map-loading">Loading map…</div>}>
+                    <TheaterMap
+                      latitude={location.latitude}
+                      longitude={location.longitude}
+                      label={location.name}
+                    />
+                  </Suspense>
+                </div>
+
+                <div className="location-details">
+                  <p>
+                    <FaLocationDot aria-hidden="true" />
+                    <span>{location.address}</span>
+                  </p>
+                  <a href={location.phoneHref} className="call">
+                    <FaPhoneAlt aria-hidden="true" />
+                    <span>{location.phoneDisplay}</span>
+                  </a>
+                </div>
+              </motion.article>
+            ))}
+          </div>
+        </section>
+      </main>
     </div>
   );
 }

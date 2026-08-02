@@ -88,7 +88,7 @@ export default function Logo() {
                                 variants={drawVariant}
                                 initial="hidden"
                                 animate="visible"
-                                transition={{ duration: 1, ease: "easeInOut", delay: index * 0.25 }}
+                                transition={{ duration: 0.55, ease: "easeInOut", delay: index * 0.08 }}
                             />
                         </g>
                     </g>

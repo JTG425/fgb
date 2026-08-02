@@ -1,16 +1,18 @@
 import "../componentstyles/moviecard.css";
+import { useCallback, useEffect, useRef, useState, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { useEffect, useState, Suspense } from "react";
 import { FaInfoCircle } from "react-icons/fa";
 import { IoCloseOutline } from "react-icons/io5";
+import { RiMovie2Line } from "react-icons/ri";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-
 import "react-loading-skeleton/dist/skeleton.css";
 import noImage from "../assets/noimage.png";
 import { SuspenseImage } from "./suspenseImage";
 
 const convertToStandardTime = (militaryTime) => {
-  const hoursMinutes = militaryTime.match(/(\d{2})(\d{2})/);
+  const hoursMinutes = String(militaryTime || "").match(/(\d{2})(\d{2})/);
+  if (!hoursMinutes) return militaryTime || "Time TBA";
+
   let hours = parseInt(hoursMinutes[1], 10);
   const minutes = hoursMinutes[2];
   const suffix = hours >= 12 ? "PM" : "AM";
@@ -26,237 +28,273 @@ const createDisplayDate = (date) => {
   return `${month} / ${day} / ${year}`;
 };
 
-// Takes in length in mins (String) and returns a string in hours and minutes
 const createDisplayTime = (time) => {
-  const hours = Math.floor(time / 60);
-  const minutes = time % 60;
-  return `${hours}HR ${minutes}MIN`;
+  const totalMinutes = Number(time);
+  if (!Number.isFinite(totalMinutes)) return "Runtime TBA";
+
+  const hours = Math.floor(totalMinutes / 60);
+  const minutes = totalMinutes % 60;
+  return [hours ? `${hours}h` : "", minutes ? `${minutes}m` : ""].filter(Boolean).join(" ");
 };
 
-function MovieCard(props) {
-  const date = props.date;
+function MovieCard({ date, capShows, parShows, selectedTheater }) {
+  const [detailFilmIndex, setDetailFilmIndex] = useState(null);
+  const detailDialogRef = useRef(null);
+  const detailTriggerRef = useRef(null);
   const displayDate = createDisplayDate(date);
-  const capShows = props.capShows;
-  const parShows = props.parShows;
-  const [shows, setShows] = useState(capShows);
-  const selectedTheater = props.selectedTheater;
-  const [isAnyMovies, setIsAnyMovies] = useState(true);
-  const [trailerButtonHovered, setTrailerButtonHovered] = useState(false);
-  const [showTrailer, setShowTrailer] = useState(false);
-  const [trailerIndex, setTrailerIndex] = useState(0);
+  const shows = selectedTheater === "capitol" ? capShows || [] : parShows || [];
+  const filmsForDate = shows.filter((film) =>
+    film.show?.some((show) => show.date === date)
+  );
 
-  const buttonVariants = {
-    hovered: {
-      background: "#940303",
-      color: "#fbfbfb",
-      boxShadow: "0px 0px 10px 0px rgba(148, 3, 3, 0.75)",
-    },
-    nothovered: {
-      background: "var(--foreground)",
-      color: "#940303",
-      boxShadow: "0px 0px 0px 0px rgba(148, 3, 3, 0)",
-    },
-  };
-
-  const trailerButtonVariants = {
-    hovered: {
-      background: "#940303",
-      color: "#fbfbfb",
-      boxShadow: "0px 0px 10px 0px rgba(148, 3, 3, 0.75)",
-      overflowX: "visible",
-      overflowY: "hidden",
-      width: "100px",
-    },
-    nothovered: {
-      background: "var(--foreground)",
-      color: "#940303",
-      boxShadow: "0px 0px 0px 0px rgba(148, 3, 3, 0)",
-      overflowX: "hidden",
-      overflowY: "hidden",
-      width: "50px",
-    },
-  };
+  const closeDetails = useCallback(() => setDetailFilmIndex(null), []);
 
   useEffect(() => {
-    const currentShows = selectedTheater === "capitol" ? capShows : parShows;
-    setShows(currentShows);
-    const hasMovies = currentShows.some((film) =>
-      film.show.some((show) => show.date === date)
-    );
-    setIsAnyMovies(hasMovies);
-  }, [selectedTheater, capShows, parShows, date]);
+    if (detailFilmIndex === null) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const focusFrame = window.requestAnimationFrame(() => {
+      detailDialogRef.current?.querySelector(".close-trailer")?.focus();
+    });
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeDetails();
+        return;
+      }
+
+      if (event.key !== "Tab" || !detailDialogRef.current) return;
+      const focusable = Array.from(
+        detailDialogRef.current.querySelectorAll(
+          "a[href], button:not(:disabled), iframe, [tabindex]:not([tabindex='-1'])"
+        )
+      );
+      if (!focusable.length) return;
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.cancelAnimationFrame(focusFrame);
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = previousOverflow;
+      detailTriggerRef.current?.focus();
+    };
+  }, [closeDetails, detailFilmIndex]);
 
   return (
     <motion.div className="movieCard">
       <AnimatePresence mode="popLayout">
-        {isAnyMovies ? (
-          shows
-            .filter((film) => film.show.some((show) => show.date === date))
-            .map((film, filmIndex) => (
-              <motion.div
-                className="film"
-                key={`movie-${filmIndex}-${film.name}`}
-                initial={{ opacity: 0, y: 100 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 100 }}
-                transition={{ duration: 0.5, type: "spring" }}
-              >
-                <div className="poster-container">
-                  <Suspense
-                    fallback={
-                      <div className="poster-skeleton">
-                        <SkeletonTheme
-                          baseColor="var(--background)"
-                          highlightColor="var(--foreground)"
-                        >
-                          <Skeleton width={200} height={300} />
-                        </SkeletonTheme>
-                      </div>
-                    }
-                  >
-                    <SuspenseImage
-                      className="poster"
-                      src={
-                        film.poster ===
-                        "https://fgbtheatersstoragef2bb9-dev.s3.amazonaws.com/public/images/noimage.png"
-                          ? noImage
-                          : film.poster
-                      }
-                      alt={film.name}
-                    />
-                  </Suspense>
-                </div>
-                <motion.div
-                  key={`movie-${filmIndex}-${film.name}-header`}
-                  className="film-header"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                >
-                  <a
-                    href={film.website}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <h3 className="film-name">{film.name}</h3>
-                  </a>
-                  <span className="film-info">
-                    <p>{film.rating}</p>
-                    <p>|</p>
-                    <p>{createDisplayTime(film.length)}</p>
-                  </span>
-                  <span className="film-trailer-desc">
-                    <motion.button
-                      key={`${film.trailer}-${film.name}-${filmIndex}`}
-                      className="film-trailer"
-                      initial="nothovered"
-                      whileHover="hovered"
-                      whileTap={{ scale: 0.98 }}
-                      onClick={() => {
-                        setShowTrailer(true);
-                        setTrailerIndex(filmIndex);
-                      }}
-                      onMouseEnter={() => {
-                        setTrailerButtonHovered(true);
-                        setTrailerIndex(filmIndex);
-                      }}
-                      onMouseLeave={() => {
-                        setTrailerButtonHovered(false);
-                      }}
-                      variants={trailerButtonVariants}
-                    >
-                      <FaInfoCircle />
-                      {trailerButtonHovered && trailerIndex === filmIndex ? (
-                        <p>Info</p>
-                      ) : null}
-                    </motion.button>
-                    {showTrailer && trailerIndex === filmIndex ? (
-                      <motion.div
-                        className="trailer-background"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        transition={{ duration: 0.5 }}
-                        onClick={() => setShowTrailer(false)}
+        {filmsForDate.length > 0 ? (
+          filmsForDate.map((film, filmIndex) => (
+            <motion.article
+              className="film"
+              key={`${film.RtsCode || film.name}-${filmIndex}`}
+              initial={{ opacity: 0, y: 28 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div className="poster-container">
+                <Suspense
+                  fallback={
+                    <div className="poster-skeleton">
+                      <SkeletonTheme
+                        baseColor="var(--background)"
+                        highlightColor="var(--foreground)"
                       >
-                        <motion.button
-                          className="close-trailer"
-                          whileTap={{ scale: 0.98 }}
-                          onClick={() => setShowTrailer(false)}
-                        >
-                          <IoCloseOutline />
-                        </motion.button>
+                        <Skeleton width="100%" height="100%" />
+                      </SkeletonTheme>
+                    </div>
+                  }
+                >
+                  <SuspenseImage
+                    className="poster"
+                    src={
+                      !film.poster ||
+                      film.poster ===
+                        "https://fgbtheatersstoragef2bb9-dev.s3.amazonaws.com/public/images/noimage.png"
+                        ? noImage
+                        : film.poster
+                    }
+                    alt={`${film.name} poster`}
+                  />
+                </Suspense>
+              </div>
 
-                        <motion.div
-                          key={`movie-${filmIndex}-${film.name}-trailer-container`}
-                          className="trailer-container"
-                          initial={{ opacity: 0, y: "0" }}
-                          animate={{ opacity: 1, y: "0" }}
-                          exit={{ opacity: 0 }}
-                          transition={{ duration: 0.5 }}
-                        >
-                          <span className="trailer-header">
-                            <h2>{film.name}</h2>
-                          </span>
-                          {film.trailer !== "" && (
-                            <iframe
-                              title="trailer"
-                              className="youtube-trailer"
-                              type="text/html"
-                              src={`${film.trailer}?autoplay=1`}
-                              width="480"
-                              height="390"
-                            />
-                          )}
-                          <div className="movie-info-container">
-                            <div className="movie-info">
-                              <span className="movie-stats">
-                                <p>{film.rating}</p>
-                                <p>|</p>
-                                <p>{createDisplayTime(film.length)}</p>
+              <div className="film-header">
+                <div className="film-heading">
+                  <div>
+                    {film.website ? (
+                      <a
+                        className="film-title-link"
+                        href={film.website}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        <h3 className="film-name">{film.name}</h3>
+                      </a>
+                    ) : (
+                      <h3 className="film-name">{film.name}</h3>
+                    )}
+
+                    <div className="film-info">
+                      {film.rating && <span>{film.rating}</span>}
+                      <span>{createDisplayTime(film.length)}</span>
+                    </div>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="film-trailer"
+                    onClick={(event) => {
+                      detailTriggerRef.current = event.currentTarget;
+                      setDetailFilmIndex(filmIndex);
+                    }}
+                    aria-label={`View trailer and details for ${film.name}`}
+                  >
+                    <FaInfoCircle aria-hidden="true" />
+                    <span>{film.trailer ? "Trailer & details" : "Movie details"}</span>
+                  </button>
+                </div>
+
+                <div className="film-showtimes">
+                  <span className="showtimes-label">Choose a showtime</span>
+                  <div className="showtime-grid">
+                    {film.show
+                      .filter((show) => show.date === date)
+                      .map((show, showIndex) => {
+                        const showtime = convertToStandardTime(show.time);
+                        const isSubtitled = show.Subtitles === "True";
+                        const key = `${show.time}-${show.screen}-${showIndex}`;
+
+                        if (!show.salelink) {
+                          return (
+                            <span
+                              className="showtime-button unavailable"
+                              key={key}
+                              aria-disabled="true"
+                              aria-label={`Tickets unavailable for ${film.name} at ${showtime}${isSubtitled ? ", with subtitles" : ""}`}
+                            >
+                              <strong>{showtime}</strong>
+                              <span>
+                                {isSubtitled
+                                  ? "Subtitled · Tickets unavailable"
+                                  : "Tickets unavailable"}
                               </span>
-                              <span className="movie-description">
-                                <p>{film.description}</p>
-                              </span>
-                            </div>
-                          </div>
-                        </motion.div>
-                      </motion.div>
-                    ) : null}
-                  </span>
-                  {film.show
-                    .filter((show) => show.date === date)
-                    .map((show, showIndex) => (
-                      <div className="showtime" key={showIndex}>
-                        <a
-                          className="showtime-link"
-                          href={show.salelink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <motion.button
+                            </span>
+                          );
+                        }
+
+                        return (
+                          <motion.a
                             className="showtime-button"
-                            initial="nothovered"
-                            whileHover="hovered"
+                            href={show.salelink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            key={key}
+                            whileHover={{ y: -2 }}
                             whileTap={{ scale: 0.98 }}
-                            variants={buttonVariants}
+                            aria-label={`Buy tickets for ${film.name} at ${showtime}${isSubtitled ? ", with subtitles" : ""}`}
                           >
-                            <motion.p whileHover={{ color: "#fbfbfb" }}>
-                              {convertToStandardTime(show.time)}
-                              {show.Subtitles === "True" ? " (Subtitles)" : ""}
-                            </motion.p>
-                          </motion.button>
-                        </a>
+                            <strong>{showtime}</strong>
+                            <span>{isSubtitled ? "Subtitled · Tickets" : "Tickets"}</span>
+                          </motion.a>
+                        );
+                      })}
+                  </div>
+                </div>
+              </div>
+
+              <AnimatePresence>
+                {detailFilmIndex === filmIndex && (
+                  <motion.div
+                    className="trailer-background"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.25 }}
+                    onClick={closeDetails}
+                  >
+                    <motion.div
+                      className="trailer-container"
+                      ref={detailDialogRef}
+                      role="dialog"
+                      aria-modal="true"
+                      aria-label={`${film.name} details`}
+                      initial={{ opacity: 0, y: 24, scale: 0.97 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: 18, scale: 0.98 }}
+                      transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+                      onClick={(event) => event.stopPropagation()}
+                    >
+                      <div className="trailer-header">
+                        <div>
+                          <span>Movie details</span>
+                          <h2>{film.name}</h2>
+                        </div>
+                        <button
+                          type="button"
+                          className="close-trailer"
+                          onClick={closeDetails}
+                          aria-label="Close movie details"
+                        >
+                          <IoCloseOutline aria-hidden="true" />
+                        </button>
                       </div>
-                    ))}
-                </motion.div>
-              </motion.div>
-            ))
+
+                      {film.trailer && (
+                        <iframe
+                          title={`${film.name} trailer`}
+                          className="youtube-trailer"
+                          src={film.trailer}
+                          allow="encrypted-media; picture-in-picture"
+                          allowFullScreen
+                        />
+                      )}
+
+                      <div className="movie-info-container">
+                        <div className="movie-stats">
+                          {film.rating && <span>{film.rating}</span>}
+                          <span>{createDisplayTime(film.length)}</span>
+                        </div>
+                        <p className="movie-description">
+                          {film.description || "More details are coming soon."}
+                        </p>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.article>
+          ))
         ) : (
-          <div className="no-shows">
-            <h2>No Scheduled Movies for {displayDate}</h2>
-            <h3>Grab some popcorn and hang tight!</h3>
-          </div>
+          <motion.div
+            className="no-shows"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+          >
+            <span className="no-shows-icon" aria-hidden="true">
+              <RiMovie2Line />
+            </span>
+            <div>
+              <span className="no-shows-kicker">Nothing scheduled yet</span>
+              <h2>No movies listed for {displayDate}</h2>
+              <p>Try another date or switch theaters to see more showtimes.</p>
+            </div>
+          </motion.div>
         )}
       </AnimatePresence>
     </motion.div>

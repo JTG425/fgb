@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ready Theatre Systems"
+  short_description: "RTS ticketing architecture and operations"
+  default_prompt: "Use $ready-theatre-systems to analyze or implement this project using the documented RTS architecture, workflows, integrations, and operational constraints."

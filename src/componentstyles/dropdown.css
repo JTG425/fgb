@@ -1,92 +1,117 @@
 .dropdown-top-bar {
-    display: none;
-    box-shadow: var(--box-shadow);
-    border-radius: 0;
-    width: 100vw;
-    height: 75px;
-    overflow-y: hidden;
-    position: fixed;
-    top: 0;
-    z-index: 15;
-    background: var(--foreground-head);
-    -webkit-backdrop-filter: blur(5px);
-    backdrop-filter: blur(25px);
-    padding: 1rem;
-}
-
-.dropdown-header {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0;
-}
-
-.dropdown-content {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 10px;
-    padding: 1rem;
-
-}
-
-.show-dropdown-button {
-    font-size: 32px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 10;
-    margin-right: 10px;
-    padding: 0;
-    color: var(--copy);
-}
-
-
-.dropdown-button {
-    position: relative;
-    width: 90vw;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    background: transparent;
-    border: 1px solid var(--border);
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    cursor: pointer;
-    z-index: 5;
-    font-size: 24px;
-}
-
-.icon {
-    width: 30px;
-    height: 30px;
-    fill: var(--primary);
-    z-index: 5;
-
-}
-
-.dropdown-button p {
-    margin: 0;
-    text-decoration: none;
-    font-size: 24px;
-    z-index: 5;
+  display: none;
 }
 
 @media screen and (max-width: 675px) {
-    .dropdown-top-bar {
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
+  .dropdown-top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 30;
+    display: block;
+    width: 100%;
+  }
 
-    }
-    .dropdown {
-        display: flex;
-    }
+  .dropdown-header {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    height: 74px;
+    padding: 0 1rem;
+    border-bottom: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+    background: color-mix(in srgb, var(--foreground-solid) 88%, transparent);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.16);
+    -webkit-backdrop-filter: blur(24px) saturate(1.15);
+    backdrop-filter: blur(24px) saturate(1.15);
+  }
+
+  .mobile-nav-brand {
+    min-width: 78px;
+  }
+
+  .show-dropdown-button {
+    display: inline-grid;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    place-items: center;
+    color: var(--copy);
+    font-size: 1.7rem;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    background: color-mix(in srgb, var(--foreground-solid) 84%, transparent);
+    cursor: pointer;
+  }
+
+  .show-dropdown-button:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 3px;
+  }
+
+  .dropdown-content {
+    position: absolute;
+    top: 74px;
+    right: 0;
+    left: 0;
+    display: grid;
+    gap: 0.5rem;
+    max-height: calc(100dvh - 74px);
+    padding: 1rem 1rem 1.25rem;
+    overflow-y: auto;
+    border-bottom: 1px solid var(--border);
+    background:
+      radial-gradient(circle at 92% 4%, rgba(149, 21, 18, 0.18), transparent 15rem),
+      color-mix(in srgb, var(--foreground-solid) 96%, transparent);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.24);
+    -webkit-backdrop-filter: blur(28px);
+    backdrop-filter: blur(28px);
+  }
+
+  .mobile-menu-eyebrow {
+    margin: 0.2rem 0 0.35rem 0.25rem;
+    color: var(--accent-text);
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+  }
+
+  .dropdown-button {
+    display: grid;
+    grid-template-columns: 42px 1fr;
+    align-items: center;
+    gap: 0.85rem;
+    width: 100%;
+    min-height: 58px;
+    padding: 0.65rem 0.8rem;
+    color: var(--copy-light);
+    font-size: 0.95rem;
+    font-weight: 720;
+    border: 1px solid var(--border);
+    border-radius: 0.85rem;
+    background: color-mix(in srgb, var(--foreground) 92%, transparent);
+  }
+
+  .dropdown-button.active {
+    color: var(--copy);
+    border-color: color-mix(in srgb, var(--primary) 60%, var(--border));
+    background: color-mix(in srgb, var(--primary) 12%, var(--foreground));
+  }
+
+  .dropdown-button:focus-visible {
+    outline: 3px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  .dropdown-icon {
+    width: 42px;
+    height: 42px;
+    padding: 0.72rem;
+    color: var(--accent-text);
+    border-radius: 0.7rem;
+    background: color-mix(in srgb, var(--primary) 10%, transparent);
+  }
 }

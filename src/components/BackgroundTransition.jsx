@@ -1,50 +1,39 @@
-import { motion } from "motion/react";
 import { forwardRef } from "react";
+import { motion } from "motion/react";
 
 export const BackgroundTransition = forwardRef(({ slide, transitionKey }, ref) => {
-  const isFirstSlide =
-    slide.Background === "https://fgbtheatersstoragec850c-main.s3.us-east-1.amazonaws.com/public/slideshow/firstSlide.webp";
-  const gradient =
-    !isFirstSlide &&
-    `linear-gradient(75deg, ${slide.Background[0]}, ${slide.Background[1]}, ${slide.Background[2]})`;
+  const background = slide?.Background;
+  const colorPalette = Array.isArray(background) ? background.slice(0, 5) : [];
+  const hasColorPalette = colorPalette.length > 1;
+  const hasBackgroundImage = typeof background === "string" && background.trim();
+
+  const backgroundStyle = {
+    backgroundImage: hasBackgroundImage
+      ? background.trim().startsWith("url(")
+        ? background.trim()
+        : `url(${JSON.stringify(background.trim())})`
+      : hasColorPalette
+        ? `linear-gradient(75deg, ${colorPalette.join(", ")})`
+        : "linear-gradient(75deg, #2b1616, #19191b 52%, #090a0b)",
+  };
 
   return (
     <motion.div
       ref={ref}
       key={transitionKey}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
+      className="slideshow-background"
+      initial={{ opacity: 0, scale: 1.035 }}
+      animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.8 }}
-      style={{
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: "100%",
-        height: "100%",
-        background: isFirstSlide ? "#262626" : gradient,
-      }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+      style={backgroundStyle}
+      aria-hidden="true"
     >
-      {isFirstSlide && (
-        <motion.img
-          src="https://fgbtheatersstoragec850c-main.s3.us-east-1.amazonaws.com/public/slideshow/firstSlide.webp"
-          alt="First Slide"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            filter: "blur(10px)",
-          }}
-        />
-      )}
+      <div className="slideshow-background-overlay" />
     </motion.div>
   );
 });
+
+BackgroundTransition.displayName = "BackgroundTransition";
 
 export default BackgroundTransition;

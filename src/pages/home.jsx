@@ -1,17 +1,14 @@
-import { useState, useContext } from "react";
+import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import "../pagestyles/home.css";
 import SlideShow from "../components/slideshow";
 import MovieCard from "../components/movieCard";
 import SelectTheater from "../components/selecttheater";
 import Upcoming from "../components/upcoming";
-import { motion, AnimatePresence } from "motion/react"
-import icon7 from "../assets/7.png";
 import CustomDatepicker from "../components/customDatePicker";
 import { Context } from "../App";
 
-
-
-const handleDateFormating = (date) => {
+const formatScheduleDate = (date) => {
   const day = date.getDate();
   const year = date.getFullYear();
   const month = date.getMonth() + 1;
@@ -20,72 +17,99 @@ const handleDateFormating = (date) => {
   return `${formattedMonth}${formattedDay}${year}`;
 };
 
-const buttonVariants = {
-  hovered: {
-    backgroundColor: "var(--primary)",
-    color: "var(--copy)",
-    boxShadow: "0px 0px 10px rgba(148, 3, 3, 0.5)",
-    transition: { duration: 0.2 }
-  },
-  nothovered: {
-    backgroundColor: "var(--foreground)",
-    color: "var(--copy)",
-    boxShadow: "var(--box-shadow)",
-    transition: { duration: 0.2 }
-  },
-};
-
-
-
-
 function Home() {
-  const { capShows, parShows, upcoming, loading, slideshow } = useContext(Context);
-  const [date, setDate] = useState(handleDateFormating(new Date()));
+  const { capShows, parShows, upcoming, loading, scheduleError, slideshow } = useContext(Context);
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [selectedTheater, setSelectedTheater] = useState("capitol");
+  const hasSlideshow = Array.isArray(slideshow) && slideshow.length > 0;
 
-  const handleTheaterChange = (theater) => {
-    setSelectedTheater(theater);
+  const selectedTheaterName =
+    selectedTheater === "capitol" ? "Capitol Theater" : "Paramount Theater";
+
+  const handleUpcomingDateChange = (date) => {
+    setSelectedDate(date);
+    window.requestAnimationFrame(() => {
+      const heading = document.getElementById("showtimes-heading");
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      heading?.scrollIntoView({
+        behavior: reduceMotion ? "auto" : "smooth",
+        block: "start",
+      });
+      heading?.focus({ preventScroll: true });
+    });
   };
 
-  const handleDateChange = (date) => {
-    setDate(handleDateFormating(date));
-  }
-
+  if (loading) return null;
 
   return (
-    <AnimatePresence mode="wait">
-      {!loading && (
-        <motion.div
-          className="page-container"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+    <div className="page-container home-page">
+      <main
+        id="main-content"
+        className={`home-main${hasSlideshow ? " has-slideshow" : " no-slideshow"}`}
+        tabIndex="-1"
+      >
+        <SlideShow slideshowData={slideshow} />
 
-        >
-          <SlideShow slideshowData={slideshow} />
-          <div className="home-container">
-            <div className="home-options">
-            <SelectTheater
-              selected={selectedTheater}
-              setSelected={handleTheaterChange}
-            />
-            <CustomDatepicker setDate={handleDateChange} />
-            </div>
-            <img className="home-icon1" src={icon7} alt="Decorative film reel" />
-            <img className="home-icon2" src={icon7} alt="Decorative film reel" />
-            <div className="movies-container">
-              <MovieCard
-                date={date}
-                capShows={capShows}
-                parShows={parShows}
-                selectedTheater={selectedTheater}
-              />
-            </div>
-          </div>
-          <Upcoming upcoming={upcoming} handleDateChange={handleDateChange} />
-        </motion.div>
-      )}
-    </AnimatePresence>
+        <div className="home-container">
+          <section className="showtimes-section" aria-labelledby="showtimes-heading">
+              <div className="showtimes-header">
+                <div className="showtimes-heading-copy">
+                  <span className="section-eyebrow">Plan your visit</span>
+                  <h1 id="showtimes-heading" tabIndex="-1">Now Showing</h1>
+                  <p>Choose a theater and date to find your next movie.</p>
+                </div>
+
+                <div className="home-options" aria-label="Showtime filters">
+                  <SelectTheater
+                    selected={selectedTheater}
+                    setSelected={setSelectedTheater}
+                  />
+                  <CustomDatepicker
+                    value={selectedDate}
+                    setDate={setSelectedDate}
+                  />
+                </div>
+              </div>
+
+              <div className="showtimes-context" aria-live="polite">
+                Showtimes for <strong>{selectedTheaterName}</strong> on{" "}
+                <strong>
+                  {selectedDate.toLocaleDateString("en-US", {
+                    month: "long",
+                    day: "numeric",
+                    year: "numeric",
+                  })}
+                </strong>
+              </div>
+
+              <div className="movies-container">
+                {scheduleError ? (
+                  <div className="schedule-error" role="alert">
+                    <span className="no-shows-kicker">Schedule unavailable</span>
+                    <h2>We couldn’t load the current showtimes.</h2>
+                    <p>
+                      Please try again in a moment, or visit the{" "}
+                      <Link to="/tickets">Tickets page</Link> to continue to the
+                      online ticketing portal.
+                    </p>
+                  </div>
+                ) : (
+                  <MovieCard
+                    date={formatScheduleDate(selectedDate)}
+                    capShows={capShows}
+                    parShows={parShows}
+                    selectedTheater={selectedTheater}
+                  />
+                )}
+              </div>
+          </section>
+        </div>
+
+        {!scheduleError && (
+          <Upcoming upcoming={upcoming} handleDateChange={handleUpcomingDateChange} />
+        )}
+      </main>
+    </div>
   );
 }
 
