@@ -42,9 +42,12 @@ function MovieCard({ date, capShows, parShows, selectedTheater }) {
   const detailDialogRef = useRef(null);
   const detailTriggerRef = useRef(null);
   const displayDate = createDisplayDate(date);
-  const shows = selectedTheater === "capitol" ? capShows || [] : parShows || [];
-  const filmsForDate = shows.filter((film) =>
-    film.show?.some((show) => show.date === date)
+  const selectedShows = selectedTheater === "capitol" ? capShows : parShows;
+  const shows = Array.isArray(selectedShows) ? selectedShows : [];
+  const filmsForDate = shows.filter(
+    (film) =>
+      Array.isArray(film?.show) &&
+      film.show.some((show) => show?.date === date)
   );
 
   const closeDetails = useCallback(() => setDetailFilmIndex(null), []);
@@ -129,6 +132,7 @@ function MovieCard({ date, capShows, parShows, selectedTheater }) {
                         ? noImage
                         : film.poster
                     }
+                    fallbackSrc={noImage}
                     alt={`${film.name} poster`}
                   />
                 </Suspense>
@@ -174,7 +178,7 @@ function MovieCard({ date, capShows, parShows, selectedTheater }) {
                   <span className="showtimes-label">Choose a showtime</span>
                   <div className="showtime-grid">
                     {film.show
-                      .filter((show) => show.date === date)
+                      .filter((show) => show?.date === date)
                       .map((show, showIndex) => {
                         const showtime = convertToStandardTime(show.time);
                         const isSubtitled = show.Subtitles === "True";

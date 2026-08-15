@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 const imgResourceCache = {};
 
@@ -12,27 +12,25 @@ function loadImage(src) {
 }
 
 function createResource(promise) {
-  let status = 'pending';
+  let status = "pending";
   let result;
   const suspender = promise.then(
     (r) => {
-      status = 'success';
+      status = "success";
       result = r;
     },
-    (e) => {
-      status = 'error';
-      result = e;
+    () => {
+      status = "error";
     }
   );
+
   return {
     read() {
-      if (status === 'pending') {
+      if (status === "pending") {
         throw suspender;
-      } else if (status === 'error') {
-        throw result;
-      } else {
-        return result;
       }
+
+      return status === "success" ? result : null;
     },
   };
 }
@@ -44,16 +42,17 @@ function getImageResource(src) {
   return imgResourceCache[src];
 }
 
-export function SuspenseImage({ src, alt, ...props }) {
-  getImageResource(src).read();
+export function SuspenseImage({ src, fallbackSrc, alt, ...props }) {
+  const loadedSrc = src ? getImageResource(src).read() : null;
+
   return (
-  <motion.img 
-    src={src} 
-    alt={alt} 
-    initial={{ opacity: 0 }}
-    animate={{ opacity: 1 }}
-    exit={{ opacity: 0 }}
-    {...props} 
+    <motion.img
+      src={loadedSrc || fallbackSrc}
+      alt={alt}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      {...props}
     />
   );
 }

@@ -329,7 +329,7 @@
 
   .poster-container,
   .poster-skeleton {
-    width: 100%;
+    width: 50%;
     border-radius: 0.65rem;
   }
 
