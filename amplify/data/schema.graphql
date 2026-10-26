@@ -1,0 +1,59 @@
+type AddAnnouncement @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  Date: AWSDate
+  Title: String
+  Description: String
+  Image: String
+  Active: Boolean
+}
+
+# The CSV is a bundled baseline; records here override it or add new listings.
+# Editing belongs to the separate admin project and is intentionally not exposed here.
+type PosterListing
+  @model(subscriptions: null, mutations: null)
+  @auth(rules: [
+    { allow: public, provider: identityPool, operations: [read] }
+    { allow: private, provider: identityPool, operations: [read] }
+  ]) {
+  id: ID!
+  catalogNumber: String!
+  title: String!
+  year: Int
+  posterType: String
+  size: String
+  condition: String
+  estimatedValue: Float
+  askingPrice: Float
+  quantity: Int!
+  storageLocation: String
+  provenance: String
+  description: String
+  dateAcquired: String
+  active: Boolean!
+}
+
+# Visitors can submit a request but cannot list, retrieve, update or subscribe
+# to anyone's contact details. Requests never reserve or decrement inventory.
+# The separate admin project will add its authenticated management interface.
+type PosterRequest
+  @model(subscriptions: null, queries: null, mutations: { create: "createPosterRequest", update: null, delete: null })
+  @auth(rules: [
+    { allow: public, provider: identityPool, operations: [create] }
+    { allow: private, provider: identityPool, operations: [create] }
+  ]) {
+  id: ID!
+  posterId: ID!
+  posterTitle: String!
+  catalogNumber: String!
+  customerName: String!
+  phone: String!
+  comments: String
+  status: PosterRequestStatus!
+}
+
+enum PosterRequestStatus {
+  NEW
+  CONTACTED
+  COMPLETED
+  CANCELLED
+}

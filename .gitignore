@@ -27,3 +27,11 @@ dist-ssr
 
 .env
 
+# Local backups include environment settings; never publish them.
+backups/
+
+# Amplify Gen 2 deployment outputs and local state
+.amplify/
+amplify_outputs.*
+cdk.out/
+.npm/

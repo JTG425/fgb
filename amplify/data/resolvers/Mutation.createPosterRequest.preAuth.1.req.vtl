@@ -1,0 +1,26 @@
+## Validate on the server as well as in the form. Never trust client status/time.
+#set($input = $ctx.args.input)
+#set($name = $input.customerName.trim())
+#set($phone = $input.phone.trim())
+#set($digits = $phone.replaceAll("[^0-9]", ""))
+#if(!$util.isNull($input.id) && ($input.id.length() > 100 || $input.id.trim().length() < 1))
+  $util.error("Invalid request reference.", "ValidationError")
+#end
+#if($name.length() < 1 || $name.length() > 100)
+  $util.error("Enter a name of up to 100 characters.", "ValidationError")
+#end
+#if(!$util.matches("^[+0-9().\\s-]+$", $phone) || $phone.length() > 40 || $digits.length() < 7 || $digits.length() > 15)
+  $util.error("Enter a valid phone number.", "ValidationError")
+#end
+#if(!$util.isNull($input.comments) && $input.comments.length() > 2000)
+  $util.error("Comments must be 2000 characters or fewer.", "ValidationError")
+#end
+#if($input.posterId.length() > 100 || $input.posterId.trim().length() < 1 || $input.posterTitle.length() > 200 || $input.posterTitle.trim().length() < 1 || $input.catalogNumber.length() > 100)
+  $util.error("Invalid poster reference.", "ValidationError")
+#end
+$util.qr($input.put("customerName", $name))
+$util.qr($input.put("phone", $phone))
+$util.qr($input.put("status", "NEW"))
+$util.qr($input.put("createdAt", $util.time.nowISO8601()))
+$util.qr($input.put("updatedAt", $util.time.nowISO8601()))
+{"version":"2018-05-29","payload":{}}

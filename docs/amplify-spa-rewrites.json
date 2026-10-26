@@ -1,0 +1,12 @@
+[
+  {
+    "source": "https://fgbtheaters.com",
+    "target": "https://www.fgbtheaters.com",
+    "status": "302"
+  },
+  {
+    "source": "</^[^.]+$|\\.(?!(css|gif|ico|jpg|jpeg|js|mjs|png|txt|svg|woff|woff2|ttf|map|json|webp)$)([^.]+$)/>",
+    "target": "/index.html",
+    "status": "200"
+  }
+]

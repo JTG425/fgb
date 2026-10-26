@@ -1,6 +1,6 @@
 import "./App.css";
 import "react-day-picker/dist/style.css";
-import React, { useEffect, useState } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import {
   BrowserRouter,
   Routes,
@@ -10,8 +10,7 @@ import {
 } from "react-router-dom";
 import { motion, AnimatePresence, MotionConfig } from "framer-motion";
 import { SocialIcon } from "react-social-icons";
-import amplifyconfig from "./amplifyconfiguration.json";
-import { Amplify } from "aws-amplify";
+import "./amplify";
 import NavBar from "./components/navbar";
 import Home from "./pages/home";
 import Tickets from "./pages/tickets";
@@ -21,7 +20,7 @@ import Rentals from "./pages/rentals";
 import Logo from "./components/logo";
 import useSystemTheme from "./useSystemTheme";
 
-Amplify.configure(amplifyconfig);
+const Posters = lazy(() => import("./pages/posters"));
 
 export const Context = React.createContext(null);
 
@@ -175,6 +174,7 @@ const routeTitles = {
   "/locations": "Locations | FGB Theaters",
   "/rentals": "Theater Rentals | FGB Theaters",
   "/about": "About | FGB Theaters",
+  "/posters": "Posters | FGB Theaters",
 };
 
 function AnimatedRoutes() {
@@ -197,10 +197,15 @@ function AnimatedRoutes() {
         />
         <Route path="/rentals" element={<PageWrapper><Rentals /></PageWrapper>} />
         <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
+        <Route path="/posters" element={<PageWrapper><Suspense fallback={<RouteLoading />}><Posters /></Suspense></PageWrapper>} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </AnimatePresence>
   );
+}
+
+function RouteLoading() {
+  return <main id="main-content" className="site-page-container" role="status">Loading page…</main>;
 }
 
 function PageWrapper({ children }) {

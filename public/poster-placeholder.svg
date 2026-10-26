@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="450" height="800" viewBox="0 0 450 800" fill="none">
+  <defs><linearGradient id="paper" x1="0" y1="0" x2="450" y2="800" gradientUnits="userSpaceOnUse"><stop stop-color="#352c2c"/><stop offset="1" stop-color="#1d1b1b"/></linearGradient><pattern id="lines" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 0h8" stroke="#fff" stroke-opacity=".025"/></pattern></defs>
+  <path fill="url(#paper)" d="M0 0h450v800H0z"/><path fill="url(#lines)" d="M0 0h450v800H0z"/>
+  <rect x="24" y="24" width="402" height="752" rx="2" stroke="#c69866" stroke-opacity=".35"/>
+  <rect x="32" y="32" width="386" height="736" rx="2" stroke="#c69866" stroke-opacity=".12"/>
+  <text x="225" y="97" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" letter-spacing="6" fill="#c69866">FGB THEATERS</text>
+  <circle cx="225" cy="350" r="66" stroke="#c69866" stroke-opacity=".35"/>
+  <rect x="193" y="309" width="64" height="82" rx="3" stroke="#c69866" stroke-width="2"/>
+  <path d="M202 318h46v64h-46z" stroke="#c69866" stroke-opacity=".45"/><path d="m218 338 20 12-20 12v-24Z" fill="#c69866" fill-opacity=".7"/>
+  <text x="225" y="465" text-anchor="middle" font-family="Georgia,serif" font-size="31" fill="#e3d7c9">The poster collection</text>
+  <text x="225" y="501" text-anchor="middle" font-family="Arial,sans-serif" font-size="15" fill="#b9aaa0">Image coming soon</text>
+  <path d="M190 687h70" stroke="#c69866" stroke-opacity=".5"/>
+  <text x="225" y="720" text-anchor="middle" font-family="Arial,sans-serif" font-size="11" letter-spacing="3" fill="#b9aaa0">A PIECE OF MOVIE HISTORY</text>
+</svg>

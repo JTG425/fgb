@@ -1,0 +1,14 @@
+{
+  "cliVersion": "14.5.1",
+  "sourceAppId": "d5vhylij0llj8",
+  "sourceEnvironment": "main",
+  "region": "us-east-1",
+  "files": {
+    "auth/resource.ts": "eb31c1efffe8cf1e8ee92828c3122ffabf986ddd1e28cc554a61bcac7b13809d",
+    "backend.ts": "a9b7ebcb80206b0df40ebded34b6c59e97f0f4555eab24cea5e79da9bdfbe0f2",
+    "data/resource.ts": "75e43900f66170435e9bc265c54c08a825f659bb8d52429692c422e4057936b0",
+    "package.json": "3ca9d4afd21425087cf31893b8f9f63c81b0b8408db5e343ca76e5f8aa26ab9a",
+    "storage/resource.ts": "9a7f3df5d7146f9196b165e9b9b6329c6b8c78bb7e50376b57bf52e11178b4ba",
+    "tsconfig.json": "b20a7627c986ad75f196f00b7e7cdb18dad27e55b9b2986a8b7624fbfbb5f6d8"
+  }
+}

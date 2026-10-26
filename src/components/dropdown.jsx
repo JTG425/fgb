@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { Link, useLocation } from "react-router-dom";
 import { RxCross2, RxHamburgerMenu } from "react-icons/rx";
-import { FiHome } from "react-icons/fi";
+import { FiHome, FiImage } from "react-icons/fi";
 import { FaMapLocation, FaRegCircleQuestion, FaTicketSimple } from "react-icons/fa6";
 import { RiMovie2Line } from "react-icons/ri";
 import Logo from "./logo";
@@ -13,6 +13,7 @@ const mobileNavItems = [
   { route: "/tickets", label: "Buy Tickets", Icon: FaTicketSimple },
   { route: "/locations", label: "Our Locations", Icon: FaMapLocation },
   { route: "/rentals", label: "Rentals", Icon: RiMovie2Line },
+  { route: "/posters", label: "Posters", Icon: FiImage },
   { route: "/about", label: "About Us", Icon: FaRegCircleQuestion },
 ];
 
